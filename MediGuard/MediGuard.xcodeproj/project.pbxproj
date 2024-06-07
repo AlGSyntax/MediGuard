@@ -27,6 +27,7 @@
 		386DBDC12C12BA8900FE3A41 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 386DBDC02C12BA8900FE3A41 /* FirebaseStorage */; };
 		386DBDC32C12BA8900FE3A41 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 386DBDC22C12BA8900FE3A41 /* FirebaseStorageCombine-Community */; };
 		386DBDCC2C12C28100FE3A41 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386DBDCB2C12C28100FE3A41 /* FirebaseManager.swift */; };
+		386DBDCE2C12D88B00FE3A41 /* FireUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386DBDCD2C12D88B00FE3A41 /* FireUser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		386DBD9E2C12B88C00FE3A41 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		386DBDA52C12B93200FE3A41 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		386DBDCB2C12C28100FE3A41 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		386DBDCD2C12D88B00FE3A41 /* FireUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireUser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 		386DBDC72C12BBCC00FE3A41 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				386DBDCD2C12D88B00FE3A41 /* FireUser.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 			files = (
 				386DBDCC2C12C28100FE3A41 /* FirebaseManager.swift in Sources */,
 				386DBD9A2C12B88B00FE3A41 /* ContentView.swift in Sources */,
+				386DBDCE2C12D88B00FE3A41 /* FireUser.swift in Sources */,
 				386DBD982C12B88B00FE3A41 /* MediGuardApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
