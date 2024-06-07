@@ -1,0 +1,538 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		386DBD982C12B88B00FE3A41 /* MediGuardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386DBD972C12B88B00FE3A41 /* MediGuardApp.swift */; };
+		386DBD9A2C12B88B00FE3A41 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386DBD992C12B88B00FE3A41 /* ContentView.swift */; };
+		386DBD9C2C12B88C00FE3A41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 386DBD9B2C12B88C00FE3A41 /* Assets.xcassets */; };
+		386DBD9F2C12B88C00FE3A41 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 386DBD9E2C12B88C00FE3A41 /* Preview Assets.xcassets */; };
+		386DBDA62C12B93200FE3A41 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 386DBDA52C12B93200FE3A41 /* GoogleService-Info.plist */; };
+		386DBDA92C12BA8900FE3A41 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 386DBDA82C12BA8900FE3A41 /* FirebaseAnalytics */; };
+		386DBDAB2C12BA8900FE3A41 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 386DBDAA2C12BA8900FE3A41 /* FirebaseAnalyticsSwift */; };
+		386DBDAD2C12BA8900FE3A41 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 386DBDAC2C12BA8900FE3A41 /* FirebaseAuth */; };
+		386DBDAF2C12BA8900FE3A41 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 386DBDAE2C12BA8900FE3A41 /* FirebaseAuthCombine-Community */; };
+		386DBDB12C12BA8900FE3A41 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 386DBDB02C12BA8900FE3A41 /* FirebaseCrashlytics */; };
+		386DBDB32C12BA8900FE3A41 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 386DBDB22C12BA8900FE3A41 /* FirebaseDatabase */; };
+		386DBDB52C12BA8900FE3A41 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 386DBDB42C12BA8900FE3A41 /* FirebaseDatabaseSwift */; };
+		386DBDB72C12BA8900FE3A41 /* FirebaseDynamicLinks in Frameworks */ = {isa = PBXBuildFile; productRef = 386DBDB62C12BA8900FE3A41 /* FirebaseDynamicLinks */; };
+		386DBDB92C12BA8900FE3A41 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 386DBDB82C12BA8900FE3A41 /* FirebaseFirestore */; };
+		386DBDBB2C12BA8900FE3A41 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 386DBDBA2C12BA8900FE3A41 /* FirebaseFirestoreCombine-Community */; };
+		386DBDBD2C12BA8900FE3A41 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 386DBDBC2C12BA8900FE3A41 /* FirebaseFirestoreSwift */; };
+		386DBDBF2C12BA8900FE3A41 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 386DBDBE2C12BA8900FE3A41 /* FirebaseFunctions */; };
+		386DBDC12C12BA8900FE3A41 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 386DBDC02C12BA8900FE3A41 /* FirebaseStorage */; };
+		386DBDC32C12BA8900FE3A41 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 386DBDC22C12BA8900FE3A41 /* FirebaseStorageCombine-Community */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		386DBD942C12B88B00FE3A41 /* MediGuard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediGuard.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		386DBD972C12B88B00FE3A41 /* MediGuardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediGuardApp.swift; sourceTree = "<group>"; };
+		386DBD992C12B88B00FE3A41 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		386DBD9B2C12B88C00FE3A41 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		386DBD9E2C12B88C00FE3A41 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		386DBDA52C12B93200FE3A41 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		386DBD912C12B88B00FE3A41 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				386DBDB52C12BA8900FE3A41 /* FirebaseDatabaseSwift in Frameworks */,
+				386DBDB32C12BA8900FE3A41 /* FirebaseDatabase in Frameworks */,
+				386DBDAB2C12BA8900FE3A41 /* FirebaseAnalyticsSwift in Frameworks */,
+				386DBDBF2C12BA8900FE3A41 /* FirebaseFunctions in Frameworks */,
+				386DBDBB2C12BA8900FE3A41 /* FirebaseFirestoreCombine-Community in Frameworks */,
+				386DBDB72C12BA8900FE3A41 /* FirebaseDynamicLinks in Frameworks */,
+				386DBDBD2C12BA8900FE3A41 /* FirebaseFirestoreSwift in Frameworks */,
+				386DBDAD2C12BA8900FE3A41 /* FirebaseAuth in Frameworks */,
+				386DBDC32C12BA8900FE3A41 /* FirebaseStorageCombine-Community in Frameworks */,
+				386DBDC12C12BA8900FE3A41 /* FirebaseStorage in Frameworks */,
+				386DBDB92C12BA8900FE3A41 /* FirebaseFirestore in Frameworks */,
+				386DBDB12C12BA8900FE3A41 /* FirebaseCrashlytics in Frameworks */,
+				386DBDA92C12BA8900FE3A41 /* FirebaseAnalytics in Frameworks */,
+				386DBDAF2C12BA8900FE3A41 /* FirebaseAuthCombine-Community in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		386DBD8B2C12B88B00FE3A41 = {
+			isa = PBXGroup;
+			children = (
+				386DBDA52C12B93200FE3A41 /* GoogleService-Info.plist */,
+				386DBD962C12B88B00FE3A41 /* MediGuard */,
+				386DBD952C12B88B00FE3A41 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		386DBD952C12B88B00FE3A41 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				386DBD942C12B88B00FE3A41 /* MediGuard.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		386DBD962C12B88B00FE3A41 /* MediGuard */ = {
+			isa = PBXGroup;
+			children = (
+				386DBDCA2C12BF3B00FE3A41 /* Extensions */,
+				386DBDC92C12BF3300FE3A41 /* Enums */,
+				386DBDC82C12BC3300FE3A41 /* Manager */,
+				386DBDC72C12BBCC00FE3A41 /* Models */,
+				386DBDC62C12BBC300FE3A41 /* Views */,
+				386DBDC52C12BBB800FE3A41 /* Repositories */,
+				386DBDC42C12BBAA00FE3A41 /* ViewModels */,
+				386DBD972C12B88B00FE3A41 /* MediGuardApp.swift */,
+				386DBD992C12B88B00FE3A41 /* ContentView.swift */,
+				386DBD9B2C12B88C00FE3A41 /* Assets.xcassets */,
+				386DBD9D2C12B88C00FE3A41 /* Preview Content */,
+			);
+			path = MediGuard;
+			sourceTree = "<group>";
+		};
+		386DBD9D2C12B88C00FE3A41 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				386DBD9E2C12B88C00FE3A41 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		386DBDC42C12BBAA00FE3A41 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		386DBDC52C12BBB800FE3A41 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		386DBDC62C12BBC300FE3A41 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		386DBDC72C12BBCC00FE3A41 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		386DBDC82C12BC3300FE3A41 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		386DBDC92C12BF3300FE3A41 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		386DBDCA2C12BF3B00FE3A41 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		386DBD932C12B88B00FE3A41 /* MediGuard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 386DBDA22C12B88C00FE3A41 /* Build configuration list for PBXNativeTarget "MediGuard" */;
+			buildPhases = (
+				386DBD902C12B88B00FE3A41 /* Sources */,
+				386DBD912C12B88B00FE3A41 /* Frameworks */,
+				386DBD922C12B88B00FE3A41 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MediGuard;
+			packageProductDependencies = (
+				386DBDA82C12BA8900FE3A41 /* FirebaseAnalytics */,
+				386DBDAA2C12BA8900FE3A41 /* FirebaseAnalyticsSwift */,
+				386DBDAC2C12BA8900FE3A41 /* FirebaseAuth */,
+				386DBDAE2C12BA8900FE3A41 /* FirebaseAuthCombine-Community */,
+				386DBDB02C12BA8900FE3A41 /* FirebaseCrashlytics */,
+				386DBDB22C12BA8900FE3A41 /* FirebaseDatabase */,
+				386DBDB42C12BA8900FE3A41 /* FirebaseDatabaseSwift */,
+				386DBDB62C12BA8900FE3A41 /* FirebaseDynamicLinks */,
+				386DBDB82C12BA8900FE3A41 /* FirebaseFirestore */,
+				386DBDBA2C12BA8900FE3A41 /* FirebaseFirestoreCombine-Community */,
+				386DBDBC2C12BA8900FE3A41 /* FirebaseFirestoreSwift */,
+				386DBDBE2C12BA8900FE3A41 /* FirebaseFunctions */,
+				386DBDC02C12BA8900FE3A41 /* FirebaseStorage */,
+				386DBDC22C12BA8900FE3A41 /* FirebaseStorageCombine-Community */,
+			);
+			productName = MediGuard;
+			productReference = 386DBD942C12B88B00FE3A41 /* MediGuard.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		386DBD8C2C12B88B00FE3A41 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					386DBD932C12B88B00FE3A41 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+				};
+			};
+			buildConfigurationList = 386DBD8F2C12B88B00FE3A41 /* Build configuration list for PBXProject "MediGuard" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 386DBD8B2C12B88B00FE3A41;
+			packageReferences = (
+				386DBDA72C12BA8900FE3A41 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
+			productRefGroup = 386DBD952C12B88B00FE3A41 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				386DBD932C12B88B00FE3A41 /* MediGuard */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		386DBD922C12B88B00FE3A41 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				386DBD9F2C12B88C00FE3A41 /* Preview Assets.xcassets in Resources */,
+				386DBDA62C12B93200FE3A41 /* GoogleService-Info.plist in Resources */,
+				386DBD9C2C12B88C00FE3A41 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		386DBD902C12B88B00FE3A41 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				386DBD9A2C12B88B00FE3A41 /* ContentView.swift in Sources */,
+				386DBD982C12B88B00FE3A41 /* MediGuardApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		386DBDA02C12B88C00FE3A41 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		386DBDA12C12B88C00FE3A41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		386DBDA32C12B88C00FE3A41 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MediGuard/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = alvaro.MediGuard;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		386DBDA42C12B88C00FE3A41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MediGuard/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = alvaro.MediGuard;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		386DBD8F2C12B88B00FE3A41 /* Build configuration list for PBXProject "MediGuard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				386DBDA02C12B88C00FE3A41 /* Debug */,
+				386DBDA12C12B88C00FE3A41 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		386DBDA22C12B88C00FE3A41 /* Build configuration list for PBXNativeTarget "MediGuard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				386DBDA32C12B88C00FE3A41 /* Debug */,
+				386DBDA42C12B88C00FE3A41 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		386DBDA72C12BA8900FE3A41 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.27.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		386DBDA82C12BA8900FE3A41 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 386DBDA72C12BA8900FE3A41 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		386DBDAA2C12BA8900FE3A41 /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 386DBDA72C12BA8900FE3A41 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
+		};
+		386DBDAC2C12BA8900FE3A41 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 386DBDA72C12BA8900FE3A41 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		386DBDAE2C12BA8900FE3A41 /* FirebaseAuthCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 386DBDA72C12BA8900FE3A41 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseAuthCombine-Community";
+		};
+		386DBDB02C12BA8900FE3A41 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 386DBDA72C12BA8900FE3A41 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		386DBDB22C12BA8900FE3A41 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 386DBDA72C12BA8900FE3A41 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		386DBDB42C12BA8900FE3A41 /* FirebaseDatabaseSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 386DBDA72C12BA8900FE3A41 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabaseSwift;
+		};
+		386DBDB62C12BA8900FE3A41 /* FirebaseDynamicLinks */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 386DBDA72C12BA8900FE3A41 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDynamicLinks;
+		};
+		386DBDB82C12BA8900FE3A41 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 386DBDA72C12BA8900FE3A41 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		386DBDBA2C12BA8900FE3A41 /* FirebaseFirestoreCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 386DBDA72C12BA8900FE3A41 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseFirestoreCombine-Community";
+		};
+		386DBDBC2C12BA8900FE3A41 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 386DBDA72C12BA8900FE3A41 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+		386DBDBE2C12BA8900FE3A41 /* FirebaseFunctions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 386DBDA72C12BA8900FE3A41 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFunctions;
+		};
+		386DBDC02C12BA8900FE3A41 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 386DBDA72C12BA8900FE3A41 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		386DBDC22C12BA8900FE3A41 /* FirebaseStorageCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 386DBDA72C12BA8900FE3A41 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseStorageCombine-Community";
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 386DBD8C2C12B88B00FE3A41 /* Project object */;
+}
