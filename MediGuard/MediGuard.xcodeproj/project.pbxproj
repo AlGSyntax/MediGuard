@@ -28,6 +28,7 @@
 		386DBDC32C12BA8900FE3A41 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 386DBDC22C12BA8900FE3A41 /* FirebaseStorageCombine-Community */; };
 		386DBDCC2C12C28100FE3A41 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386DBDCB2C12C28100FE3A41 /* FirebaseManager.swift */; };
 		386DBDCE2C12D88B00FE3A41 /* FireUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386DBDCD2C12D88B00FE3A41 /* FireUser.swift */; };
+		386DBDD02C12DABF00FE3A41 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386DBDCF2C12DABF00FE3A41 /* UserViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		386DBDA52C12B93200FE3A41 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		386DBDCB2C12C28100FE3A41 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		386DBDCD2C12D88B00FE3A41 /* FireUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireUser.swift; sourceTree = "<group>"; };
+		386DBDCF2C12DABF00FE3A41 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 		386DBDC42C12BBAA00FE3A41 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				386DBDCF2C12DABF00FE3A41 /* UserViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				386DBDCC2C12C28100FE3A41 /* FirebaseManager.swift in Sources */,
 				386DBD9A2C12B88B00FE3A41 /* ContentView.swift in Sources */,
 				386DBDCE2C12D88B00FE3A41 /* FireUser.swift in Sources */,
+				386DBDD02C12DABF00FE3A41 /* UserViewModel.swift in Sources */,
 				386DBD982C12B88B00FE3A41 /* MediGuardApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
