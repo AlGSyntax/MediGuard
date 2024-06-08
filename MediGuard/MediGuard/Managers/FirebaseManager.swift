@@ -34,12 +34,17 @@ class FirebaseManager {
     
     static let shared = FirebaseManager()
     
-    let auth = Auth.auth()
-    let database = Firestore.firestore()
+    var auth = Auth.auth()
+    var database = Firestore.firestore()
     
     
     var userId:String? {
         auth.currentUser?.uid
     }
+    
+    private init() {
+            self.auth = Auth.auth()
+            self.database = Firestore.firestore()
+        }
     
 }

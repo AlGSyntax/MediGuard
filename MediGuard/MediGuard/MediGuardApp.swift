@@ -6,12 +6,31 @@
 //
 
 import SwiftUI
+import Firebase
 
 @main
 struct MediGuardApp: App {
+    
+    
+    init(){
+        FirebaseConfiguration.shared.setLoggerLevel(.min)
+        FirebaseApp.configure()
+    }
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if userViewModel.userIsLoggedIn{
+                HomeView()
+                    .environmentObject(userViewModel)
+            }else{
+                AuthenticationView()
+                    .environmentObject(userViewModel)
+            }
+            
         }
     }
+    
+    // MARK: - Variables
+        
+        @StateObject private var userViewModel = UserViewModel()
 }

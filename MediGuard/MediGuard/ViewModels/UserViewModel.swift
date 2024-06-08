@@ -22,6 +22,10 @@ class UserViewModel: ObservableObject {
     private let firebaseManager = FirebaseManager.shared
     
     @Published var user: FireUser?
+    @Published var mode: AuthenticationMode = .login
+    @Published var name: String = ""
+    @Published var password: String = ""
+    @Published var confirmPassword: String = ""
     
     
     
@@ -31,7 +35,16 @@ class UserViewModel: ObservableObject {
         user != nil
     }
     
-    var name: String {
+    var disableAuthentication: Bool {
+            if mode == .register {
+                return name.isEmpty || password.isEmpty || confirmPassword.isEmpty || password != confirmPassword
+            } else {
+                return name.isEmpty || password.isEmpty
+            }
+        }
+    
+    
+    var nameDisplay: String {
         user?.name ?? ""
     }
     
@@ -60,7 +73,8 @@ class UserViewModel: ObservableObject {
      */
     func login(username: String, password: String) {
         
-        let email = "\(username)@mediguard.de"
+        let email = "\(username.lowercased())@mediguard.com"
+        print("Trying to log in with email: \(email) and password: \(password)")
         
         firebaseManager.auth.signIn(withEmail: email, password: password) { authResult, error in
             if let error {
@@ -82,7 +96,8 @@ class UserViewModel: ObservableObject {
      */
     func register(name: String, username: String, password: String) {
         
-        let email = "\(username)@mediguard.com"
+        let email = "\(username.lowercased())@mediguard.com"
+        print("Trying to register with email: \(email) and password: \(password)")
         
         firebaseManager.auth.createUser(withEmail: email, password: password) { authResult, error in
             if let error {
@@ -100,6 +115,27 @@ class UserViewModel: ObservableObject {
             self.login(username: username, password: password)
         }
     }
+    
+    
+    func switchAuthenticationMode() {
+            mode = mode == .login ? .register : .login
+            clearFields()
+        }
+        
+        func authenticate() {
+            switch mode {
+            case .login:
+                login(username: name, password: password)
+            case .register:
+                register(name: name, username: name, password: password)
+            }
+        }
+    
+     func clearFields() {
+            name = ""
+            password = ""
+            confirmPassword = ""
+        }
     
     /**
      Der Logout entfernt den aktuellen User und wir setzen unsere User-Variable ebenfalls nil.

@@ -29,6 +29,11 @@
 		386DBDCC2C12C28100FE3A41 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386DBDCB2C12C28100FE3A41 /* FirebaseManager.swift */; };
 		386DBDCE2C12D88B00FE3A41 /* FireUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386DBDCD2C12D88B00FE3A41 /* FireUser.swift */; };
 		386DBDD02C12DABF00FE3A41 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386DBDCF2C12DABF00FE3A41 /* UserViewModel.swift */; };
+		386DBDE32C12E27800FE3A41 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386DBDE22C12E27800FE3A41 /* AuthenticationView.swift */; };
+		386DBDE52C12E29700FE3A41 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386DBDE42C12E29700FE3A41 /* PrimaryButton.swift */; };
+		386DBDE72C12E2A100FE3A41 /* TextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386DBDE62C12E2A100FE3A41 /* TextButton.swift */; };
+		386DBDE92C12E2D300FE3A41 /* AuthenticationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386DBDE82C12E2D300FE3A41 /* AuthenticationMode.swift */; };
+		386DBDEE2C130BCF00FE3A41 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386DBDED2C130BCF00FE3A41 /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +46,11 @@
 		386DBDCB2C12C28100FE3A41 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		386DBDCD2C12D88B00FE3A41 /* FireUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireUser.swift; sourceTree = "<group>"; };
 		386DBDCF2C12DABF00FE3A41 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		386DBDE22C12E27800FE3A41 /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
+		386DBDE42C12E29700FE3A41 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
+		386DBDE62C12E2A100FE3A41 /* TextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextButton.swift; sourceTree = "<group>"; };
+		386DBDE82C12E2D300FE3A41 /* AuthenticationMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationMode.swift; sourceTree = "<group>"; };
+		386DBDED2C130BCF00FE3A41 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				386DBDA52C12B93200FE3A41 /* GoogleService-Info.plist */,
+				386DBDCD2C12D88B00FE3A41 /* FireUser.swift */,
 				386DBD962C12B88B00FE3A41 /* MediGuard */,
 				386DBD952C12B88B00FE3A41 /* Products */,
 			);
@@ -90,7 +101,7 @@
 			children = (
 				386DBDCA2C12BF3B00FE3A41 /* Extensions */,
 				386DBDC92C12BF3300FE3A41 /* Enums */,
-				386DBDC82C12BC3300FE3A41 /* Manager */,
+				386DBDC82C12BC3300FE3A41 /* Managers */,
 				386DBDC72C12BBCC00FE3A41 /* Models */,
 				386DBDC62C12BBC300FE3A41 /* Views */,
 				386DBDC52C12BBB800FE3A41 /* Repositories */,
@@ -129,6 +140,11 @@
 		386DBDC62C12BBC300FE3A41 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				386DBDEA2C12F0F300FE3A41 /* Font */,
+				386DBDD52C12DF8300FE3A41 /* Detail */,
+				386DBDD22C12DF3B00FE3A41 /* Home */,
+				386DBDD12C12DF3000FE3A41 /* Authentication */,
+				386DBDD42C12DF5100FE3A41 /* Settings */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -136,17 +152,16 @@
 		386DBDC72C12BBCC00FE3A41 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				386DBDCD2C12D88B00FE3A41 /* FireUser.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		386DBDC82C12BC3300FE3A41 /* Manager */ = {
+		386DBDC82C12BC3300FE3A41 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
 				386DBDCB2C12C28100FE3A41 /* FirebaseManager.swift */,
 			);
-			path = Manager;
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		386DBDC92C12BF3300FE3A41 /* Enums */ = {
@@ -161,6 +176,142 @@
 			children = (
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		386DBDD12C12DF3000FE3A41 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				386DBDD82C12DFA200FE3A41 /* View */,
+				386DBDD72C12DF9300FE3A41 /* Components */,
+				386DBDD62C12DF8C00FE3A41 /* Enum */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		386DBDD22C12DF3B00FE3A41 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				386DBDDB2C12DFBC00FE3A41 /* Enum */,
+				386DBDDA2C12DFB300FE3A41 /* Components */,
+				386DBDD92C12DFAE00FE3A41 /* View */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		386DBDD42C12DF5100FE3A41 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				386DBDE12C12DFEC00FE3A41 /* Enum */,
+				386DBDE02C12DFE400FE3A41 /* Components */,
+				386DBDDF2C12DFDF00FE3A41 /* View */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		386DBDD52C12DF8300FE3A41 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				386DBDDE2C12DFD300FE3A41 /* View */,
+				386DBDDD2C12DFCD00FE3A41 /* Components */,
+				386DBDDC2C12DFC600FE3A41 /* Enum */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		386DBDD62C12DF8C00FE3A41 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				386DBDE82C12E2D300FE3A41 /* AuthenticationMode.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
+		386DBDD72C12DF9300FE3A41 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				386DBDE42C12E29700FE3A41 /* PrimaryButton.swift */,
+				386DBDE62C12E2A100FE3A41 /* TextButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		386DBDD82C12DFA200FE3A41 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				386DBDE22C12E27800FE3A41 /* AuthenticationView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		386DBDD92C12DFAE00FE3A41 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				386DBDED2C130BCF00FE3A41 /* HomeView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		386DBDDA2C12DFB300FE3A41 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		386DBDDB2C12DFBC00FE3A41 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
+		386DBDDC2C12DFC600FE3A41 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
+		386DBDDD2C12DFCD00FE3A41 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		386DBDDE2C12DFD300FE3A41 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		386DBDDF2C12DFDF00FE3A41 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		386DBDE02C12DFE400FE3A41 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		386DBDE12C12DFEC00FE3A41 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
+		386DBDEA2C12F0F300FE3A41 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,7 +406,12 @@
 			files = (
 				386DBDCC2C12C28100FE3A41 /* FirebaseManager.swift in Sources */,
 				386DBD9A2C12B88B00FE3A41 /* ContentView.swift in Sources */,
+				386DBDE32C12E27800FE3A41 /* AuthenticationView.swift in Sources */,
+				386DBDEE2C130BCF00FE3A41 /* HomeView.swift in Sources */,
 				386DBDCE2C12D88B00FE3A41 /* FireUser.swift in Sources */,
+				386DBDE92C12E2D300FE3A41 /* AuthenticationMode.swift in Sources */,
+				386DBDE72C12E2A100FE3A41 /* TextButton.swift in Sources */,
+				386DBDE52C12E29700FE3A41 /* PrimaryButton.swift in Sources */,
 				386DBDD02C12DABF00FE3A41 /* UserViewModel.swift in Sources */,
 				386DBD982C12B88B00FE3A41 /* MediGuardApp.swift in Sources */,
 			);
