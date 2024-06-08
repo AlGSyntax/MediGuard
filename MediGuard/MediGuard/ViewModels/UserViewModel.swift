@@ -36,19 +36,22 @@ class UserViewModel: ObservableObject {
     }
     
     var disableAuthentication: Bool {
-            if mode == .register {
-                return name.isEmpty || password.isEmpty || confirmPassword.isEmpty || password != confirmPassword
-            } else {
-                return name.isEmpty || password.isEmpty
-            }
+        if mode == .register {
+            return name.isEmpty || password.isEmpty || confirmPassword.isEmpty || password != confirmPassword
+        } else {
+            return name.isEmpty || password.isEmpty
         }
+    }
     
+    var userId: String? {
+        firebaseManager.auth.currentUser?.uid
+    }
     
     var nameDisplay: String {
         user?.name ?? ""
     }
     
-   
+    
     
     
     
@@ -118,24 +121,24 @@ class UserViewModel: ObservableObject {
     
     
     func switchAuthenticationMode() {
-            mode = mode == .login ? .register : .login
-            clearFields()
-        }
-        
-        func authenticate() {
-            switch mode {
-            case .login:
-                login(username: name, password: password)
-            case .register:
-                register(name: name, username: name, password: password)
-            }
-        }
+        mode = mode == .login ? .register : .login
+        clearFields()
+    }
     
-     func clearFields() {
-            name = ""
-            password = ""
-            confirmPassword = ""
+    func authenticate() {
+        switch mode {
+        case .login:
+            login(username: name, password: password)
+        case .register:
+            register(name: name, username: name, password: password)
         }
+    }
+    
+    func clearFields() {
+        name = ""
+        password = ""
+        confirmPassword = ""
+    }
     
     /**
      Der Logout entfernt den aktuellen User und wir setzen unsere User-Variable ebenfalls nil.

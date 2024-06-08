@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		386DBD982C12B88B00FE3A41 /* MediGuardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386DBD972C12B88B00FE3A41 /* MediGuardApp.swift */; };
-		386DBD9A2C12B88B00FE3A41 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386DBD992C12B88B00FE3A41 /* ContentView.swift */; };
 		386DBD9C2C12B88C00FE3A41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 386DBD9B2C12B88C00FE3A41 /* Assets.xcassets */; };
 		386DBD9F2C12B88C00FE3A41 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 386DBD9E2C12B88C00FE3A41 /* Preview Assets.xcassets */; };
 		386DBDA62C12B93200FE3A41 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 386DBDA52C12B93200FE3A41 /* GoogleService-Info.plist */; };
@@ -39,7 +38,6 @@
 /* Begin PBXFileReference section */
 		386DBD942C12B88B00FE3A41 /* MediGuard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediGuard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		386DBD972C12B88B00FE3A41 /* MediGuardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediGuardApp.swift; sourceTree = "<group>"; };
-		386DBD992C12B88B00FE3A41 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		386DBD9B2C12B88C00FE3A41 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		386DBD9E2C12B88C00FE3A41 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		386DBDA52C12B93200FE3A41 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -107,7 +105,6 @@
 				386DBDC52C12BBB800FE3A41 /* Repositories */,
 				386DBDC42C12BBAA00FE3A41 /* ViewModels */,
 				386DBD972C12B88B00FE3A41 /* MediGuardApp.swift */,
-				386DBD992C12B88B00FE3A41 /* ContentView.swift */,
 				386DBD9B2C12B88C00FE3A41 /* Assets.xcassets */,
 				386DBD9D2C12B88C00FE3A41 /* Preview Content */,
 			);
@@ -405,7 +402,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				386DBDCC2C12C28100FE3A41 /* FirebaseManager.swift in Sources */,
-				386DBD9A2C12B88B00FE3A41 /* ContentView.swift in Sources */,
 				386DBDE32C12E27800FE3A41 /* AuthenticationView.swift in Sources */,
 				386DBDEE2C130BCF00FE3A41 /* HomeView.swift in Sources */,
 				386DBDCE2C12D88B00FE3A41 /* FireUser.swift in Sources */,
