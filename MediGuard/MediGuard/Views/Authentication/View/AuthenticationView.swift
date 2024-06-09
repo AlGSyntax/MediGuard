@@ -9,8 +9,10 @@ import SwiftUI
 
 struct AuthenticationView: View {
     
+    @EnvironmentObject private var userViewModel: UserViewModel
     @State private var isPasswordVisible = false
     @State private var isConfirmPasswordVisible = false
+    @State private var showAlert = false
     
     var body: some View {
         VStack(spacing: 24) {
@@ -47,17 +49,31 @@ struct AuthenticationView: View {
             .textInputAutocapitalization(.never)
             
             PrimaryButton(title: userViewModel.mode.title, action: {
-                userViewModel.authenticate()
-                userViewModel.clearFields()
-                        })
-            .disabled(userViewModel.disableAuthentication)
+                if userViewModel.disableAuthentication {
+                    if userViewModel.name.isEmpty {
+                        userViewModel.errorMessage = "Bitte geben Sie einen Namen ein."
+                    } else if userViewModel.password.isEmpty {
+                        userViewModel.errorMessage = "Bitte geben Sie ein Passwort ein."
+                    } else if userViewModel.mode == .register && userViewModel.confirmPassword.isEmpty {
+                        userViewModel.errorMessage = "Bitte wiederholen Sie das Passwort."
+                    } else if userViewModel.mode == .register && userViewModel.password != userViewModel.confirmPassword {
+                        userViewModel.errorMessage = "Die Passwörter stimmen nicht überein."
+                    }
+                    showAlert = true
+                } else {
+                    userViewModel.authenticate()
+                    userViewModel.clearFields()
+                }
+            })
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text("Fehler"), message: Text(userViewModel.errorMessage), dismissButton: .default(Text("OK")))
+            }
             
             TextButton(title: userViewModel.mode.alternativeTitle) {
-                            withAnimation {
-                                userViewModel.switchAuthenticationMode()
-                                
-                            }
-                        }
+                withAnimation {
+                    userViewModel.switchAuthenticationMode()
+                }
+            }
             
             Spacer()
         }
@@ -66,16 +82,12 @@ struct AuthenticationView: View {
         .cornerRadius(12)
         .padding(.horizontal, 36)
         .frame(maxHeight: .infinity, alignment: .top)
+        .onReceive(userViewModel.$errorMessage) { errorMessage in
+            if !errorMessage.isEmpty {
+                showAlert = true
+            }
+        }
     }
-    
-    // MARK: - Variables
-    
-    @EnvironmentObject private var userViewModel: UserViewModel
-    
-    
-    
-  
-    
     
     @ViewBuilder
     private func passwordField(_ title: String, text: Binding<String>, isVisible: Binding<Bool>) -> some View {
@@ -103,9 +115,6 @@ struct AuthenticationView: View {
             }
         }
     }
-    
-   
-    
 }
 
 struct LoginView_Previews: PreviewProvider {
@@ -114,3 +123,13 @@ struct LoginView_Previews: PreviewProvider {
             .environmentObject(UserViewModel())
     }
 }
+
+
+
+
+
+
+
+
+
+
