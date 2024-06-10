@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3855EF952C16F9650037B169 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3855EF942C16F9650037B169 /* HomeViewModel.swift */; };
 		386DBD982C12B88B00FE3A41 /* MediGuardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386DBD972C12B88B00FE3A41 /* MediGuardApp.swift */; };
 		386DBD9C2C12B88C00FE3A41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 386DBD9B2C12B88C00FE3A41 /* Assets.xcassets */; };
 		386DBD9F2C12B88C00FE3A41 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 386DBD9E2C12B88C00FE3A41 /* Preview Assets.xcassets */; };
@@ -47,6 +48,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3855EF942C16F9650037B169 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		386DBD942C12B88B00FE3A41 /* MediGuard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediGuard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		386DBD972C12B88B00FE3A41 /* MediGuardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediGuardApp.swift; sourceTree = "<group>"; };
 		386DBD9B2C12B88C00FE3A41 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -98,6 +100,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3855EF912C16F9440037B169 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				3855EF932C16F9530037B169 /* Enums */,
+				3855EF922C16F94C0037B169 /* ViewModel */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		3855EF922C16F94C0037B169 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				3855EF942C16F9650037B169 /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		3855EF932C16F9530037B169 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		386DBD8B2C12B88B00FE3A41 = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +169,7 @@
 		386DBDC42C12BBAA00FE3A41 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				3855EF912C16F9440037B169 /* Home */,
 				38A8A29A2C14458F00950F82 /* User */,
 			);
 			path = ViewModels;
@@ -457,6 +484,7 @@
 				386DBDCE2C12D88B00FE3A41 /* FireUser.swift in Sources */,
 				386DBDE92C12E2D300FE3A41 /* AuthenticationMode.swift in Sources */,
 				386DBDE72C12E2A100FE3A41 /* TextButton.swift in Sources */,
+				3855EF952C16F9650037B169 /* HomeViewModel.swift in Sources */,
 				386DBDE52C12E29700FE3A41 /* PrimaryButton.swift in Sources */,
 				386DBDD02C12DABF00FE3A41 /* UserViewModel.swift in Sources */,
 				386DBD982C12B88B00FE3A41 /* MediGuardApp.swift in Sources */,
