@@ -83,7 +83,7 @@ struct AuthenticationView: View {
         .padding(.horizontal, 36)
         .frame(maxHeight: .infinity, alignment: .top)
         .onReceive(userViewModel.$errorMessage) { errorMessage in
-            if !errorMessage.isEmpty {
+            if !errorMessage.isEmpty {// Verkürzen 
                 showAlert = true
             }
         }
