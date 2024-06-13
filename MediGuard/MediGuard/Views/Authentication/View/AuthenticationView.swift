@@ -39,10 +39,10 @@ struct AuthenticationView: View {
                 }
                 
                 if userViewModel.mode == .register {
-                    passwordField("Passwort", text: $userViewModel.password, isVisible: $isPasswordVisible)
-                    passwordField("Passwort wiederholen", text: $userViewModel.confirmPassword, isVisible: $isConfirmPasswordVisible)
+                    PasswordField(title: "Passwort", text: $userViewModel.password, isVisible: $isPasswordVisible)
+                    PasswordField(title: "Passwort wiederholen", text: $userViewModel.confirmPassword, isVisible: $isConfirmPasswordVisible)
                 } else {
-                    passwordField("Passwort", text: $userViewModel.password, isVisible: $isPasswordVisible)
+                    PasswordField(title: "Passwort", text: $userViewModel.password, isVisible: $isPasswordVisible)
                 }
             }
             .font(.headline)
@@ -86,33 +86,6 @@ struct AuthenticationView: View {
             showAlert = !errorMessage.isEmpty
         }
     }
-    
-    @ViewBuilder
-    private func passwordField(_ title: String, text: Binding<String>, isVisible: Binding<Bool>) -> some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(Color.blue, lineWidth: 1)
-                .frame(height: 50)
-            
-            HStack {
-                if isVisible.wrappedValue {
-                    TextField(title, text: text)
-                        .padding()
-                } else {
-                    SecureField(title, text: text)
-                        .padding()
-                }
-                
-                Button(action: {
-                    isVisible.wrappedValue.toggle()
-                }) {
-                    Image(systemName: isVisible.wrappedValue ? "eye.slash" : "eye")
-                        .foregroundColor(.gray)
-                }
-                .padding(.trailing, 8)
-            }
-        }
-    }
 }
 
 struct LoginView_Previews: PreviewProvider {
@@ -121,6 +94,7 @@ struct LoginView_Previews: PreviewProvider {
             .environmentObject(UserViewModel())
     }
 }
+
 
 
 

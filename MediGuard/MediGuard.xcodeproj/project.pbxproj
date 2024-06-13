@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		3855EF952C16F9650037B169 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3855EF942C16F9650037B169 /* HomeViewModel.swift */; };
+		3855EF972C16FD1A0037B169 /* TimePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3855EF962C16FD1A0037B169 /* TimePeriod.swift */; };
+		3855EF992C16FEF40037B169 /* DetailViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3855EF982C16FEF40037B169 /* DetailViewButton.swift */; };
+		3855EF9B2C16FF2A0037B169 /* EmergencyCallButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3855EF9A2C16FF2A0037B169 /* EmergencyCallButton.swift */; };
+		3855EF9E2C1704000037B169 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3855EF9D2C1704000037B169 /* Calendar.swift */; };
+		3855EFA22C1736600037B169 /* PasswordField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3855EFA12C1736600037B169 /* PasswordField.swift */; };
+		38630DEF2C1AD9BA002671BD /* MedicationDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38630DEE2C1AD9BA002671BD /* MedicationDetailViewModel.swift */; };
+		38630DF12C1ADA1C002671BD /* CostumAddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38630DF02C1ADA1C002671BD /* CostumAddButton.swift */; };
+		38630DF72C1ADD03002671BD /* Medication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38630DF62C1ADD03002671BD /* Medication.swift */; };
+		38630DFA2C1ADD61002671BD /* MedicationCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38630DF92C1ADD61002671BD /* MedicationCardView.swift */; };
 		386DBD982C12B88B00FE3A41 /* MediGuardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386DBD972C12B88B00FE3A41 /* MediGuardApp.swift */; };
 		386DBD9C2C12B88C00FE3A41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 386DBD9B2C12B88C00FE3A41 /* Assets.xcassets */; };
 		386DBD9F2C12B88C00FE3A41 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 386DBD9E2C12B88C00FE3A41 /* Preview Assets.xcassets */; };
@@ -20,6 +29,13 @@
 		386DBDE72C12E2A100FE3A41 /* TextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386DBDE62C12E2A100FE3A41 /* TextButton.swift */; };
 		386DBDE92C12E2D300FE3A41 /* AuthenticationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386DBDE82C12E2D300FE3A41 /* AuthenticationMode.swift */; };
 		386DBDEE2C130BCF00FE3A41 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386DBDED2C130BCF00FE3A41 /* HomeView.swift */; };
+		3886F3562C1800F6004C3203 /* MedicationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3886F3552C1800F6004C3203 /* MedicationDetailView.swift */; };
+		3886F3582C18026F004C3203 /* SettingsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3886F3572C18026F004C3203 /* SettingsButton.swift */; };
+		3886F35A2C18350A004C3203 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3886F3592C18350A004C3203 /* SettingsView.swift */; };
+		3886F35F2C184271004C3203 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3886F35E2C184271004C3203 /* SettingsViewModel.swift */; };
+		3886F3612C18815B004C3203 /* CostumBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3886F3602C18815B004C3203 /* CostumBackButton.swift */; };
+		3886F36B2C188AF0004C3203 /* MealDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3886F36A2C188AF0004C3203 /* MealDetailView.swift */; };
+		3886F36D2C188B01004C3203 /* DrinksDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3886F36C2C188B01004C3203 /* DrinksDetailView.swift */; };
 		38A4AA4F2C15AFB3004FE7FA /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 38A4AA4E2C15AFB3004FE7FA /* FirebaseAnalytics */; };
 		38A4AA512C15AFB3004FE7FA /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 38A4AA502C15AFB3004FE7FA /* FirebaseAnalyticsOnDeviceConversion */; };
 		38A4AA532C15AFB3004FE7FA /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 38A4AA522C15AFB3004FE7FA /* FirebaseAnalyticsSwift */; };
@@ -43,12 +59,20 @@
 		38A4AA772C15AFB3004FE7FA /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 38A4AA762C15AFB3004FE7FA /* FirebaseRemoteConfigSwift */; };
 		38A4AA792C15AFB3004FE7FA /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 38A4AA782C15AFB3004FE7FA /* FirebaseStorage */; };
 		38A4AA7B2C15AFB3004FE7FA /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 38A4AA7A2C15AFB3004FE7FA /* FirebaseStorageCombine-Community */; };
-		38A8A2992C14367E00950F82 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A8A2982C14367E00950F82 /* AppError.swift */; };
 		38A8A29E2C1445CD00950F82 /* AuthenticationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A8A29D2C1445CD00950F82 /* AuthenticationError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3855EF942C16F9650037B169 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		3855EF962C16FD1A0037B169 /* TimePeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePeriod.swift; sourceTree = "<group>"; };
+		3855EF982C16FEF40037B169 /* DetailViewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewButton.swift; sourceTree = "<group>"; };
+		3855EF9A2C16FF2A0037B169 /* EmergencyCallButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyCallButton.swift; sourceTree = "<group>"; };
+		3855EF9D2C1704000037B169 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
+		3855EFA12C1736600037B169 /* PasswordField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordField.swift; sourceTree = "<group>"; };
+		38630DEE2C1AD9BA002671BD /* MedicationDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationDetailViewModel.swift; sourceTree = "<group>"; };
+		38630DF02C1ADA1C002671BD /* CostumAddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostumAddButton.swift; sourceTree = "<group>"; };
+		38630DF62C1ADD03002671BD /* Medication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Medication.swift; sourceTree = "<group>"; };
+		38630DF92C1ADD61002671BD /* MedicationCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationCardView.swift; sourceTree = "<group>"; };
 		386DBD942C12B88B00FE3A41 /* MediGuard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediGuard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		386DBD972C12B88B00FE3A41 /* MediGuardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediGuardApp.swift; sourceTree = "<group>"; };
 		386DBD9B2C12B88C00FE3A41 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -62,7 +86,13 @@
 		386DBDE62C12E2A100FE3A41 /* TextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextButton.swift; sourceTree = "<group>"; };
 		386DBDE82C12E2D300FE3A41 /* AuthenticationMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationMode.swift; sourceTree = "<group>"; };
 		386DBDED2C130BCF00FE3A41 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		38A8A2982C14367E00950F82 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
+		3886F3552C1800F6004C3203 /* MedicationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationDetailView.swift; sourceTree = "<group>"; };
+		3886F3572C18026F004C3203 /* SettingsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsButton.swift; sourceTree = "<group>"; };
+		3886F3592C18350A004C3203 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		3886F35E2C184271004C3203 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		3886F3602C18815B004C3203 /* CostumBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostumBackButton.swift; sourceTree = "<group>"; };
+		3886F36A2C188AF0004C3203 /* MealDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDetailView.swift; sourceTree = "<group>"; };
+		3886F36C2C188B01004C3203 /* DrinksDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinksDetailView.swift; sourceTree = "<group>"; };
 		38A8A29D2C1445CD00950F82 /* AuthenticationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,11 +154,85 @@
 			path = Enums;
 			sourceTree = "<group>";
 		};
+		3855EF9C2C1703F10037B169 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				3855EF9D2C1704000037B169 /* Calendar.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		38630DEC2C1AD98F002671BD /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				38630DED2C1AD9A2002671BD /* MedicationDetail */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		38630DED2C1AD9A2002671BD /* MedicationDetail */ = {
+			isa = PBXGroup;
+			children = (
+				38630DEE2C1AD9BA002671BD /* MedicationDetailViewModel.swift */,
+			);
+			path = MedicationDetail;
+			sourceTree = "<group>";
+		};
+		38630DF22C1ADC66002671BD /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				3886F3602C18815B004C3203 /* CostumBackButton.swift */,
+				38630DF02C1ADA1C002671BD /* CostumAddButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		38630DF32C1ADC79002671BD /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				3855EF982C16FEF40037B169 /* DetailViewButton.swift */,
+				3855EF9A2C16FF2A0037B169 /* EmergencyCallButton.swift */,
+				3886F3572C18026F004C3203 /* SettingsButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		38630DF42C1ADCDF002671BD /* User */ = {
+			isa = PBXGroup;
+			children = (
+				386DBDCD2C12D88B00FE3A41 /* FireUser.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		38630DF52C1ADCE7002671BD /* Medication */ = {
+			isa = PBXGroup;
+			children = (
+				38630DF62C1ADD03002671BD /* Medication.swift */,
+			);
+			path = Medication;
+			sourceTree = "<group>";
+		};
+		38630DF82C1ADD4F002671BD /* Cards */ = {
+			isa = PBXGroup;
+			children = (
+				38630DF92C1ADD61002671BD /* MedicationCardView.swift */,
+			);
+			path = Cards;
+			sourceTree = "<group>";
+		};
+		386B324F2C19D10A0068F0CA /* General Components */ = {
+			isa = PBXGroup;
+			children = (
+				38630DF22C1ADC66002671BD /* Buttons */,
+			);
+			path = "General Components";
+			sourceTree = "<group>";
+		};
 		386DBD8B2C12B88B00FE3A41 = {
 			isa = PBXGroup;
 			children = (
 				386DBDA52C12B93200FE3A41 /* GoogleService-Info.plist */,
-				386DBDCD2C12D88B00FE3A41 /* FireUser.swift */,
 				386DBD962C12B88B00FE3A41 /* MediGuard */,
 				386DBD952C12B88B00FE3A41 /* Products */,
 			);
@@ -145,7 +249,6 @@
 		386DBD962C12B88B00FE3A41 /* MediGuard */ = {
 			isa = PBXGroup;
 			children = (
-				386DBDCA2C12BF3B00FE3A41 /* Extensions */,
 				386DBDC82C12BC3300FE3A41 /* Managers */,
 				386DBDC72C12BBCC00FE3A41 /* Models */,
 				386DBDC62C12BBC300FE3A41 /* Views */,
@@ -169,6 +272,8 @@
 		386DBDC42C12BBAA00FE3A41 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				38630DEC2C1AD98F002671BD /* Detail */,
+				3886F35B2C184251004C3203 /* Settings */,
 				3855EF912C16F9440037B169 /* Home */,
 				38A8A29A2C14458F00950F82 /* User */,
 			);
@@ -185,6 +290,7 @@
 		386DBDC62C12BBC300FE3A41 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				386B324F2C19D10A0068F0CA /* General Components */,
 				386DBDEA2C12F0F300FE3A41 /* Font */,
 				386DBDD52C12DF8300FE3A41 /* Detail */,
 				386DBDD22C12DF3B00FE3A41 /* Home */,
@@ -197,7 +303,8 @@
 		386DBDC72C12BBCC00FE3A41 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				38A8A2982C14367E00950F82 /* AppError.swift */,
+				38630DF52C1ADCE7002671BD /* Medication */,
+				38630DF42C1ADCDF002671BD /* User */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -208,13 +315,6 @@
 				386DBDCB2C12C28100FE3A41 /* FirebaseManager.swift */,
 			);
 			path = Managers;
-			sourceTree = "<group>";
-		};
-		386DBDCA2C12BF3B00FE3A41 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		386DBDD12C12DF3000FE3A41 /* Authentication */ = {
@@ -230,6 +330,7 @@
 		386DBDD22C12DF3B00FE3A41 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				3855EF9C2C1703F10037B169 /* Extension */,
 				386DBDDB2C12DFBC00FE3A41 /* Enum */,
 				386DBDDA2C12DFB300FE3A41 /* Components */,
 				386DBDD92C12DFAE00FE3A41 /* View */,
@@ -250,9 +351,9 @@
 		386DBDD52C12DF8300FE3A41 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
-				386DBDDE2C12DFD300FE3A41 /* View */,
-				386DBDDD2C12DFCD00FE3A41 /* Components */,
-				386DBDDC2C12DFC600FE3A41 /* Enum */,
+				3886F3632C1889FF004C3203 /* DrinksDetail */,
+				3886F3622C1889C4004C3203 /* MealDetail */,
+				3886F3542C1800C9004C3203 /* MedicationDetail */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -270,6 +371,7 @@
 			children = (
 				386DBDE42C12E29700FE3A41 /* PrimaryButton.swift */,
 				386DBDE62C12E2A100FE3A41 /* TextButton.swift */,
+				3855EFA12C1736600037B169 /* PasswordField.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -293,6 +395,7 @@
 		386DBDDA2C12DFB300FE3A41 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				38630DF32C1ADC79002671BD /* Buttons */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -300,20 +403,22 @@
 		386DBDDB2C12DFBC00FE3A41 /* Enum */ = {
 			isa = PBXGroup;
 			children = (
+				3855EF962C16FD1A0037B169 /* TimePeriod.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
 		};
-		386DBDDC2C12DFC600FE3A41 /* Enum */ = {
+		386DBDDC2C12DFC600FE3A41 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = Enum;
+			path = Enums;
 			sourceTree = "<group>";
 		};
 		386DBDDD2C12DFCD00FE3A41 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				38630DF82C1ADD4F002671BD /* Cards */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -321,6 +426,7 @@
 		386DBDDE2C12DFD300FE3A41 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3886F3552C1800F6004C3203 /* MedicationDetailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -328,6 +434,7 @@
 		386DBDDF2C12DFDF00FE3A41 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3886F3592C18350A004C3203 /* SettingsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -351,6 +458,104 @@
 			children = (
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		3886F3542C1800C9004C3203 /* MedicationDetail */ = {
+			isa = PBXGroup;
+			children = (
+				386DBDDE2C12DFD300FE3A41 /* View */,
+				386DBDDD2C12DFCD00FE3A41 /* Components */,
+				386DBDDC2C12DFC600FE3A41 /* Enums */,
+			);
+			path = MedicationDetail;
+			sourceTree = "<group>";
+		};
+		3886F35B2C184251004C3203 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				3886F35D2C18425F004C3203 /* Enums */,
+				3886F35C2C184258004C3203 /* ViewModel */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		3886F35C2C184258004C3203 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				3886F35E2C184271004C3203 /* SettingsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		3886F35D2C18425F004C3203 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		3886F3622C1889C4004C3203 /* MealDetail */ = {
+			isa = PBXGroup;
+			children = (
+				3886F3692C188A87004C3203 /* View */,
+				3886F3682C188A7A004C3203 /* Components */,
+				3886F3672C188A66004C3203 /* Enums */,
+			);
+			path = MealDetail;
+			sourceTree = "<group>";
+		};
+		3886F3632C1889FF004C3203 /* DrinksDetail */ = {
+			isa = PBXGroup;
+			children = (
+				3886F3642C188A1A004C3203 /* View */,
+				3886F3652C188A22004C3203 /* Components */,
+				3886F3662C188A30004C3203 /* Enums */,
+			);
+			path = DrinksDetail;
+			sourceTree = "<group>";
+		};
+		3886F3642C188A1A004C3203 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3886F36C2C188B01004C3203 /* DrinksDetailView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3886F3652C188A22004C3203 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		3886F3662C188A30004C3203 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		3886F3672C188A66004C3203 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		3886F3682C188A7A004C3203 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		3886F3692C188A87004C3203 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3886F36A2C188AF0004C3203 /* MealDetailView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		38A8A29A2C14458F00950F82 /* User */ = {
@@ -479,16 +684,31 @@
 			files = (
 				386DBDCC2C12C28100FE3A41 /* FirebaseManager.swift in Sources */,
 				386DBDE32C12E27800FE3A41 /* AuthenticationView.swift in Sources */,
-				38A8A2992C14367E00950F82 /* AppError.swift in Sources */,
+				38630DEF2C1AD9BA002671BD /* MedicationDetailViewModel.swift in Sources */,
+				3855EF9E2C1704000037B169 /* Calendar.swift in Sources */,
 				386DBDEE2C130BCF00FE3A41 /* HomeView.swift in Sources */,
+				3886F35A2C18350A004C3203 /* SettingsView.swift in Sources */,
 				386DBDCE2C12D88B00FE3A41 /* FireUser.swift in Sources */,
+				3855EF992C16FEF40037B169 /* DetailViewButton.swift in Sources */,
+				3886F36B2C188AF0004C3203 /* MealDetailView.swift in Sources */,
 				386DBDE92C12E2D300FE3A41 /* AuthenticationMode.swift in Sources */,
+				3886F36D2C188B01004C3203 /* DrinksDetailView.swift in Sources */,
+				38630DF12C1ADA1C002671BD /* CostumAddButton.swift in Sources */,
+				38630DFA2C1ADD61002671BD /* MedicationCardView.swift in Sources */,
 				386DBDE72C12E2A100FE3A41 /* TextButton.swift in Sources */,
+				3855EFA22C1736600037B169 /* PasswordField.swift in Sources */,
 				3855EF952C16F9650037B169 /* HomeViewModel.swift in Sources */,
 				386DBDE52C12E29700FE3A41 /* PrimaryButton.swift in Sources */,
+				38630DF72C1ADD03002671BD /* Medication.swift in Sources */,
 				386DBDD02C12DABF00FE3A41 /* UserViewModel.swift in Sources */,
+				3855EF972C16FD1A0037B169 /* TimePeriod.swift in Sources */,
+				3886F3562C1800F6004C3203 /* MedicationDetailView.swift in Sources */,
 				386DBD982C12B88B00FE3A41 /* MediGuardApp.swift in Sources */,
+				3855EF9B2C16FF2A0037B169 /* EmergencyCallButton.swift in Sources */,
 				38A8A29E2C1445CD00950F82 /* AuthenticationError.swift in Sources */,
+				3886F3612C18815B004C3203 /* CostumBackButton.swift in Sources */,
+				3886F3582C18026F004C3203 /* SettingsButton.swift in Sources */,
+				3886F35F2C184271004C3203 /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
