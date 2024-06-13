@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CustomAddButton: View {
     var action: () -> Void
-
+    
     var body: some View {
         Button(action: {
             self.action()
@@ -27,4 +27,3 @@ struct CustomAddButton: View {
         }
     }
 }
-

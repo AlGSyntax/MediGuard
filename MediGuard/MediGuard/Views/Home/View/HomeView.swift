@@ -11,6 +11,7 @@ struct HomeView: View {
     
     @StateObject private var homeViewModel = HomeViewModel()
     @StateObject private var settingsViewModel = SettingsViewModel()
+    @EnvironmentObject private var userViewModel: UserViewModel
     
     var body: some View {
         NavigationStack {
@@ -29,7 +30,7 @@ struct HomeView: View {
                     .padding(.vertical, 16)
                 
                 VStack(spacing: 8) {
-                    NavigationLink(destination: MedicationDetailView()) {
+                    NavigationLink(destination: MedicationDetailView(userViewModel: userViewModel)) {
                         DetailViewButton(title: "Medikamente", iconName: "pills.fill")
                     }
                     

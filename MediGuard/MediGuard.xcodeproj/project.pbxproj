@@ -17,6 +17,7 @@
 		38630DF12C1ADA1C002671BD /* CostumAddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38630DF02C1ADA1C002671BD /* CostumAddButton.swift */; };
 		38630DF72C1ADD03002671BD /* Medication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38630DF62C1ADD03002671BD /* Medication.swift */; };
 		38630DFA2C1ADD61002671BD /* MedicationCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38630DF92C1ADD61002671BD /* MedicationCardView.swift */; };
+		38630DFF2C1B218E002671BD /* AddMedicationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38630DFE2C1B218E002671BD /* AddMedicationSheet.swift */; };
 		386DBD982C12B88B00FE3A41 /* MediGuardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386DBD972C12B88B00FE3A41 /* MediGuardApp.swift */; };
 		386DBD9C2C12B88C00FE3A41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 386DBD9B2C12B88C00FE3A41 /* Assets.xcassets */; };
 		386DBD9F2C12B88C00FE3A41 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 386DBD9E2C12B88C00FE3A41 /* Preview Assets.xcassets */; };
@@ -73,6 +74,7 @@
 		38630DF02C1ADA1C002671BD /* CostumAddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostumAddButton.swift; sourceTree = "<group>"; };
 		38630DF62C1ADD03002671BD /* Medication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Medication.swift; sourceTree = "<group>"; };
 		38630DF92C1ADD61002671BD /* MedicationCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationCardView.swift; sourceTree = "<group>"; };
+		38630DFE2C1B218E002671BD /* AddMedicationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMedicationSheet.swift; sourceTree = "<group>"; };
 		386DBD942C12B88B00FE3A41 /* MediGuard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediGuard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		386DBD972C12B88B00FE3A41 /* MediGuardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediGuardApp.swift; sourceTree = "<group>"; };
 		386DBD9B2C12B88C00FE3A41 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -236,6 +238,14 @@
 				3855EFA12C1736600037B169 /* PasswordField.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		38630DFD2C1B2178002671BD /* Sheet */ = {
+			isa = PBXGroup;
+			children = (
+				38630DFE2C1B218E002671BD /* AddMedicationSheet.swift */,
+			);
+			path = Sheet;
 			sourceTree = "<group>";
 		};
 		386B324F2C19D10A0068F0CA /* General Components */ = {
@@ -443,6 +453,7 @@
 			isa = PBXGroup;
 			children = (
 				3886F3552C1800F6004C3203 /* MedicationDetailView.swift */,
+				38630DFD2C1B2178002671BD /* Sheet */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -704,6 +715,7 @@
 				3855EF9E2C1704000037B169 /* Calendar.swift in Sources */,
 				386DBDEE2C130BCF00FE3A41 /* HomeView.swift in Sources */,
 				3886F35A2C18350A004C3203 /* SettingsView.swift in Sources */,
+				38630DFF2C1B218E002671BD /* AddMedicationSheet.swift in Sources */,
 				386DBDCE2C12D88B00FE3A41 /* FireUser.swift in Sources */,
 				3855EF992C16FEF40037B169 /* DetailViewButton.swift in Sources */,
 				3886F36B2C188AF0004C3203 /* MealDetailView.swift in Sources */,
