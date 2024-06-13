@@ -221,6 +221,23 @@
 			path = Cards;
 			sourceTree = "<group>";
 		};
+		38630DFB2C1B1588002671BD /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				386DBDE42C12E29700FE3A41 /* PrimaryButton.swift */,
+				386DBDE62C12E2A100FE3A41 /* TextButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		38630DFC2C1B15A4002671BD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3855EFA12C1736600037B169 /* PasswordField.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		386B324F2C19D10A0068F0CA /* General Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -369,9 +386,8 @@
 		386DBDD72C12DF9300FE3A41 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				386DBDE42C12E29700FE3A41 /* PrimaryButton.swift */,
-				386DBDE62C12E2A100FE3A41 /* TextButton.swift */,
-				3855EFA12C1736600037B169 /* PasswordField.swift */,
+				38630DFC2C1B15A4002671BD /* View */,
+				38630DFB2C1B1588002671BD /* Buttons */,
 			);
 			path = Components;
 			sourceTree = "<group>";
