@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+
+enum TimePeriod {
+    case morning
+    case afternoon
+    case evening
+}
