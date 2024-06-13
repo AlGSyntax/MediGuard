@@ -24,22 +24,25 @@ struct MedicationDetailView: View {
                 .font(.largeTitle)
                 .padding(.bottom, 40)
             
-            ScrollView {
+            List {
                 ForEach(viewModel.medications) { medication in
                     MedicationCardView(medicationName: medication.name, intakeTime: medication.intakeTime, nextIntakeDate: medication.nextIntakeDate)
-                        .padding(.bottom, 10)
                         .swipeActions {
-                            Button("Löschen") {
+                            Button(role: .destructive) {
                                 viewModel.deleteMedication(medication)
+                            } label: {
+                                Label("Löschen", systemImage: "trash")
                             }
-                            .tint(.red)
                             
-                            Button("Bearbeiten") {
+                            Button {
                                 medicationToEdit = medication
                                 showingEditMedicationSheet.toggle()
+                            } label: {
+                                Label("Bearbeiten", systemImage: "pencil")
                             }
                             .tint(.blue)
                         }
+                        
                 }
             }
             
@@ -53,7 +56,7 @@ struct MedicationDetailView: View {
                 AddMedicationSheetView(medicationViewModel: viewModel)
             }
             .sheet(item: $medicationToEdit) { medication in
-               EditMedicationSheetView(medicationViewModel: viewModel, medication: medication)
+                EditMedicationSheetView(medicationViewModel: viewModel, medication: medication)
             }
         }
         .padding()
