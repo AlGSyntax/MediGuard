@@ -31,6 +31,7 @@ struct MedicationCardView: View {
         }
         .padding()
         .frame(maxWidth: .infinity, minHeight: 150)
+        .background(Color(UIColor.systemGray6))
         .cornerRadius(20)
         .shadow(color: .gray, radius: 5, x: 0, y: 2)
         .padding(.horizontal)

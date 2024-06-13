@@ -10,7 +10,7 @@ import FirebaseFirestore
 
 struct Medication: Identifiable, Codable {
     @DocumentID var id: String?
-    let name: String
-    let intakeTime: String
-    let nextIntakeDate: String
+    var name: String
+    var intakeTime: String
+    var nextIntakeDate: String
 }

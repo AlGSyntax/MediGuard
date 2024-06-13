@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AddMedicationSheet: View {
+struct AddMedicationSheetView: View {
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var medicationViewModel: MedicationViewModel
     
@@ -43,7 +43,7 @@ struct AddMedicationSheet: View {
 
 struct AddMedicationSheet_Previews: PreviewProvider {
     static var previews: some View {
-        AddMedicationSheet(medicationViewModel: MedicationViewModel(userViewModel: UserViewModel()))
+        AddMedicationSheetView(medicationViewModel: MedicationViewModel(userViewModel: UserViewModel()))
     }
 }
 

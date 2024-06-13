@@ -51,5 +51,32 @@ class MedicationViewModel: ObservableObject {
             print("Error adding medication: \(error)")
         }
     }
+    
+    func deleteMedication(_ medication: Medication) {
+          guard let userId = userViewModel.userId, let id = medication.id else { return }
+          
+          Firestore.firestore().collection("users").document(userId).collection("medications").document(id).delete { error in
+              if let error = error {
+                  print("Error deleting medication: \(error)")
+                  return
+              }
+              
+              self.medications.removeAll { $0.id == medication.id }
+          }
+      }
+      
+      func updateMedication(_ medication: Medication) {
+          guard let userId = userViewModel.userId, let id = medication.id else { return }
+          
+          do {
+              try Firestore.firestore().collection("users").document(userId).collection("medications").document(id).setData(from: medication)
+              if let index = self.medications.firstIndex(where: { $0.id == medication.id }) {
+                  self.medications[index] = medication
+              }
+          } catch let error {
+              print("Error updating medication: \(error)")
+          }
+      }
+    
 }
 
