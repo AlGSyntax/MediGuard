@@ -7,19 +7,18 @@
 
 import Foundation
 
-
 /**
  Das `FireUser`-Modell repräsentiert einen Benutzer in der Firestore-Datenbank.
  
- Es enthält grundlegende Benutzerinformationen und implementiert das `Codable`-Protokoll, um einfache Speicherung und Abruf aus Firestore zu ermöglichen.
+ Es enthält grundlegende Benutzerinformationen und implementiert das `Codable`-Protokoll, um eine einfache Speicherung und einen einfachen Abruf aus Firestore zu ermöglichen.
 
  - Eigenschaften:
     - `id`: Die eindeutige Benutzer-ID (String).
     - `name`: Der Name des Benutzers (String).
     - `registeredAt`: Das Datum, an dem der Benutzer sich registriert hat (Date).
- 
+
  - Verwendung:
-    ```
+    ```swift
     // Erstellen eines neuen Benutzers
     let user = FireUser(id: "12345", name: "Alvaro", registeredAt: Date())
     
@@ -44,12 +43,19 @@ import Foundation
         }
     }
     ```
+
+ - Bemerkungen:
+    - Diese Struktur folgt dem `Codable`-Protokoll, das es ermöglicht, sie einfach in und aus Firestore-Dokumenten zu konvertieren.
+    - Die `registeredAt`-Eigenschaft ist ein `Date`-Objekt, das das Registrierungsdatum des Benutzers speichert.
  */
-
-
 struct FireUser: Codable {
+    /// Die eindeutige Benutzer-ID.
     var id: String
+    
+    /// Der Name des Benutzers.
     var name: String
+    
+    /// Das Datum, an dem der Benutzer sich registriert hat.
     var registeredAt: Date
 }
 
