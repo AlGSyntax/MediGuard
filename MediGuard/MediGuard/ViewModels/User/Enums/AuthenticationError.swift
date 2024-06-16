@@ -7,7 +7,23 @@
 
 import Foundation
 
+/**
+ Das `AuthenticationError`-Enum beschreibt mögliche Authentifizierungsfehler, die während der Benutzer-Authentifizierung auftreten können.
+
+ Dieses Enum implementiert die Protokolle `Error`, `LocalizedError` und `Identifiable`, um eine einfache Fehlerbehandlung und Lokalisierung zu ermöglichen.
+
+ - Fehlerfälle:
+    - `invalidEmailOrPassword`: Der Benutzername oder das Passwort ist falsch.
+    - `emailAlreadyInUse`: Der Benutzername wird bereits verwendet.
+    - `unknownError`: Ein unbekannter Fehler ist aufgetreten.
+    - `networkError`: Ein Netzwerkfehler ist aufgetreten.
+    - `sessionExpired`: Die Sitzung ist abgelaufen.
+    - `tooManyRequests`: Zu viele Anfragen wurden gesendet.
+ */
 enum AuthenticationError: Error, LocalizedError, Identifiable {
+    
+    // MARK: - Fehlerfälle
+    
     case invalidEmailOrPassword
     case emailAlreadyInUse
     case unknownError
@@ -15,10 +31,16 @@ enum AuthenticationError: Error, LocalizedError, Identifiable {
     case sessionExpired
     case tooManyRequests
 
+    // MARK: - Identifiable
+    
+    /// Eindeutige ID für den Fehler.
     var id: String {
         UUID().uuidString
     }
 
+    // MARK: - LocalizedError
+    
+    /// Lokalisierte Beschreibung des Fehlers.
     var errorDescription: String? {
         switch self {
         case .invalidEmailOrPassword:
@@ -36,6 +58,7 @@ enum AuthenticationError: Error, LocalizedError, Identifiable {
         }
     }
 }
+
 
 
 
