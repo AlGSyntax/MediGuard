@@ -169,6 +169,8 @@
 		38630DEC2C1AD98F002671BD /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				388FF34E2C1C24AF0048AB7B /* DrinksDetail */,
+				388FF34D2C1C24A60048AB7B /* MealDetail */,
 				38630DED2C1AD9A2002671BD /* MedicationDetail */,
 			);
 			path = Detail;
@@ -563,6 +565,7 @@
 		3886F3642C188A1A004C3203 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				388FF3502C1C24CC0048AB7B /* Sheets */,
 				3886F36C2C188B01004C3203 /* DrinksDetailView.swift */,
 			);
 			path = View;
@@ -599,9 +602,54 @@
 		3886F3692C188A87004C3203 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				388FF34F2C1C24C20048AB7B /* Sheets */,
 				3886F36A2C188AF0004C3203 /* MealDetailView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		388FF34D2C1C24A60048AB7B /* MealDetail */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MealDetail;
+			sourceTree = "<group>";
+		};
+		388FF34E2C1C24AF0048AB7B /* DrinksDetail */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DrinksDetail;
+			sourceTree = "<group>";
+		};
+		388FF34F2C1C24C20048AB7B /* Sheets */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Sheets;
+			sourceTree = "<group>";
+		};
+		388FF3502C1C24CC0048AB7B /* Sheets */ = {
+			isa = PBXGroup;
+			children = (
+				388FF3522C1C25470048AB7B /* AddDrinks */,
+				388FF3512C1C25360048AB7B /* EditDrinks */,
+			);
+			path = Sheets;
+			sourceTree = "<group>";
+		};
+		388FF3512C1C25360048AB7B /* EditDrinks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = EditDrinks;
+			sourceTree = "<group>";
+		};
+		388FF3522C1C25470048AB7B /* AddDrinks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AddDrinks;
 			sourceTree = "<group>";
 		};
 		38A8A29A2C14458F00950F82 /* User */ = {
