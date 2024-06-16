@@ -19,6 +19,8 @@
 		38630DFA2C1ADD61002671BD /* MedicationCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38630DF92C1ADD61002671BD /* MedicationCardView.swift */; };
 		38630DFF2C1B218E002671BD /* AddMedicationSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38630DFE2C1B218E002671BD /* AddMedicationSheetView.swift */; };
 		38630E032C1B27D8002671BD /* EditMedicationSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38630E022C1B27D8002671BD /* EditMedicationSheetView.swift */; };
+		386D8E522C1EC55400FA151C /* LogoutButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386D8E512C1EC55400FA151C /* LogoutButton.swift */; };
+		386D8E542C1EC5DB00FA151C /* SaveEmergencyContactButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386D8E532C1EC5DB00FA151C /* SaveEmergencyContactButton.swift */; };
 		386DBD982C12B88B00FE3A41 /* MediGuardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386DBD972C12B88B00FE3A41 /* MediGuardApp.swift */; };
 		386DBD9C2C12B88C00FE3A41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 386DBD9B2C12B88C00FE3A41 /* Assets.xcassets */; };
 		386DBD9F2C12B88C00FE3A41 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 386DBD9E2C12B88C00FE3A41 /* Preview Assets.xcassets */; };
@@ -77,6 +79,8 @@
 		38630DF92C1ADD61002671BD /* MedicationCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationCardView.swift; sourceTree = "<group>"; };
 		38630DFE2C1B218E002671BD /* AddMedicationSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMedicationSheetView.swift; sourceTree = "<group>"; };
 		38630E022C1B27D8002671BD /* EditMedicationSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMedicationSheetView.swift; sourceTree = "<group>"; };
+		386D8E512C1EC55400FA151C /* LogoutButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutButton.swift; sourceTree = "<group>"; };
+		386D8E532C1EC5DB00FA151C /* SaveEmergencyContactButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveEmergencyContactButton.swift; sourceTree = "<group>"; };
 		386DBD942C12B88B00FE3A41 /* MediGuard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediGuard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		386DBD972C12B88B00FE3A41 /* MediGuardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediGuardApp.swift; sourceTree = "<group>"; };
 		386DBD9B2C12B88C00FE3A41 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -490,6 +494,8 @@
 		386DBDE02C12DFE400FE3A41 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				386D8E512C1EC55400FA151C /* LogoutButton.swift */,
+				386D8E532C1EC5DB00FA151C /* SaveEmergencyContactButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -781,6 +787,7 @@
 				38630DEF2C1AD9BA002671BD /* MedicationDetailViewModel.swift in Sources */,
 				3855EF9E2C1704000037B169 /* Calendar.swift in Sources */,
 				386DBDEE2C130BCF00FE3A41 /* HomeView.swift in Sources */,
+				386D8E522C1EC55400FA151C /* LogoutButton.swift in Sources */,
 				38630E032C1B27D8002671BD /* EditMedicationSheetView.swift in Sources */,
 				3886F35A2C18350A004C3203 /* SettingsView.swift in Sources */,
 				38630DFF2C1B218E002671BD /* AddMedicationSheetView.swift in Sources */,
@@ -799,6 +806,7 @@
 				386DBDD02C12DABF00FE3A41 /* UserViewModel.swift in Sources */,
 				3855EF972C16FD1A0037B169 /* TimePeriod.swift in Sources */,
 				3886F3562C1800F6004C3203 /* MedicationDetailView.swift in Sources */,
+				386D8E542C1EC5DB00FA151C /* SaveEmergencyContactButton.swift in Sources */,
 				386DBD982C12B88B00FE3A41 /* MediGuardApp.swift in Sources */,
 				3855EF9B2C16FF2A0037B169 /* EmergencyCallButton.swift in Sources */,
 				38A8A29E2C1445CD00950F82 /* AuthenticationError.swift in Sources */,
