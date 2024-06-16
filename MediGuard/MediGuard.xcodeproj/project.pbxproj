@@ -137,6 +137,7 @@
 		3855EF912C16F9440037B169 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				3855EF9C2C1703F10037B169 /* Extension */,
 				3855EF932C16F9530037B169 /* Enums */,
 				3855EF922C16F94C0037B169 /* ViewModel */,
 			);
@@ -379,7 +380,6 @@
 		386DBDD22C12DF3B00FE3A41 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				3855EF9C2C1703F10037B169 /* Extension */,
 				386DBDDB2C12DFBC00FE3A41 /* Enum */,
 				386DBDDA2C12DFB300FE3A41 /* Components */,
 				386DBDD92C12DFAE00FE3A41 /* View */,
