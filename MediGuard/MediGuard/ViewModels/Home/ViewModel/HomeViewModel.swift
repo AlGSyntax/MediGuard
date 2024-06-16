@@ -42,12 +42,13 @@ class HomeViewModel: ObservableObject {
      */
     func updateGreeting() {
         let hour = Calendar.current.component(.hour, from: Date())
-        switch hour {
-        case 5..<12:
+        let timePeriod = TimePeriod.current(from: hour)
+        switch timePeriod {
+        case .morning:
             greeting = "Guten Morgen!"
-        case 12..<16:
+        case .afternoon:
             greeting = "Guten Tag!"
-        default:
+        case .evening:
             greeting = "Guten Abend!"
         }
     }
@@ -65,6 +66,7 @@ class HomeViewModel: ObservableObject {
         }
     }
 }
+
 
 
 
