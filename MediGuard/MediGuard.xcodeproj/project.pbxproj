@@ -154,6 +154,7 @@
 		3855EF932C16F9530037B169 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				3855EF962C16FD1A0037B169 /* TimePeriod.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -450,7 +451,6 @@
 		386DBDDB2C12DFBC00FE3A41 /* Enum */ = {
 			isa = PBXGroup;
 			children = (
-				3855EF962C16FD1A0037B169 /* TimePeriod.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
