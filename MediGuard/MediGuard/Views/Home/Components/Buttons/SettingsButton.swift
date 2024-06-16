@@ -7,17 +7,29 @@
 
 import SwiftUI
 
+/**
+ Die `SettingsButton`-Struktur ist eine SwiftUI-View-Komponente, die einen Button zur Navigation zu den Einstellungen darstellt.
+ 
+ Dieser Button wird in der `HomeView` verwendet, um die Einstellungen der App zu öffnen.
+
+ - Eigenschaften:
+    - `iconName`: Der Name des Symbols, das auf dem Button angezeigt wird.
+ */
 struct SettingsButton: View {
     
+    // MARK: - Body
+    
     var body: some View {
+        // Symbol auf dem Button
         Image(systemName: "gear")
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(width: 48, height: 48)
             .foregroundStyle(.primary)
-            
     }
 }
+
+// MARK: - Vorschau
 
 struct SettingsButton_Previews: PreviewProvider {
     static var previews: some View {
