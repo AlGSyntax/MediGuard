@@ -19,6 +19,9 @@ import Firebase
 @main
 struct MediGuardApp: App {
     
+    
+    
+    
     // MARK: - Initializer
     
     /**
@@ -27,11 +30,23 @@ struct MediGuardApp: App {
     init() {
         FirebaseConfiguration.shared.setLoggerLevel(.min)
         FirebaseApp.configure()
+        requestNotificationAuthorization()
     }
     
     // MARK: - Variables
     
     @StateObject private var userViewModel = UserViewModel()
+    
+    // MARK: - Private Methods
+    
+    private func requestNotificationAuthorization() {
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+                if let error = error {
+                    print("Error requesting notification authorization: \(error)")
+                }
+                print(granted)
+            }
+        }
     
     // MARK: - Body
     
@@ -49,5 +64,8 @@ struct MediGuardApp: App {
             }
         }
     }
+    
+    
+    
 }
 

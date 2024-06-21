@@ -20,6 +20,11 @@ class MedicationDetailViewModel: ObservableObject {
     @Published var medications: [Medication] = []
 
     // MARK: - Methoden
+    
+    init(){
+        listScheduledNotifications()
+    }
+    
 
     /**
      Ruft die Medikamente für den angegebenen Benutzer aus der Firestore-Datenbank ab.
@@ -55,8 +60,11 @@ class MedicationDetailViewModel: ObservableObject {
         content.body = "Es ist Zeit, \(medication.name) einzunehmen."
         content.sound = UNNotificationSound.default
         
-        let dateComponents = medication.intakeTime
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        
+        let date = Date().setTime(hour: medication.intakeTime.hour!, minute: medication.intakeTime.minute!)
+        let comps = Calendar.current.dateComponents([.year, .month, .day,.hour,.minute], from: date)
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: true)
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
 
         UNUserNotificationCenter.current().add(request) { error in
@@ -65,6 +73,16 @@ class MedicationDetailViewModel: ObservableObject {
             }
         }
     }
+    
+    func listScheduledNotifications() {
+        UNUserNotificationCenter.current().getPendingNotificationRequests { notifications in
+                notifications.forEach { notification in
+                    guard let dateComponents = (notification.trigger as? UNCalendarNotificationTrigger)?.dateComponents,
+                          let date = Calendar.current.date(from: dateComponents) else { return }
+                    print("-----> Notifications: ", date, notification.identifier)
+                }
+            }
+        }
 
     /**
      Fügt ein neues Medikament hinzu und plant eine Benachrichtigung dafür.
@@ -85,7 +103,7 @@ class MedicationDetailViewModel: ObservableObject {
         do {
             // Hauptmedikation speichern
             let _ = try Firestore.firestore().collection("users").document(userId).collection("medications").document(newMedicationID).setData(from: newMedication)
-            medications.append(newMedication)
+            medications.append(newMedication)// Mit addSnapshotlistener
             scheduleNotification(for: newMedication)
             
             // Optionale Medikation speichern, falls vorhanden

@@ -23,7 +23,7 @@ struct CustomBackButton: View {
                     .foregroundColor(.blue)
                     .font(.system(size: 24, weight: .bold)) 
             }
-            .padding(40)
+            
             
         }
     }
