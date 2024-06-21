@@ -13,10 +13,10 @@ import SwiftUI
  Diese View ermöglicht es dem Benutzer, sich anzumelden oder zu registrieren, basierend auf dem aktuellen Modus im `UserViewModel`.
  
  - Eigenschaften:
- - `userViewModel`: Das `UserViewModel`-Objekt, das die Authentifizierungslogik und -daten verwaltet.
- - `isPasswordVisible`: Boolean-Wert, der angibt, ob das Passwort sichtbar ist.
- - `isConfirmPasswordVisible`: Boolean-Wert, der angibt, ob das Bestätigungspasswort sichtbar ist.
- - `showAlert`: Boolean-Wert, der angibt, ob ein Alert angezeigt werden soll.
+    - `userViewModel`: Das `UserViewModel`-Objekt, das die Authentifizierungslogik und -daten verwaltet.
+    - `isPasswordVisible`: Boolean-Wert, der angibt, ob das Passwort sichtbar ist.
+    - `isConfirmPasswordVisible`: Boolean-Wert, der angibt, ob das Bestätigungspasswort sichtbar ist.
+    - `showAlert`: Boolean-Wert, der angibt, ob ein Alert angezeigt werden soll.
  */
 struct AuthenticationView: View {
     
@@ -72,44 +72,19 @@ struct AuthenticationView: View {
             .font(.headline)
             .textInputAutocapitalization(.never)
             
-            
             // MARK: - Authentifizierungsbutton
             
             // Primärer Button, um den Authentifizierungsvorgang zu starten
-            PrimaryButton(title: userViewModel.mode.title, action: {
-                // Überprüfung, ob die Authentifizierung deaktiviert ist
-                if userViewModel.disableAuthentication {
-                    // Fehlerbehandlung und entsprechende Fehlermeldungen
-                    if userViewModel.name.isEmpty {
-                        userViewModel.errorMessage = "Bitte geben Sie einen Namen ein."
-                    } else if userViewModel.password.isEmpty {
-                        userViewModel.errorMessage = "Bitte geben Sie ein Passwort ein."
-                    } else if userViewModel.mode == .register && userViewModel.confirmPassword.isEmpty {
-                        userViewModel.errorMessage = "Bitte wiederholen Sie das Passwort."
-                    } else if userViewModel.mode == .register && userViewModel.password != userViewModel.confirmPassword {
-                        userViewModel.errorMessage = "Die Passwörter stimmen nicht überein."
-                    }
-                    showAlert = true
-                } else {
-                    // Authentifizierungsvorgang starten
-                    userViewModel.authenticate()
-                    // Eingabefelder leeren nach der Authentifizierung
-                    userViewModel.clearFields()
+            PrimaryButton.authenticationButton(userViewModel: userViewModel, showAlert: $showAlert)
+                .alert(isPresented: $showAlert) {
+                    // Anzeige eines Alerts bei Fehlern
+                    Alert(title: Text("Fehler"), message: Text(userViewModel.errorMessage), dismissButton: .default(Text("OK")))
                 }
-            })
-            .alert(isPresented: $showAlert) {
-                // Anzeige eines Alerts bei Fehlern
-                Alert(title: Text("Fehler"), message: Text(userViewModel.errorMessage), dismissButton: .default(Text("OK")))
-            }
             
             // MARK: - Modus wechseln
             
             // Button, um zwischen Anmelde- und Registrierungsmodus zu wechseln
-            TextButton(title: userViewModel.mode.alternativeTitle) {
-                withAnimation {
-                    userViewModel.switchAuthenticationMode()
-                }
-            }
+            TextButton.switchModeButton(userViewModel: userViewModel)
             
             Spacer()
         }
@@ -127,12 +102,13 @@ struct AuthenticationView: View {
 
 // MARK: - Vorschau
 
-struct LoginView_Previews: PreviewProvider {
+struct AuthenticationView_Previews: PreviewProvider {
     static var previews: some View {
         AuthenticationView()
             .environmentObject(UserViewModel())
     }
 }
+
 
 
 

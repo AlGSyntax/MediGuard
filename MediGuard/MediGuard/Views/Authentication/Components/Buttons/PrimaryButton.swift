@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// MARK: - PrimaryButton
+
 /**
  Die `PrimaryButton`-Struktur ist eine SwiftUI-View-Komponente, die einen primären Aktionsbutton darstellt.
  
@@ -39,6 +41,34 @@ struct PrimaryButton: View {
     }
 }
 
+// MARK: - Erweiterung für spezifische Logik
+
+extension PrimaryButton {
+    @MainActor static func authenticationButton(userViewModel: UserViewModel, showAlert: Binding<Bool>) -> PrimaryButton {
+        return PrimaryButton(title: userViewModel.mode.title) {
+            // Überprüfung, ob die Authentifizierung deaktiviert ist
+            if userViewModel.disableAuthentication {
+                // Fehlerbehandlung und entsprechende Fehlermeldungen
+                if userViewModel.name.isEmpty {
+                    userViewModel.errorMessage = "Bitte geben Sie einen Namen ein."
+                } else if userViewModel.password.isEmpty {
+                    userViewModel.errorMessage = "Bitte geben Sie ein Passwort ein."
+                } else if userViewModel.mode == .register && userViewModel.confirmPassword.isEmpty {
+                    userViewModel.errorMessage = "Bitte wiederholen Sie das Passwort."
+                } else if userViewModel.mode == .register && userViewModel.password != userViewModel.confirmPassword {
+                    userViewModel.errorMessage = "Die Passwörter stimmen nicht überein."
+                }
+                showAlert.wrappedValue = true
+            } else {
+                // Authentifizierungsvorgang starten
+                userViewModel.authenticate()
+                // Eingabefelder leeren nach der Authentifizierung
+                userViewModel.clearFields()
+            }
+        }
+    }
+}
+
 // MARK: - Vorschau
 
 struct PrimaryButton_Previews: PreviewProvider {
@@ -46,3 +76,4 @@ struct PrimaryButton_Previews: PreviewProvider {
         PrimaryButton(title: "Login") { }
     }
 }
+
