@@ -7,6 +7,20 @@
 
 import SwiftUI
 
+// MARK: - MedicationDetailView
+
+/**
+ Die `MedicationDetailView`-Struktur ist eine SwiftUI-View, die die Detailansicht für Medikamente darstellt.
+ 
+ Diese View zeigt eine Liste von Medikamenten und ermöglicht das Hinzufügen, Bearbeiten und Löschen von Medikamenten.
+ 
+ - Eigenschaften:
+    - `userViewModel`: Das `UserViewModel`-Objekt, das die Benutzerdaten und Authentifizierungslogik verwaltet.
+    - `viewModel`: Das `MedicationDetailViewModel`-Objekt, das die Daten und Logik für die Detailansicht von Medikamenten verwaltet.
+    - `showingAddMedicationSheet`: Ein Boolescher Zustand, der angibt, ob das Blatt zum Hinzufügen eines neuen Medikaments angezeigt wird.
+    - `showingEditMedicationSheet`: Ein Boolescher Zustand, der angibt, ob das Blatt zum Bearbeiten eines Medikaments angezeigt wird.
+    - `medicationToEdit`: Das Medikament, das bearbeitet wird. Wird verwendet, um das Bearbeitungsblatt zu initialisieren.
+ */
 struct MedicationDetailView: View {
     @EnvironmentObject private var userViewModel: UserViewModel
     @StateObject private var viewModel = MedicationDetailViewModel()
@@ -15,8 +29,10 @@ struct MedicationDetailView: View {
     @State private var showingEditMedicationSheet = false
     @State private var medicationToEdit: Medication?
 
+    // MARK: - Body
     var body: some View {
         VStack {
+            // MARK: - Header
             HStack {
                 CustomBackButton()
                 Spacer()
@@ -35,9 +51,11 @@ struct MedicationDetailView: View {
             }
             .padding(.top, 20)
             
+            // MARK: - Liste der Medikamente
             List {
                 ForEach(["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"], id: \.self) { day in
                     VStack(alignment: .leading) {
+                        // MARK: - Tag-Header
                         Text(day)
                             .font(.title2)
                             .bold()
@@ -48,6 +66,7 @@ struct MedicationDetailView: View {
                             .padding(.top, 10)
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
+                        // MARK: - Uhrzeit-Sektionen
                         ForEach(["08:00", "12:00", "16:00", "20:00"], id: \.self) { time in
                             VStack(alignment: .leading) {
                                 Text(time)
@@ -55,7 +74,7 @@ struct MedicationDetailView: View {
                                     .padding(.top, 5)
                                     .padding(.horizontal, 10)
 
-                                // Filter für intakeTime
+                                // MARK: - Filter für intakeTime
                                 ForEach(viewModel.medications.filter {
                                     let hourMinute = String(format: "%02d:%02d", $0.intakeTime.hour ?? 0, $0.intakeTime.minute ?? 0)
                                     return $0.day == day && hourMinute == time
@@ -70,11 +89,11 @@ struct MedicationDetailView: View {
                                     .padding(.vertical, 5)
                                 }
 
-                                // Filter für nextIntakeDate
+                                // MARK: - Filter für nextIntakeDate
                                 ForEach(viewModel.medications.filter {
                                     guard let nextIntakeDate = $0.nextIntakeDate else { return false }
                                     let hourMinute = String(format: "%02d:%02d", nextIntakeDate.hour ?? 0, nextIntakeDate.minute ?? 0)
-                                    let nextDay = getDayString(from: nextIntakeDate.weekday)
+                                    let nextDay = Weekday.from(nextIntakeDate.weekday)?.name ?? "Unbekannt"
                                     return nextDay == day && hourMinute == time
                                 }) { medication in
                                     MedicationCardView(medication: medication, onDelete: {
@@ -111,21 +130,9 @@ struct MedicationDetailView: View {
             }
         }
     }
-
-    private func getDayString(from weekday: Int?) -> String? {
-        guard let weekday = weekday else { return nil }
-        switch weekday {
-        case 2: return "Montag"
-        case 3: return "Dienstag"
-        case 4: return "Mittwoch"
-        case 5: return "Donnerstag"
-        case 6: return "Freitag"
-        case 7: return "Samstag"
-        case 1: return "Sonntag"
-        default: return nil
-        }
-    }
 }
+
+// MARK: - Vorschau
 
 struct MedicationDetailView_Previews: PreviewProvider {
     static var previews: some View {
@@ -133,6 +140,7 @@ struct MedicationDetailView_Previews: PreviewProvider {
             .environmentObject(UserViewModel())
     }
 }
+
 
 
 
