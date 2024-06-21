@@ -75,7 +75,7 @@ struct AuthenticationView: View {
             // MARK: - Authentifizierungsbutton
             
             // Primärer Button, um den Authentifizierungsvorgang zu starten
-            PrimaryButton.authenticationButton(userViewModel: userViewModel, showAlert: $showAlert)
+            AuthButton.authenticationButton(userViewModel: userViewModel, showAlert: $showAlert)
                 .alert(isPresented: $showAlert) {
                     // Anzeige eines Alerts bei Fehlern
                     Alert(title: Text("Fehler"), message: Text(userViewModel.errorMessage), dismissButton: .default(Text("OK")))
@@ -84,7 +84,7 @@ struct AuthenticationView: View {
             // MARK: - Modus wechseln
             
             // Button, um zwischen Anmelde- und Registrierungsmodus zu wechseln
-            TextButton.switchModeButton(userViewModel: userViewModel)
+            AuthModeSwitchButton.switchModeButton(userViewModel: userViewModel)
             
             Spacer()
         }

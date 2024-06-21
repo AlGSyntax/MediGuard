@@ -12,7 +12,7 @@ import SwiftUI
 // MARK: - TextButton
 
 /**
- Die `TextButton`-Struktur ist eine SwiftUI-View-Komponente, die einen Button darstellt, der nur Text enthält.
+ Die `AuthModeSwitchButton`-Struktur ist eine SwiftUI-View-Komponente, die einen Button darstellt, der nur Text enthält.
  
  Dieser Button wird in der `AuthenticationView` verwendet, um zwischen den Authentifizierungsmodi (Anmelden und Registrieren) zu wechseln.
  
@@ -20,7 +20,7 @@ import SwiftUI
     - `title`: Der Text, der auf dem Button angezeigt wird.
     - `action`: Die Aktion, die ausgeführt wird, wenn der Button gedrückt wird.
  */
-struct TextButton: View {
+struct AuthModeSwitchButton: View {
     
     // MARK: - Variables
     
@@ -41,9 +41,9 @@ struct TextButton: View {
 
 // MARK: - Erweiterung für spezifische Logik
 
-extension TextButton {
-    @MainActor static func switchModeButton(userViewModel: UserViewModel) -> TextButton {
-        return TextButton(title: userViewModel.mode.alternativeTitle) {
+extension AuthModeSwitchButton {
+    @MainActor static func switchModeButton(userViewModel: UserViewModel) -> AuthModeSwitchButton {
+        return AuthModeSwitchButton(title: userViewModel.mode.alternativeTitle) {
             withAnimation {
                 userViewModel.switchAuthenticationMode()
             }
@@ -55,7 +55,7 @@ extension TextButton {
 
 struct TextButton_Previews: PreviewProvider {
     static var previews: some View {
-        TextButton(title: "Anmelden") { }
+        AuthModeSwitchButton(title: "Anmelden") { }
     }
 }
 
