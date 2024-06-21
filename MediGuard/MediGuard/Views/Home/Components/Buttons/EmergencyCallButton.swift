@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// MARK: - EmergencyCallButton
+
 /**
  Die `EmergencyCallButton`-Struktur ist eine SwiftUI-View-Komponente, die einen Notruf-Button darstellt.
  
@@ -19,7 +21,7 @@ import SwiftUI
  */
 struct EmergencyCallButton: View {
     
-    // MARK: - Variables
+    // MARK: - Variablen
     
     let title: String
     let action: () -> Void
@@ -45,6 +47,17 @@ struct EmergencyCallButton: View {
             .foregroundStyle(.white)
             .cornerRadius(24)
         }
+    }
+}
+
+// MARK: - Erweiterung für spezifische Logik
+
+extension EmergencyCallButton {
+    @MainActor
+    static func callButton(homeViewModel: HomeViewModel) -> EmergencyCallButton {
+        return EmergencyCallButton(title: "Notruf", action: {
+            homeViewModel.callEmergencyContact()
+        }, iconName: "phone.fill")
     }
 }
 

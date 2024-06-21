@@ -38,7 +38,7 @@ struct HomeView: View {
                 
                 Rectangle()
                     .fill(Color.gray)
-                    .frame(height: 200)
+                    .frame(height: 100)
                     .overlay(
                         Text("Grafisches Element")
                             .foregroundColor(.white)
@@ -48,7 +48,7 @@ struct HomeView: View {
                 // MARK: - Navigation Links
                 
                 VStack(spacing: 8) {
-                    NavigationLink(destination: MedicationDetailView(userViewModel: userViewModel)) {
+                    NavigationLink(destination: MedicationDetailView()) {
                         DetailViewButton(title: "Medikamente", iconName: "pills.fill")
                     }
                     
@@ -64,9 +64,8 @@ struct HomeView: View {
                 
                 // MARK: - Notruf Button
                 
-                EmergencyCallButton(title: "Notruf", action: {
-                    homeViewModel.callEmergencyContact()
-                }, iconName: "phone.fill")
+                EmergencyCallButton.callButton(homeViewModel: homeViewModel)
+
                 
                 Spacer()
             }
