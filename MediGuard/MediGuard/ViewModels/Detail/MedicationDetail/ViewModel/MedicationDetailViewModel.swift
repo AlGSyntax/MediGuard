@@ -8,10 +8,24 @@
 import SwiftUI
 import FirebaseFirestore
 
+// MARK: - MedicationDetailViewModel Klasse
+
+/**
+ Die `MedicationDetailViewModel`-Klasse verwaltet die Daten und die Logik für die Detailansicht von Medikamenten.
+ 
+ Diese Klasse ermöglicht das Abrufen, Hinzufügen, Aktualisieren und Löschen von Medikamenten sowie das Planen von Benachrichtigungen.
+ */
 @MainActor
 class MedicationDetailViewModel: ObservableObject {
     @Published var medications: [Medication] = []
 
+    // MARK: - Methoden
+
+    /**
+     Ruft die Medikamente für den angegebenen Benutzer aus der Firestore-Datenbank ab.
+     
+     - Parameter userId: Die eindeutige Kennung des Benutzers.
+     */
     func fetchMedications(userId: String) {
         Firestore.firestore().collection("users").document(userId).collection("medications").getDocuments { (snapshot, error) in
             if let error = error {
@@ -30,6 +44,11 @@ class MedicationDetailViewModel: ObservableObject {
         }
     }
 
+    /**
+     Plant eine Benachrichtigung für das angegebene Medikament.
+     
+     - Parameter medication: Das Medikament, für das die Benachrichtigung geplant werden soll.
+     */
     func scheduleNotification(for medication: Medication) {
         let content = UNMutableNotificationContent()
         content.title = "Medikamentenerinnerung"
@@ -47,29 +66,48 @@ class MedicationDetailViewModel: ObservableObject {
         }
     }
 
+    /**
+     Fügt ein neues Medikament hinzu und plant eine Benachrichtigung dafür.
+     
+     - Parameter name: Der Name des Medikaments.
+     - Parameter intakeTime: Die Uhrzeit, zu der das Medikament eingenommen werden soll.
+     - Parameter day: Der Wochentag, an dem das Medikament eingenommen werden soll.
+     - Parameter nextIntakeDate: Das nächste geplante Einnahmedatum und -zeit (optional).
+     - Parameter color: Die Farbe, die dem Medikament zugewiesen ist.
+     - Parameter dosage: Die Dosierung des Medikaments.
+     - Parameter dosageUnit: Die Einheit der Dosierung.
+     - Parameter userId: Die eindeutige Kennung des Benutzers.
+     */
     func addMedication(name: String, intakeTime: DateComponents, day: String, nextIntakeDate: DateComponents?, color: MedicationColor, dosage: Int, dosageUnit: DosageUnit, userId: String) {
-            let newMedicationID = UUID().uuidString
-            let newMedication = Medication(id: newMedicationID, name: name, intakeTime: intakeTime, day: day, nextIntakeDate: nil, color: color, dosage: dosage, dosageUnit: dosageUnit)
+        let newMedicationID = UUID().uuidString
+        let newMedication = Medication(id: newMedicationID, name: name, intakeTime: intakeTime, day: day, nextIntakeDate: nil, color: color, dosage: dosage, dosageUnit: dosageUnit)
+        
+        do {
+            // Hauptmedikation speichern
+            let _ = try Firestore.firestore().collection("users").document(userId).collection("medications").document(newMedicationID).setData(from: newMedication)
+            medications.append(newMedication)
+            scheduleNotification(for: newMedication)
             
-            do {
-                // Hauptmedikation speichern
-                let _ = try Firestore.firestore().collection("users").document(userId).collection("medications").document(newMedicationID).setData(from: newMedication)
-                medications.append(newMedication)
-                scheduleNotification(for: newMedication)
-                
-                // Optionale Medikation speichern, falls vorhanden
-                if let nextIntakeDate = nextIntakeDate {
-                    let nextMedicationID = UUID().uuidString
-                    let nextMedication = Medication(id: nextMedicationID, name: name, intakeTime: nextIntakeDate, day: getDayString(from: nextIntakeDate.weekday), nextIntakeDate: nil, color: color, dosage: dosage, dosageUnit: dosageUnit)
-                    let _ = try Firestore.firestore().collection("users").document(userId).collection("medications").document(nextMedicationID).setData(from: nextMedication)
-                    medications.append(nextMedication)
-                    scheduleNotification(for: nextMedication)
-                }
-            } catch let error {
-                print("Error adding medication: \(error)")
+            // Optionale Medikation speichern, falls vorhanden
+            if let nextIntakeDate = nextIntakeDate {
+                let nextMedicationID = UUID().uuidString
+                let nextDay = Weekday.from(nextIntakeDate.weekday)?.name ?? "Unbekannt"
+                let nextMedication = Medication(id: nextMedicationID, name: name, intakeTime: nextIntakeDate, day: nextDay, nextIntakeDate: nil, color: color, dosage: dosage, dosageUnit: dosageUnit)
+                let _ = try Firestore.firestore().collection("users").document(userId).collection("medications").document(nextMedicationID).setData(from: nextMedication)
+                medications.append(nextMedication)
+                scheduleNotification(for: nextMedication)
             }
+        } catch let error {
+            print("Error adding medication: \(error)")
         }
+    }
 
+    /**
+     Löscht ein Medikament und entfernt die zugehörige Benachrichtigung.
+     
+     - Parameter medication: Das zu löschende Medikament.
+     - Parameter userId: Die eindeutige Kennung des Benutzers.
+     */
     func deleteMedication(_ medication: Medication, userId: String) {
         guard let id = medication.id else { return }
 
@@ -83,6 +121,12 @@ class MedicationDetailViewModel: ObservableObject {
         }
     }
 
+    /**
+     Aktualisiert ein Medikament und plant eine neue Benachrichtigung.
+     
+     - Parameter medication: Das zu aktualisierende Medikament.
+     - Parameter userId: Die eindeutige Kennung des Benutzers.
+     */
     func updateMedication(_ medication: Medication, userId: String) {
         guard let id = medication.id else {
             print("Medication ID is missing")
@@ -100,17 +144,6 @@ class MedicationDetailViewModel: ObservableObject {
             print("Error updating medication: \(error)")
         }
     }
-    private func getDayString(from weekday: Int?) -> String {
-           switch weekday {
-           case 2: return "Montag"
-           case 3: return "Dienstag"
-           case 4: return "Mittwoch"
-           case 5: return "Donnerstag"
-           case 6: return "Freitag"
-           case 7: return "Samstag"
-           case 1: return "Sonntag"
-           default: return "Unbekannt"
-           }
-       }
 }
+
 
