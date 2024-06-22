@@ -15,36 +15,53 @@ import FirebaseFirestoreSwift
  Die MedicationDetailViewModel-Klasse verwaltet die Daten und die Logik für die Detailansicht von Medikamenten.
  
  Diese Klasse ermöglicht das Abrufen, Hinzufügen, Aktualisieren und Löschen von Medikamenten sowie das Planen von Benachrichtigungen.
+ 
+ - Eigenschaften:
+    - medications: Eine Liste von Medikamenten.
+    - errorMessage: Eine Fehlermeldung, die angezeigt wird, wenn ein Fehler auftritt.
+    - listener: Eine ListenerRegistration, um den Firestore-Listener zu entfernen.
+ 
+ - Funktionen:
+    - fetchMedications(userId:): Ruft die Medikamente für den angegebenen Benutzer in Echtzeit ab.
+    - removeListener(): Entfernt den Listener und löscht die Medikamente.
+    - scheduleNotification(for:): Plant eine Benachrichtigung für das angegebene Medikament.
+    - listScheduledNotifications(): Listet alle geplanten Benachrichtigungen auf.
+    - addMedication(name:intakeTime:day:nextIntakeDate:color:dosage:dosageUnit:userId:): Fügt ein neues Medikament hinzu und plant eine Benachrichtigung.
+    - deleteMedication(_:userId:): Löscht ein Medikament und entfernt die zugehörige Benachrichtigung.
+    - updateMedication(_:userId:): Aktualisiert ein Medikament und plant eine neue Benachrichtigung.
  */
 @MainActor
 class MedicationDetailViewModel: ObservableObject {
     @Published var medications: [Medication] = []
+    @Published var errorMessage: String = ""
     
     private var listener: ListenerRegistration?
 
-    // MARK: - Methoden
+    // MARK: - Initializer
     
     init() {
         listScheduledNotifications()
     }
 
+    // MARK: - Methoden
+    
     /**
      Fügt einen Listener hinzu, der die Medikamente für den angegebenen Benutzer aus der Firestore-Datenbank in Echtzeit abruft.
      
      - Parameter userId: Die eindeutige Kennung des Benutzers.
      */
     func fetchMedications(userId: String) {
-        listener?.remove() // Entfernt den alten Listener, falls vorhanden
+        listener?.remove()
         
         listener = Firestore.firestore().collection("users").document(userId).collection("medications")
             .addSnapshotListener { querySnapshot, error in
                 if let error = error {
-                    print("Error fetching medications: \(error)")
+                    self.errorMessage = "Error fetching medications: \(error.localizedDescription)"
                     return
                 }
                 
                 guard let documents = querySnapshot?.documents else {
-                    print("No medications found")
+                    self.errorMessage = "No medications found"
                     return
                 }
                 
@@ -74,18 +91,21 @@ class MedicationDetailViewModel: ObservableObject {
         content.sound = UNNotificationSound.default
         
         let date = Date().setTime(hour: medication.intakeTime.hour!, minute: medication.intakeTime.minute!)
-        let comps = Calendar.current.dateComponents([.year, .month, .day,.hour,.minute], from: date)
+        let comps = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: true)
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
 
         UNUserNotificationCenter.current().add(request) { error in
             if let error = error {
-                print("Error scheduling notification: \(error)")
+                self.errorMessage = "Error scheduling notification: \(error.localizedDescription)"
             }
         }
     }
     
+    /**
+     Listet alle geplanten Benachrichtigungen auf.
+     */
     func listScheduledNotifications() {
         UNUserNotificationCenter.current().getPendingNotificationRequests { notifications in
             notifications.forEach { notification in
@@ -112,14 +132,13 @@ class MedicationDetailViewModel: ObservableObject {
         let firestore = Firestore.firestore()
         let medicationRef = firestore.collection("users").document(userId).collection("medications").document()
 
-        // Den Snapshot-Listener für die neue Medikation setzen
         medicationRef.addSnapshotListener { documentSnapshot, error in
             guard let document = documentSnapshot else {
-                print("Error fetching document: \(error!)")
+                self.errorMessage = "Error fetching document: \(error!.localizedDescription)"
                 return
             }
-            guard let data = document.data() else {
-                print("Document data was empty.")
+            guard document.data() != nil else {
+                self.errorMessage = "Document data was empty."
                 return
             }
 
@@ -128,19 +147,18 @@ class MedicationDetailViewModel: ObservableObject {
                 self.medications.append(medication)
                 self.scheduleNotification(for: medication)
             } catch let error {
-                print("Error deserializing medication: \(error)")
+                self.errorMessage = "Error deserializing medication: \(error.localizedDescription)"
             }
         }
 
         let newMedication = Medication(id: medicationRef.documentID, name: name, intakeTime: intakeTime, day: day, nextIntakeDate: nil, color: color, dosage: dosage, dosageUnit: dosageUnit)
 
         do {
-            try medicationRef.setData(from: newMedication) // Daten in Firestore speichern
+            try medicationRef.setData(from: newMedication)
         } catch let error {
-            print("Error adding medication: \(error)")
+            self.errorMessage = "Error adding medication: \(error.localizedDescription)"
         }
 
-        // Optionale Medikation speichern, falls vorhanden
         if let nextIntakeDate = nextIntakeDate {
             let nextMedicationRef = firestore.collection("users").document(userId).collection("medications").document()
             let nextDay = Weekday.from(nextIntakeDate.weekday)?.name ?? "Unbekannt"
@@ -148,11 +166,11 @@ class MedicationDetailViewModel: ObservableObject {
 
             nextMedicationRef.addSnapshotListener { documentSnapshot, error in
                 guard let document = documentSnapshot else {
-                    print("Error fetching document: \(error!)")
+                    self.errorMessage = "Error fetching document: \(error!.localizedDescription)"
                     return
                 }
-                guard let data = document.data() else {
-                    print("Document data was empty.")
+                guard document.data() != nil else {
+                    self.errorMessage = "Document data was empty."
                     return
                 }
 
@@ -161,14 +179,14 @@ class MedicationDetailViewModel: ObservableObject {
                     self.medications.append(medication)
                     self.scheduleNotification(for: medication)
                 } catch let error {
-                    print("Error deserializing medication: \(error)")
+                    self.errorMessage = "Error deserializing medication: \(error.localizedDescription)"
                 }
             }
 
             do {
-                try nextMedicationRef.setData(from: nextMedication) // Daten in Firestore speichern
+                try nextMedicationRef.setData(from: nextMedication)
             } catch let error {
-                print("Error adding medication: \(error)")
+                self.errorMessage = "Error adding medication: \(error.localizedDescription)"
             }
         }
     }
@@ -184,15 +202,12 @@ class MedicationDetailViewModel: ObservableObject {
 
         Firestore.firestore().collection("users").document(userId).collection("medications").document(id).delete { error in
             if let error {
-                print("Error deleting medication: \(error)")
+                self.errorMessage = "Error deleting medication: \(error.localizedDescription)"
                 return
             }
 
             self.medications.removeAll { $0.id == medication.id }
         }
-        
-        // Den Snapshot-Listener für die gelöschte Medikation aktualisieren
-        fetchMedications(userId: userId)
     }
 
     /**
@@ -203,20 +218,19 @@ class MedicationDetailViewModel: ObservableObject {
      */
     func updateMedication(_ medication: Medication, userId: String) {
         guard let id = medication.id else {
-            print("Medication ID is missing")
+            self.errorMessage = "Medication ID is missing"
             return
         }
 
         let medicationRef = Firestore.firestore().collection("users").document(userId).collection("medications").document(id)
         
-        // Den Snapshot-Listener für die aktualisierte Medikation setzen
         medicationRef.addSnapshotListener { documentSnapshot, error in
             guard let document = documentSnapshot else {
-                print("Error fetching document: \(error!)")
+                self.errorMessage = "Error fetching document: \(error!.localizedDescription)"
                 return
             }
-            guard let data = document.data() else {
-                print("Document data was empty.")
+            guard document.data() != nil else {
+                self.errorMessage = "Document data was empty."
                 return
             }
 
@@ -228,15 +242,16 @@ class MedicationDetailViewModel: ObservableObject {
                     print("Medication updated successfully")
                 }
             } catch let error {
-                print("Error deserializing medication: \(error)")
+                self.errorMessage = "Error deserializing medication: \(error.localizedDescription)"
             }
         }
 
         do {
-            try medicationRef.setData(from: medication) // Daten in Firestore speichern
+            try medicationRef.setData(from: medication)
         } catch let error {
-            print("Error updating medication: \(error)")
+            self.errorMessage = "Error updating medication: \(error.localizedDescription)"
         }
     }
 }
+
 

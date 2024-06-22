@@ -20,6 +20,7 @@ import SwiftUI
     - `showingAddMedicationSheet`: Ein Boolescher Zustand, der angibt, ob das Blatt zum Hinzufügen eines neuen Medikaments angezeigt wird.
     - `showingEditMedicationSheet`: Ein Boolescher Zustand, der angibt, ob das Blatt zum Bearbeiten eines Medikaments angezeigt wird.
     - `medicationToEdit`: Das Medikament, das bearbeitet wird. Wird verwendet, um das Bearbeitungsblatt zu initialisieren.
+    - `showAlert`: Ein Boolescher Zustand, der angibt, ob ein Alert angezeigt werden soll.
  */
 struct MedicationDetailView: View {
     @EnvironmentObject private var userViewModel: UserViewModel
@@ -28,6 +29,7 @@ struct MedicationDetailView: View {
     @State private var showingAddMedicationSheet = false
     @State private var showingEditMedicationSheet = false
     @State private var medicationToEdit: Medication?
+    @State private var showAlert = false
 
     // MARK: - Body
     var body: some View {
@@ -124,10 +126,16 @@ struct MedicationDetailView: View {
             EditMedicationSheetView(medicationViewModel: viewModel, medication: medication)
                 .environmentObject(userViewModel)
         }
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("Fehler"), message: Text(viewModel.errorMessage), dismissButton: .default(Text("OK")))
+        }
         .onAppear {
             if let userId = userViewModel.userId {
                 viewModel.fetchMedications(userId: userId)
             }
+        }
+        .onReceive(viewModel.$errorMessage) { errorMessage in
+            showAlert = !errorMessage.isEmpty
         }
     }
 }
@@ -140,6 +148,7 @@ struct MedicationDetailView_Previews: PreviewProvider {
             .environmentObject(UserViewModel())
     }
 }
+
 
 
 
