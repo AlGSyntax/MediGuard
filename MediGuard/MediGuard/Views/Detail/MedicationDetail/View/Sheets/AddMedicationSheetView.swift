@@ -4,9 +4,25 @@
 //
 //  Created by Alvaro Guillermo del Castillo Forero on 13.06.24.
 //
-
 import SwiftUI
 
+// MARK: - AddMedicationSheetView
+
+/**
+ Die `AddMedicationSheetView`-Struktur ist eine SwiftUI-View, die eine Eingabeoberfläche zum Hinzufügen eines neuen Medikaments bereitstellt.
+ 
+ - Eigenschaften:
+    - medicationViewModel: Das `MedicationDetailViewModel`-Objekt, das die Daten und Logik für die Medikamentenverwaltung verwaltet.
+    - userViewModel: Das `UserViewModel`-Objekt, das die Benutzerdaten und Authentifizierungslogik verwaltet.
+    - medicationName: Der Name des Medikaments.
+    - intakeTime: Die Uhrzeit der Einnahme des Medikaments.
+    - day: Der Wochentag der Einnahme des Medikaments.
+    - nextIntakeTime: Die nächste Uhrzeit der Einnahme des Medikaments (optional).
+    - nextIntakeDay: Der nächste Wochentag der Einnahme des Medikaments (optional).
+    - selectedColor: Die Farbe der Medikamentenkarte.
+    - dosage: Die Dosierung des Medikaments.
+    - dosageUnit: Die Einheit der Dosierung.
+ */
 struct AddMedicationSheetView: View {
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var medicationViewModel: MedicationDetailViewModel
@@ -14,20 +30,23 @@ struct AddMedicationSheetView: View {
 
     @State private var medicationName: String = ""
     @State private var intakeTime: String = "08:00"
-    @State private var day: String = "Montag"
+    @State private var day: Weekday = .monday
     @State private var nextIntakeTime: String?
-    @State private var nextIntakeDay: String?
+    @State private var nextIntakeDay: Weekday?
     @State private var selectedColor: MedicationColor = .blue
     @State private var dosage: Int = 0
     @State private var dosageUnit: DosageUnit = .mg
 
+    // MARK: - Body
     var body: some View {
         NavigationView {
             Form {
+                // MARK: - Name des Medikaments
                 Section(header: Text("Name des Medikaments")) {
                     TextField("Name", text: $medicationName)
                 }
 
+                // MARK: - Uhrzeit der Einnahme
                 Section(header: Text("Uhrzeit der Einnahme")) {
                     Picker("Uhrzeit", selection: $intakeTime) {
                         ForEach(["08:00", "12:00", "16:00", "20:00"], id: \.self) {
@@ -36,18 +55,20 @@ struct AddMedicationSheetView: View {
                     }
                 }
 
+                // MARK: - Tag der Einnahme
                 Section(header: Text("Tag der Einnahme")) {
                     Picker("Tag", selection: $day) {
-                        ForEach(["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"], id: \.self) {
-                            Text($0).tag($0)
+                        ForEach(Weekday.allCases, id: \.self) {
+                            Text($0.name).tag($0)
                         }
                     }
                 }
 
+                // MARK: - Nächstes Einnahmedatum (optional)
                 Section(header: Text("Nächstes Einnahmedatum (optional)")) {
                     Picker("Nächster Tag", selection: $nextIntakeDay) {
-                        ForEach([nil] + ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"], id: \.self) {
-                            Text($0 ?? "Keine Auswahl").tag($0)
+                        ForEach([nil] + Weekday.allCases, id: \.self) {
+                            Text($0?.name ?? "Keine Auswahl").tag($0)
                         }
                     }
                     if nextIntakeDay != nil {
@@ -59,6 +80,7 @@ struct AddMedicationSheetView: View {
                     }
                 }
 
+                // MARK: - Farbe der Karte
                 Section(header: Text("Farbe der Karte")) {
                     Picker("Farbe", selection: $selectedColor) {
                         ForEach(MedicationColor.allCases, id: \.self) { color in
@@ -68,6 +90,7 @@ struct AddMedicationSheetView: View {
                     .pickerStyle(MenuPickerStyle())
                 }
 
+                // MARK: - Dosierung
                 Section(header: Text("Dosierung")) {
                     HStack {
                         TextField("Dosierung", value: $dosage, formatter: NumberFormatter())
@@ -95,33 +118,26 @@ struct AddMedicationSheetView: View {
                     var nextIntakeTimeComponents: DateComponents? = nil
                     if let nextDay = nextIntakeDay, let nextTime = nextIntakeTime {
                         nextIntakeTimeComponents = getTimeComponents(from: nextTime)
-                        nextIntakeTimeComponents?.weekday = getWeekdayIndex(from: nextDay)
-                        print("Next Intake Day: \(nextDay), Time: \(nextTime), Components: \(String(describing: nextIntakeTimeComponents))")
+                        nextIntakeTimeComponents?.weekday = nextDay.rawValue
                     }
-                    print("Intake Time Components: \(intakeTimeComponents)")
-                    medicationViewModel.addMedication(name: medicationName, intakeTime: intakeTimeComponents, day: day, nextIntakeDate: nextIntakeTimeComponents, color: selectedColor, dosage: dosage, dosageUnit: dosageUnit, userId: userId)
+                    medicationViewModel.addMedication(name: medicationName, intakeTime: intakeTimeComponents, day: day.name, nextIntakeDate: nextIntakeTimeComponents, color: selectedColor, dosage: dosage, dosageUnit: dosageUnit, userId: userId)
                 }
                 self.presentationMode.wrappedValue.dismiss()
             })
         }
     }
 
+    // MARK: - Helper Methods
+
+    /**
+     Konvertiert eine Uhrzeit als String in DateComponents.
+     
+     - Parameter time: Die Uhrzeit als String.
+     - Returns: Die entsprechenden DateComponents.
+     */
     private func getTimeComponents(from time: String) -> DateComponents {
         let parts = time.split(separator: ":").map { Int($0) }
         return DateComponents(hour: parts[0], minute: parts[1])
-    }
-    
-    private func getWeekdayIndex(from day: String) -> Int? {
-        switch day {
-        case "Montag": return 2
-        case "Dienstag": return 3
-        case "Mittwoch": return 4
-        case "Donnerstag": return 5
-        case "Freitag": return 6
-        case "Samstag": return 7
-        case "Sonntag": return 1
-        default: return nil
-        }
     }
 }
 

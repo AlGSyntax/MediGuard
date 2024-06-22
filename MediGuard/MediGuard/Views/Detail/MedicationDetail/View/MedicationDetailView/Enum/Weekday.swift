@@ -12,7 +12,7 @@ import Foundation
 /**
  Die `Weekday`-Enumeration stellt die Wochentage dar und enthält eine Methode, um den Namen des Wochentags von einer Wochentagsnummer abzuleiten.
  */
-enum Weekday: Int, Codable {
+enum Weekday: Int, Codable, CaseIterable, Hashable {
     case sunday = 1
     case monday = 2
     case tuesday = 3
