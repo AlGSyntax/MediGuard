@@ -4,17 +4,14 @@
 //
 //  Created by Alvaro Guillermo del Castillo Forero on 13.06.24.
 //
-
-import SwiftUI
-
 // MARK: - EditMedicationSheetView
-
+import SwiftUI
 /**
- Die `EditMedicationSheetView`-Struktur ist eine SwiftUI-View, die eine Eingabeoberfläche zum Bearbeiten eines bestehenden Medikaments bereitstellt.
+ Die EditMedicationSheetView-Struktur ist eine SwiftUI-View, die eine Eingabeoberfläche zum Bearbeiten eines bestehenden Medikaments bereitstellt.
  
  - Eigenschaften:
-    - medicationViewModel: Das `MedicationDetailViewModel`-Objekt, das die Daten und Logik für die Medikamentenverwaltung verwaltet.
-    - userViewModel: Das `UserViewModel`-Objekt, das die Benutzerdaten und Authentifizierungslogik verwaltet.
+    - medicationViewModel: Das MedicationDetailViewModel-Objekt, das die Daten und Logik für die Medikamentenverwaltung verwaltet.
+    - userViewModel: Das UserViewModel-Objekt, das die Benutzerdaten und Authentifizierungslogik verwaltet.
     - medication: Das zu bearbeitende Medikament.
     - selectedColor: Die Farbe der Medikamentenkarte.
     - dosage: Die Dosierung des Medikaments.
@@ -38,7 +35,7 @@ struct EditMedicationSheetView: View {
 
     // MARK: - Body
     var body: some View {
-        NavigationView {
+        
             Form {
                 // MARK: - Name des Medikaments
                 Section(header: Text("Name des Medikaments")) {
@@ -95,15 +92,15 @@ struct EditMedicationSheetView: View {
                         TextField("Dosierung", value: $dosage, formatter: NumberFormatter())
                             .keyboardType(.numberPad)
                         Picker("Einheit", selection: $dosageUnit) {
-                            ForEach(DosageUnit.allCases) { unit in
-                                if unit == .pills {
-                                    Label(unit.displayName, systemImage: "pills")
-                                        .tag(unit)
-                                } else {
-                                    Text(unit.displayName).tag(unit)
-                                }
-                            }
-                        }
+                                                    ForEach(DosageUnit.allCases, id: \.self) { unit in
+                                                        if let image = unit.image {
+                                                            image.tag(unit)
+                                                        } else {
+                                                            Text(unit.displayName).tag(unit)
+                                                        }
+                                                    }
+                                                }
+
                         .pickerStyle(SegmentedPickerStyle())
                     }
                 }
@@ -129,7 +126,7 @@ struct EditMedicationSheetView: View {
                 }
                 self.presentationMode.wrappedValue.dismiss()
             })
-        }
+        
         .onAppear {
             selectedColor = medication.color
             dosage = medication.dosage
@@ -155,11 +152,6 @@ struct EditMedicationSheetView: View {
         return DateComponents(hour: parts[0], minute: parts[1])
     }
 }
-
-
-
-
-
 
 
 

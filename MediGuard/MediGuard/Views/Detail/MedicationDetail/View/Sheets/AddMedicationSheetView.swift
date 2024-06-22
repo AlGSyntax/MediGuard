@@ -4,16 +4,17 @@
 //
 //  Created by Alvaro Guillermo del Castillo Forero on 13.06.24.
 //
+
 import SwiftUI
 
 // MARK: - AddMedicationSheetView
 
 /**
- Die `AddMedicationSheetView`-Struktur ist eine SwiftUI-View, die eine Eingabeoberfläche zum Hinzufügen eines neuen Medikaments bereitstellt.
+ Die AddMedicationSheetView-Struktur ist eine SwiftUI-View, die eine Eingabeoberfläche zum Hinzufügen eines neuen Medikaments bereitstellt.
  
  - Eigenschaften:
-    - medicationViewModel: Das `MedicationDetailViewModel`-Objekt, das die Daten und Logik für die Medikamentenverwaltung verwaltet.
-    - userViewModel: Das `UserViewModel`-Objekt, das die Benutzerdaten und Authentifizierungslogik verwaltet.
+    - medicationViewModel: Das MedicationDetailViewModel-Objekt, das die Daten und Logik für die Medikamentenverwaltung verwaltet.
+    - userViewModel: Das UserViewModel-Objekt, das die Benutzerdaten und Authentifizierungslogik verwaltet.
     - medicationName: Der Name des Medikaments.
     - intakeTime: Die Uhrzeit der Einnahme des Medikaments.
     - day: Der Wochentag der Einnahme des Medikaments.
@@ -39,7 +40,7 @@ struct AddMedicationSheetView: View {
 
     // MARK: - Body
     var body: some View {
-        NavigationView {
+      
             Form {
                 // MARK: - Name des Medikaments
                 Section(header: Text("Name des Medikaments")) {
@@ -96,15 +97,15 @@ struct AddMedicationSheetView: View {
                         TextField("Dosierung", value: $dosage, formatter: NumberFormatter())
                             .keyboardType(.numberPad)
                         Picker("Einheit", selection: $dosageUnit) {
-                            ForEach(DosageUnit.allCases) { unit in
-                                if unit == .pills {
-                                    Label(unit.displayName, systemImage: "pills")
-                                        .tag(unit)
-                                } else {
-                                    Text(unit.displayName).tag(unit)
-                                }
-                            }
-                        }
+                                                    ForEach(DosageUnit.allCases, id: \.self) { unit in
+                                                        if let image = unit.image {
+                                                            image.tag(unit)
+                                                        } else {
+                                                            Text(unit.displayName).tag(unit)
+                                                        }
+                                                    }
+                                                }
+
                         .pickerStyle(SegmentedPickerStyle())
                     }
                 }
@@ -124,7 +125,7 @@ struct AddMedicationSheetView: View {
                 }
                 self.presentationMode.wrappedValue.dismiss()
             })
-        }
+        
     }
 
     // MARK: - Helper Methods
@@ -140,6 +141,7 @@ struct AddMedicationSheetView: View {
         return DateComponents(hour: parts[0], minute: parts[1])
     }
 }
+
 
 
 

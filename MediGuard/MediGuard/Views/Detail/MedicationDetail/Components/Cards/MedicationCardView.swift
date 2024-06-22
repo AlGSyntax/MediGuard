@@ -82,10 +82,9 @@ struct MedicationCardView: View {
             }
         }
         .padding()
-        .frame(maxWidth: .infinity, minHeight: 150)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(medication.color.color) // Hintergrundfarbe basierend auf der Medikamentenfarbe
         .cornerRadius(20)
-        .padding(.horizontal)
         .swipeActions(edge: .trailing) {
             // Löschen-Button
             Button(role: .destructive) {

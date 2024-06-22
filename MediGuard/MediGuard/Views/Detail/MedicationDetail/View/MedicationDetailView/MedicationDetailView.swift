@@ -5,22 +5,24 @@
 //  Created by Alvaro Guillermo del Castillo Forero on 11.06.24.
 //
 
+
+
 import SwiftUI
 
 // MARK: - MedicationDetailView
 
 /**
- Die `MedicationDetailView`-Struktur ist eine SwiftUI-View, die die Detailansicht für Medikamente darstellt.
+ Die MedicationDetailView-Struktur ist eine SwiftUI-View, die die Detailansicht für Medikamente darstellt.
  
  Diese View zeigt eine Liste von Medikamenten und ermöglicht das Hinzufügen, Bearbeiten und Löschen von Medikamenten.
  
  - Eigenschaften:
-    - `userViewModel`: Das `UserViewModel`-Objekt, das die Benutzerdaten und Authentifizierungslogik verwaltet.
-    - `viewModel`: Das `MedicationDetailViewModel`-Objekt, das die Daten und Logik für die Detailansicht von Medikamenten verwaltet.
-    - `showingAddMedicationSheet`: Ein Boolescher Zustand, der angibt, ob das Blatt zum Hinzufügen eines neuen Medikaments angezeigt wird.
-    - `showingEditMedicationSheet`: Ein Boolescher Zustand, der angibt, ob das Blatt zum Bearbeiten eines Medikaments angezeigt wird.
-    - `medicationToEdit`: Das Medikament, das bearbeitet wird. Wird verwendet, um das Bearbeitungsblatt zu initialisieren.
-    - `showAlert`: Ein Boolescher Zustand, der angibt, ob ein Alert angezeigt werden soll.
+    - userViewModel: Das UserViewModel-Objekt, das die Benutzerdaten und Authentifizierungslogik verwaltet.
+    - viewModel: Das MedicationDetailViewModel-Objekt, das die Daten und Logik für die Detailansicht von Medikamenten verwaltet.
+    - showingAddMedicationSheet: Ein Boolescher Zustand, der angibt, ob das Blatt zum Hinzufügen eines neuen Medikaments angezeigt wird.
+    - showingEditMedicationSheet: Ein Boolescher Zustand, der angibt, ob das Blatt zum Bearbeiten eines Medikaments angezeigt wird.
+    - medicationToEdit: Das Medikament, das bearbeitet wird. Wird verwendet, um das Bearbeitungsblatt zu initialisieren.
+    - showAlert: Ein Boolescher Zustand, der angibt, ob ein Alert angezeigt werden soll.
  */
 struct MedicationDetailView: View {
     @EnvironmentObject private var userViewModel: UserViewModel
@@ -39,7 +41,7 @@ struct MedicationDetailView: View {
                 CustomBackButton()
                 Spacer()
                 Text("Medikamente")
-                    .font(.largeTitle)
+                    .font(.title)
                     .foregroundColor(.blue)
                 Spacer()
                 Button(action: {
@@ -54,19 +56,20 @@ struct MedicationDetailView: View {
             .padding(.top, 20)
             
             // MARK: - Liste der Medikamente
-            ScrollView {
+            List {
                 ForEach(["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"], id: \.self) { day in
-                    VStack(alignment: .leading) {
-                        // MARK: - Tag-Header
-                        Text(day)
-                            .font(.title2)
-                            .bold()
-                            .padding(.vertical, 5)
-                            .padding(.horizontal, 10)
-                            .background(Color.blue.opacity(0.2))
-                            .cornerRadius(8)
-                            .padding(.top, 10)
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                    Section(header: Text(day)
+                                .font(.title2)
+                                .bold()
+                                .padding(.vertical, 10)
+                                .padding(.horizontal, 10)
+                                .background(Color.blue)
+                                .foregroundStyle(.white) // Schriftfarbe auf Weiß setzen
+                                .cornerRadius(8)
+                                .padding(.top, 10)
+                               
+                            
+                                ) {
                         
                         // MARK: - Uhrzeit-Sektionen
                         ForEach(["08:00", "12:00", "16:00", "20:00"], id: \.self) { time in
@@ -88,7 +91,11 @@ struct MedicationDetailView: View {
                                         showingEditMedicationSheet.toggle()
                                     })
                                     .padding(.horizontal, 10)
-                                    .padding(.vertical, 5)
+                                    .padding(.vertical, 10)
+                                   
+                                    .cornerRadius(20)
+                                   
+                                
                                 }
 
                                 // MARK: - Filter für nextIntakeDate
@@ -105,25 +112,40 @@ struct MedicationDetailView: View {
                                         showingEditMedicationSheet.toggle()
                                     })
                                     .padding(.horizontal, 10)
-                                    .padding(.vertical, 5)
+                                    .padding(.vertical, 10)
+                                   
+                                    .cornerRadius(20)
+                                    
+                                   
                                 }
+                                
                             }
+                          
                         }
                     }
-                    .padding(.horizontal, 10)
+                               
+                    .listRowBackground(Color.white)
                 }
             }
-            .padding([.leading, .trailing, .bottom], 10)
+            .listStyle(PlainListStyle())
+            .background(Color.white)
+            .cornerRadius(32)
+            
         }
         .padding(.horizontal)
+        .background(Color.white)
         .navigationBarBackButtonHidden(true)
         .sheet(isPresented: $showingAddMedicationSheet) {
-            AddMedicationSheetView(medicationViewModel: viewModel)
-                .environmentObject(userViewModel)
+            NavigationStack{
+                AddMedicationSheetView(medicationViewModel: viewModel)
+                    .environmentObject(userViewModel)
+            }
         }
         .sheet(item: $medicationToEdit) { medication in
-            EditMedicationSheetView(medicationViewModel: viewModel, medication: medication)
-                .environmentObject(userViewModel)
+            NavigationStack{
+                EditMedicationSheetView(medicationViewModel: viewModel, medication: medication)
+                    .environmentObject(userViewModel)
+            }
         }
         .alert(isPresented: $showAlert) {
             Alert(title: Text("Fehler"), message: Text(viewModel.errorMessage), dismissButton: .default(Text("OK")))
@@ -147,12 +169,3 @@ struct MedicationDetailView_Previews: PreviewProvider {
             .environmentObject(UserViewModel())
     }
 }
-
-
-
-
-
-
-
-
-
