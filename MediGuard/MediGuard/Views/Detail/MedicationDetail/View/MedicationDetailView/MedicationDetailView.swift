@@ -54,7 +54,7 @@ struct MedicationDetailView: View {
             .padding(.top, 20)
             
             // MARK: - Liste der Medikamente
-            List {
+            ScrollView {
                 ForEach(["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"], id: \.self) { day in
                     VStack(alignment: .leading) {
                         // MARK: - Tag-Header
@@ -114,7 +114,6 @@ struct MedicationDetailView: View {
                 }
             }
             .padding([.leading, .trailing, .bottom], 10)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .padding(.horizontal)
         .navigationBarBackButtonHidden(true)
@@ -148,6 +147,7 @@ struct MedicationDetailView_Previews: PreviewProvider {
             .environmentObject(UserViewModel())
     }
 }
+
 
 
 
