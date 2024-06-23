@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK: - PrimaryButton
+// MARK: - AuthButton
 
 /**
  Die `AuthButton`-Struktur ist eine SwiftUI-View-Komponente, die einen primären Aktionsbutton darstellt.

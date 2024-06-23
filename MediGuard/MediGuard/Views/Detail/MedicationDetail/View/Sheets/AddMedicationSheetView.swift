@@ -23,7 +23,10 @@ import SwiftUI
     - selectedColor: Die Farbe der Medikamentenkarte.
     - dosage: Die Dosierung des Medikaments.
     - dosageUnit: Die Einheit der Dosierung.
+    - showSaveConfirmation: Ein Boolescher Zustand, der angibt, ob die Bestätigung zum Speichern angezeigt werden soll.
  */
+
+
 struct AddMedicationSheetView: View {
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var medicationViewModel: MedicationDetailViewModel
@@ -37,95 +40,105 @@ struct AddMedicationSheetView: View {
     @State private var selectedColor: MedicationColor = .blue
     @State private var dosage: Int = 0
     @State private var dosageUnit: DosageUnit = .mg
+    @State private var showSaveConfirmation = false
 
     // MARK: - Body
     var body: some View {
-      
-            Form {
-                // MARK: - Name des Medikaments
-                Section(header: Text("Name des Medikaments")) {
-                    TextField("Name", text: $medicationName)
-                }
+        Form {
+            // MARK: - Name des Medikaments
+            Section(header: Text("Name des Medikaments")) {
+                TextField("Name", text: $medicationName)
+            }
 
-                // MARK: - Uhrzeit der Einnahme
-                Section(header: Text("Uhrzeit der Einnahme")) {
-                    Picker("Uhrzeit", selection: $intakeTime) {
-                        ForEach(["08:00", "12:00", "16:00", "20:00"], id: \.self) {
-                            Text($0).tag($0)
-                        }
-                    }
-                }
-
-                // MARK: - Tag der Einnahme
-                Section(header: Text("Tag der Einnahme")) {
-                    Picker("Tag", selection: $day) {
-                        ForEach(Weekday.allCases, id: \.self) {
-                            Text($0.name).tag($0)
-                        }
-                    }
-                }
-
-                // MARK: - Nächstes Einnahmedatum (optional)
-                Section(header: Text("Nächstes Einnahmedatum (optional)")) {
-                    Picker("Nächster Tag", selection: $nextIntakeDay) {
-                        ForEach([nil] + Weekday.allCases, id: \.self) {
-                            Text($0?.name ?? "Keine Auswahl").tag($0)
-                        }
-                    }
-                    if nextIntakeDay != nil {
-                        Picker("Nächste Uhrzeit", selection: $nextIntakeTime) {
-                            ForEach([nil] + ["08:00", "12:00", "16:00", "20:00"], id: \.self) {
-                                Text($0 ?? "Keine Auswahl").tag($0)
-                            }
-                        }
-                    }
-                }
-
-                // MARK: - Farbe der Karte
-                Section(header: Text("Farbe der Karte")) {
-                    Picker("Farbe", selection: $selectedColor) {
-                        ForEach(MedicationColor.allCases, id: \.self) { color in
-                            Text(color.rawValue.capitalized).tag(color)
-                        }
-                    }
-                    .pickerStyle(MenuPickerStyle())
-                }
-
-                // MARK: - Dosierung
-                Section(header: Text("Dosierung")) {
-                    HStack {
-                        TextField("Dosierung", value: $dosage, formatter: NumberFormatter())
-                            .keyboardType(.numberPad)
-                        Picker("Einheit", selection: $dosageUnit) {
-                                                    ForEach(DosageUnit.allCases, id: \.self) { unit in
-                                                        if let image = unit.image {
-                                                            image.tag(unit)
-                                                        } else {
-                                                            Text(unit.displayName).tag(unit)
-                                                        }
-                                                    }
-                                                }
-
-                        .pickerStyle(SegmentedPickerStyle())
+            // MARK: - Uhrzeit der Einnahme
+            Section(header: Text("Uhrzeit der Einnahme")) {
+                Picker("Uhrzeit", selection: $intakeTime) {
+                    ForEach(["08:00", "12:00", "16:00", "20:00"], id: \.self) {
+                        Text($0).tag($0)
                     }
                 }
             }
-            .navigationBarTitle("Neues Medikament", displayMode: .inline)
-            .navigationBarItems(leading: Button("Abbrechen") {
-                self.presentationMode.wrappedValue.dismiss()
-            }, trailing: Button("Hinzufügen") {
-                if let userId = userViewModel.userId {
-                    let intakeTimeComponents = getTimeComponents(from: intakeTime)
-                    var nextIntakeTimeComponents: DateComponents? = nil
-                    if let nextDay = nextIntakeDay, let nextTime = nextIntakeTime {
-                        nextIntakeTimeComponents = getTimeComponents(from: nextTime)
-                        nextIntakeTimeComponents?.weekday = nextDay.rawValue
+
+            // MARK: - Tag der Einnahme
+            Section(header: Text("Tag der Einnahme")) {
+                Picker("Tag", selection: $day) {
+                    ForEach(Weekday.allCases, id: \.self) {
+                        Text($0.name).tag($0)
                     }
-                    medicationViewModel.addMedication(name: medicationName, intakeTime: intakeTimeComponents, day: day.name, nextIntakeDate: nextIntakeTimeComponents, color: selectedColor, dosage: dosage, dosageUnit: dosageUnit, userId: userId)
                 }
-                self.presentationMode.wrappedValue.dismiss()
-            })
-        
+            }
+
+            // MARK: - Nächstes Einnahmedatum (optional)
+            Section(header: Text("Nächstes Einnahmedatum (optional)")) {
+                Picker("Nächster Tag", selection: $nextIntakeDay) {
+                    ForEach([nil] + Weekday.allCases, id: \.self) {
+                        Text($0?.name ?? "Keine Auswahl").tag($0)
+                    }
+                }
+                if nextIntakeDay != nil {
+                    Picker("Nächste Uhrzeit", selection: $nextIntakeTime) {
+                        ForEach([nil] + ["08:00", "12:00", "16:00", "20:00"], id: \.self) {
+                            Text($0 ?? "Keine Auswahl").tag($0)
+                        }
+                    }
+                }
+            }
+
+            // MARK: - Farbe der Karte
+            Section(header: Text("Farbe der Karte")) {
+                Picker("Farbe", selection: $selectedColor) {
+                    ForEach(MedicationColor.allCases, id: \.self) { color in
+                        Text(color.rawValue.capitalized).tag(color)
+                    }
+                }
+                .pickerStyle(MenuPickerStyle())
+            }
+
+            // MARK: - Dosierung
+            Section(header: Text("Dosierung")) {
+                HStack {
+                    TextField("Dosierung", value: $dosage, formatter: NumberFormatter())
+                        .keyboardType(.numberPad)
+                    Picker("Einheit", selection: $dosageUnit) {
+                        ForEach(DosageUnit.allCases) { unit in
+                            if unit == .pills {
+                                Label(unit.displayName, systemImage: "pills")
+                                    .tag(unit)
+                            } else {
+                                Text(unit.displayName).tag(unit)
+                            }
+                        }
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                }
+            }
+        }
+        .navigationBarTitle("Neues Medikament", displayMode: .inline)
+        .navigationBarItems(leading: Button("Abbrechen") {
+            self.presentationMode.wrappedValue.dismiss()
+        }, trailing: Button("Hinzufügen") {
+            showSaveConfirmation.toggle()
+        })
+        .alert(isPresented: $showSaveConfirmation) {
+            // MARK: - Speicherbestätigung
+            Alert(
+                title: Text("Speichern bestätigen"),
+                message: Text("Möchten Sie dieses Medikament wirklich hinzufügen?"),
+                primaryButton: .default(Text("Hinzufügen")) {
+                    if let userId = userViewModel.userId {
+                        let intakeTimeComponents = getTimeComponents(from: intakeTime)
+                        var nextIntakeTimeComponents: DateComponents? = nil
+                        if let nextDay = nextIntakeDay, let nextTime = nextIntakeTime {
+                            nextIntakeTimeComponents = getTimeComponents(from: nextTime)
+                            nextIntakeTimeComponents?.weekday = nextDay.rawValue
+                        }
+                        medicationViewModel.addMedication(name: medicationName, intakeTime: intakeTimeComponents, day: day.name, nextIntakeDate: nextIntakeTimeComponents, color: selectedColor, dosage: dosage, dosageUnit: dosageUnit, userId: userId)
+                    }
+                    self.presentationMode.wrappedValue.dismiss()
+                },
+                secondaryButton: .cancel(Text("Abbrechen"))
+            )
+        }
     }
 
     // MARK: - Helper Methods

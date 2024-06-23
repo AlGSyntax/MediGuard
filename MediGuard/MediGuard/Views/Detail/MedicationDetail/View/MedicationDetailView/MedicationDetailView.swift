@@ -23,6 +23,7 @@ import SwiftUI
     - showingEditMedicationSheet: Ein Boolescher Zustand, der angibt, ob das Blatt zum Bearbeiten eines Medikaments angezeigt wird.
     - medicationToEdit: Das Medikament, das bearbeitet wird. Wird verwendet, um das Bearbeitungsblatt zu initialisieren.
     - showAlert: Ein Boolescher Zustand, der angibt, ob ein Alert angezeigt werden soll.
+    - medicationToDelete: Das Medikament, das gelöscht werden soll. Wird verwendet, um den Lösch-Alert zu initialisieren.
  */
 struct MedicationDetailView: View {
     @EnvironmentObject private var userViewModel: UserViewModel
@@ -32,6 +33,8 @@ struct MedicationDetailView: View {
     @State private var showingEditMedicationSheet = false
     @State private var medicationToEdit: Medication?
     @State private var showAlert = false
+    @State private var medicationToDelete: Medication?
+    @State private var showErrorAlert = false
 
     // MARK: - Body
     var body: some View {
@@ -67,8 +70,6 @@ struct MedicationDetailView: View {
                                 .foregroundStyle(.white) // Schriftfarbe auf Weiß setzen
                                 .cornerRadius(8)
                                 .padding(.top, 10)
-                               
-                            
                                 ) {
                         
                         // MARK: - Uhrzeit-Sektionen
@@ -85,70 +86,54 @@ struct MedicationDetailView: View {
                                     return $0.day == day && hourMinute == time
                                 }) { medication in
                                     MedicationCardView(medication: medication, onDelete: {
-                                        viewModel.deleteMedication(medication, userId: userViewModel.userId ?? "")
+                                        medicationToDelete = medication
+                                        showAlert = true
                                     }, onEdit: {
                                         medicationToEdit = medication
                                         showingEditMedicationSheet.toggle()
                                     })
                                     .padding(.horizontal, 10)
                                     .padding(.vertical, 10)
-                                   
                                     .cornerRadius(20)
-                                   
-                                
                                 }
-
-                                // MARK: - Filter für nextIntakeDate
-                                ForEach(viewModel.medications.filter {
-                                    guard let nextIntakeDate = $0.nextIntakeDate else { return false }
-                                    let hourMinute = String(format: "%02d:%02d", nextIntakeDate.hour ?? 0, nextIntakeDate.minute ?? 0)
-                                    let nextDay = Weekday.from(nextIntakeDate.weekday)?.name ?? "Unbekannt"
-                                    return nextDay == day && hourMinute == time
-                                }) { medication in
-                                    MedicationCardView(medication: medication, onDelete: {
-                                        viewModel.deleteMedication(medication, userId: userViewModel.userId ?? "")
-                                    }, onEdit: {
-                                        medicationToEdit = medication
-                                        showingEditMedicationSheet.toggle()
-                                    })
-                                    .padding(.horizontal, 10)
-                                    .padding(.vertical, 10)
-                                   
-                                    .cornerRadius(20)
-                                    
-                                   
-                                }
-                                
                             }
-                          
                         }
                     }
-                               
                     .listRowBackground(Color.white)
                 }
             }
             .listStyle(PlainListStyle())
             .background(Color.white)
             .cornerRadius(32)
-            
         }
         .padding(.horizontal)
         .background(Color.white)
         .navigationBarBackButtonHidden(true)
         .sheet(isPresented: $showingAddMedicationSheet) {
-            NavigationStack{
+            NavigationStack {
                 AddMedicationSheetView(medicationViewModel: viewModel)
                     .environmentObject(userViewModel)
             }
         }
         .sheet(item: $medicationToEdit) { medication in
-            NavigationStack{
+            NavigationStack {
                 EditMedicationSheetView(medicationViewModel: viewModel, medication: medication)
                     .environmentObject(userViewModel)
             }
         }
         .alert(isPresented: $showAlert) {
-            Alert(title: Text("Fehler"), message: Text(viewModel.errorMessage), dismissButton: .default(Text("OK")))
+            if let medicationToDelete = medicationToDelete {
+                return Alert(
+                    title: Text("Löschen bestätigen"),
+                    message: Text("Möchten Sie dieses Medikament wirklich löschen?"),
+                    primaryButton: .destructive(Text("Löschen")) {
+                        viewModel.deleteMedication(medicationToDelete, userId: userViewModel.userId ?? "")
+                    },
+                    secondaryButton: .cancel(Text("Abbrechen"))
+                )
+            } else {
+                return Alert(title: Text("Fehler"), message: Text("Es gibt kein Medikament zum Löschen."), dismissButton: .default(Text("OK")))
+            }
         }
         .onAppear {
             if let userId = userViewModel.userId {
@@ -156,7 +141,7 @@ struct MedicationDetailView: View {
             }
         }
         .onReceive(viewModel.$errorMessage) { errorMessage in
-            showAlert = !errorMessage.isEmpty
+            showErrorAlert = !errorMessage.isEmpty
         }
     }
 }
