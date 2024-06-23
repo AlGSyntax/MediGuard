@@ -92,23 +92,22 @@ struct EditMedicationSheetView: View {
 
             // MARK: - Dosierung
             Section(header: Text("Dosierung")) {
-                HStack {
-                    TextField("Dosierung", value: $dosage, formatter: NumberFormatter())
-                        .keyboardType(.numberPad)
-                    Picker("Einheit", selection: $dosageUnit) {
-                        ForEach(DosageUnit.allCases) { unit in
-                            if unit == .pills {
-                                Label(unit.displayName, systemImage: "pills")
-                                    .tag(unit)
-                            } else {
-                                Text(unit.displayName).tag(unit)
+                                HStack {
+                                    TextField("Dosierung", value: $dosage, formatter: NumberFormatter())
+                                        .keyboardType(.numberPad)
+                                    Picker("Einheit", selection: $dosageUnit) {
+                                        ForEach(DosageUnit.allCases, id: \.self) { unit in
+                                            if let image = unit.image {
+                                                image.tag(unit)
+                                            } else {
+                                                Text(unit.displayName).tag(unit)
+                                            }
+                                        }
+                                    }
+                                    .pickerStyle(SegmentedPickerStyle())
+                                }
                             }
                         }
-                    }
-                    .pickerStyle(SegmentedPickerStyle())
-                }
-            }
-        }
         .navigationBarTitle("Medikament bearbeiten", displayMode: .inline)
         .navigationBarItems(leading: Button("Abbrechen") {
             self.presentationMode.wrappedValue.dismiss()
