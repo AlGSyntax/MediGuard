@@ -74,12 +74,11 @@ struct MedicationDetailView: View {
                         
                         // MARK: - Uhrzeit-Sektionen
                         ForEach(["08:00", "12:00", "16:00", "20:00"], id: \.self) { time in
-                            VStack(alignment: .leading) {
-                                Text(time)
-                                    .font(.headline)
-                                    .padding(.top, 5)
-                                    .padding(.horizontal, 10)
-
+                            Section(header: Text(time)
+                                        .font(.headline)
+                                        .padding(.top, 5)
+                                        .padding(.horizontal, 10)) {
+                                
                                 // MARK: - Filter für intakeTime
                                 ForEach(viewModel.medications.filter {
                                     let hourMinute = String(format: "%02d:%02d", $0.intakeTime.hour ?? 0, $0.intakeTime.minute ?? 0)
@@ -154,3 +153,4 @@ struct MedicationDetailView_Previews: PreviewProvider {
             .environmentObject(UserViewModel())
     }
 }
+
