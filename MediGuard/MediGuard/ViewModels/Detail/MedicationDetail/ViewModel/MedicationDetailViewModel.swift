@@ -71,13 +71,7 @@ class MedicationDetailViewModel: ObservableObject {
             }
     }
     
-    /**
-     Entfernt den Listener, um Änderungen zu stoppen.
-     */
-    func removeListener() {
-        medications.removeAll()
-        listener?.remove()
-    }
+   
 
     /**
      Plant eine Benachrichtigung für das angegebene Medikament.
@@ -200,15 +194,30 @@ class MedicationDetailViewModel: ObservableObject {
     func deleteMedication(_ medication: Medication, userId: String) {
         guard let id = medication.id else { return }
 
-        Firestore.firestore().collection("users").document(userId).collection("medications").document(id).delete { error in
-            if let error {
+        let medicationRef = Firestore.firestore().collection("users").document(userId).collection("medications").document(id)
+
+        medicationRef.delete { error in
+            if let error = error {
                 self.errorMessage = "Error deleting medication: \(error.localizedDescription)"
                 return
             }
 
-            self.medications.removeAll { $0.id == medication.id }
+            medicationRef.addSnapshotListener { documentSnapshot, error in
+                if let error = error {
+                    self.errorMessage = "Error fetching medication: \(error.localizedDescription)"
+                    return
+                }
+                guard let document = documentSnapshot else {
+                    self.errorMessage = "Medication document does not exist."
+                    return
+                }
+                if !document.exists {
+                    self.medications.removeAll { $0.id == medication.id }
+                }
+            }
         }
     }
+
 
     /**
      Aktualisiert ein Medikament und plant eine neue Benachrichtigung.
