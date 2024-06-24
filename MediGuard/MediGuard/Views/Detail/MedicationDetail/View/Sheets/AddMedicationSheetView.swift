@@ -38,7 +38,7 @@ struct AddMedicationSheetView: View {
     @State private var nextIntakeTime: String?
     @State private var nextIntakeDay: Weekday?
     @State private var selectedColor: MedicationColor = .blue
-    @State private var dosage: Int = 0
+    @State private var dosage: Int = 10
     @State private var dosageUnit: DosageUnit = .mg
     @State private var showSaveConfirmation = false
 

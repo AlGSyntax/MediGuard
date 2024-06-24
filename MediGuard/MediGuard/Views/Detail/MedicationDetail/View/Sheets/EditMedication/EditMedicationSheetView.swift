@@ -30,7 +30,7 @@ struct EditMedicationSheetView: View {
     @State var medication: Medication
 
     @State private var selectedColor: MedicationColor = .blue
-    @State private var dosage: Int = 0
+    @State private var dosage: Int = 10
     @State private var dosageUnit: DosageUnit = .mg
     @State private var intakeTime: String = "08:00"
     @State private var nextIntakeTime: String?
