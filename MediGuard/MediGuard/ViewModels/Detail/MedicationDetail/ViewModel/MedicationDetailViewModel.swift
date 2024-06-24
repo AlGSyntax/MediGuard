@@ -45,6 +45,10 @@ class MedicationDetailViewModel: ObservableObject {
 
     // MARK: - Methoden
     
+    
+    
+    // MARK: - Fetch Medication
+    
     /**
      Fügt einen Listener hinzu, der die Medikamente für den angegebenen Benutzer aus der Firestore-Datenbank in Echtzeit abruft.
      
@@ -72,6 +76,9 @@ class MedicationDetailViewModel: ObservableObject {
     }
     
    
+    
+    // MARK: - Notifications
+    
 
     /**
      Plant eine Benachrichtigung für das angegebene Medikament.
@@ -110,6 +117,9 @@ class MedicationDetailViewModel: ObservableObject {
         }
     }
 
+    
+    // MARK: - Add Medication
+    
     /**
      Fügt ein neues Medikament hinzu und plant eine Benachrichtigung dafür.
      
@@ -184,6 +194,11 @@ class MedicationDetailViewModel: ObservableObject {
             }
         }
     }
+    
+    
+    
+    
+    // MARK: - Delete Medication
 
     /**
      Löscht ein Medikament und entfernt die zugehörige Benachrichtigung.
@@ -218,6 +233,9 @@ class MedicationDetailViewModel: ObservableObject {
         }
     }
 
+    
+    // MARK: - Update Medication
+    
 
     /**
      Aktualisiert ein Medikament und plant eine neue Benachrichtigung.
