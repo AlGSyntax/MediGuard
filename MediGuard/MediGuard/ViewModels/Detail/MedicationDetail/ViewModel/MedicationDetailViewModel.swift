@@ -56,7 +56,7 @@ class MedicationDetailViewModel: ObservableObject {
      */
     func fetchMedications(userId: String) {
         listener?.remove()
-        
+        print(medications)
         listener = Firestore.firestore().collection("users").document(userId).collection("medications")
             .addSnapshotListener { querySnapshot, error in
                 if let error = error {
@@ -73,6 +73,7 @@ class MedicationDetailViewModel: ObservableObject {
                     try? doc.data(as: Medication.self)
                 }
             }
+        
     }
     
    
@@ -149,13 +150,14 @@ class MedicationDetailViewModel: ObservableObject {
                 self.errorMessage = "Error serializing medication: \(error.localizedDescription)"
             }
 
-            if let nextIntakeDate = nextIntakeDate {
-                let nextMedicationRef = firestore.collection("users").document(userId).collection("medications")
+                     if let nextIntakeDate = nextIntakeDate {
+               let nextMedicationRef = firestore.collection("users").document(userId).collection("medications")
                 let nextDay = Weekday.from(nextIntakeDate.weekday)?.name ?? "Unbekannt"
                 let nextMedication = Medication(id: UUID().uuidString, name: name, intakeTime: nextIntakeDate, day: nextDay, nextIntakeDate: nil, color: color, dosage: dosage, dosageUnit: dosageUnit)
                 
                 do {
-                    try nextMedicationRef.addDocument(from: nextMedication) { error in
+                    try nextMedicationRef.addDocument(from: nextMedication)
+                    { error in
                         if let error = error {
                             self.errorMessage = "Error adding next medication: \(error.localizedDescription)"
                             return
@@ -165,6 +167,7 @@ class MedicationDetailViewModel: ObservableObject {
                     self.errorMessage = "Error serializing next medication: \(error.localizedDescription)"
                 }
             }
+        print(medications)
         }
     
     
@@ -226,6 +229,7 @@ class MedicationDetailViewModel: ObservableObject {
                 if let index = self.medications.firstIndex(where: { $0.id == updatedMedication.id }) {
                     self.medications[index] = updatedMedication
                     self.scheduleNotification(for: updatedMedication)
+                   
                     print("Medication updated successfully")
                 }
             } catch let error {

@@ -92,7 +92,7 @@ struct MedicationDetailView: View {
                                     .padding(.vertical, 10)
                                     .cornerRadius(20)
                                 }
-                                
+                               
                                 // MARK: - Filter für nextIntakeDate
                                 let nextMedicationsAtTime = nextMedications(at: time, on: day.name)
                                 ForEach(nextMedicationsAtTime) { medication in
@@ -107,7 +107,10 @@ struct MedicationDetailView: View {
                                     .padding(.vertical, 10)
                                     .cornerRadius(20)
                                 }
+                                 
                             }
+                                 
+                                 
                         }
                     }
                     .listRowBackground(Color.white)
@@ -159,13 +162,16 @@ struct MedicationDetailView: View {
     // MARK: - Helper Functions
     
     private func medications(at time: String, on day: String) -> [Medication] {
+       
         return viewModel.medications.filter {
             let hourMinute = String(format: "%02d:%02d", $0.intakeTime.hour ?? 0, $0.intakeTime.minute ?? 0)
+          
             return $0.day == day && hourMinute == time
         }
     }
 
     private func nextMedications(at time: String, on day: String) -> [Medication] {
+        
         return viewModel.medications.filter {
             guard let nextIntakeDate = $0.nextIntakeDate else { return false }
             let hourMinute = String(format: "%02d:%02d", nextIntakeDate.hour ?? 0, nextIntakeDate.minute ?? 0)

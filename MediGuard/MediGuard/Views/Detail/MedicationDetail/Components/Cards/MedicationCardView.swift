@@ -92,7 +92,7 @@ struct MedicationCardView: View {
             }
         }
         .padding()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
         .background(medication.color.color) // Hintergrundfarbe basierend auf der Medikamentenfarbe
         .cornerRadius(20)
         .swipeActions(edge: .trailing) {

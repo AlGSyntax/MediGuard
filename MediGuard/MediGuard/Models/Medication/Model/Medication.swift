@@ -25,7 +25,7 @@ import FirebaseFirestoreSwift
     - `dosage`: Die Dosierung des Medikaments.
     - `dosageUnit`: Die Einheit der Dosierung (z.B. mg, ml).
  */
-struct Medication: Identifiable, Codable {
+struct Medication: Identifiable, Codable,Hashable {
     @DocumentID var id: String?
     var name: String
     var intakeTime: DateComponents
