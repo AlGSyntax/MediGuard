@@ -23,6 +23,8 @@ import SwiftUI
     - nextIntakeTime: Die nächste Uhrzeit der Einnahme des Medikaments (optional).
     - nextIntakeDay: Der nächste Wochentag der Einnahme des Medikaments (optional).
  */
+
+
 struct EditMedicationSheetView: View {
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var medicationViewModel: MedicationDetailViewModel
@@ -38,14 +40,14 @@ struct EditMedicationSheetView: View {
     @State private var showSaveConfirmation = false
     @State private var showDeleteConfirmation = false
 
-    // MARK: - Body
     var body: some View {
         Form {
+            
             // MARK: - Name des Medikaments
             Section(header: Text("Name des Medikaments")) {
                 TextField("Name", text: $medication.name)
             }
-
+            
             // MARK: - Uhrzeit der Einnahme
             Section(header: Text("Uhrzeit der Einnahme")) {
                 Picker("Uhrzeit", selection: $intakeTime) {
@@ -54,7 +56,7 @@ struct EditMedicationSheetView: View {
                     }
                 }
             }
-
+            
             // MARK: - Tag der Einnahme
             Section(header: Text("Tag der Einnahme")) {
                 Picker("Tag", selection: $medication.day) {
@@ -63,7 +65,7 @@ struct EditMedicationSheetView: View {
                     }
                 }
             }
-
+            
             // MARK: - Nächstes Einnahmedatum (optional)
             Section(header: Text("Nächstes Einnahmedatum (optional)")) {
                 Picker("Nächster Tag", selection: $nextIntakeDay) {
@@ -79,7 +81,7 @@ struct EditMedicationSheetView: View {
                     }
                 }
             }
-
+            
             // MARK: - Farbe der Karte
             Section(header: Text("Farbe der Karte")) {
                 Picker("Farbe", selection: $selectedColor) {
@@ -89,25 +91,25 @@ struct EditMedicationSheetView: View {
                 }
                 .pickerStyle(MenuPickerStyle())
             }
-
+            
             // MARK: - Dosierung
             Section(header: Text("Dosierung")) {
-                                HStack {
-                                    TextField("Dosierung", value: $dosage, formatter: NumberFormatter())
-                                        .keyboardType(.numberPad)
-                                    Picker("Einheit", selection: $dosageUnit) {
-                                        ForEach(DosageUnit.allCases, id: \.self) { unit in
-                                            if let image = unit.image {
-                                                image.tag(unit)
-                                            } else {
-                                                Text(unit.displayName).tag(unit)
-                                            }
-                                        }
-                                    }
-                                    .pickerStyle(SegmentedPickerStyle())
-                                }
+                HStack {
+                    TextField("Dosierung", value: $dosage, formatter: NumberFormatter())
+                        .keyboardType(.numberPad)
+                    Picker("Einheit", selection: $dosageUnit) {
+                        ForEach(DosageUnit.allCases, id: \.self) { unit in
+                            if let image = unit.image {
+                                image.tag(unit)
+                            } else {
+                                Text(unit.displayName).tag(unit)
                             }
                         }
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                }
+            }
+        }
         .navigationBarTitle("Medikament bearbeiten", displayMode: .inline)
         .navigationBarItems(leading: Button("Abbrechen") {
             self.presentationMode.wrappedValue.dismiss()
@@ -121,6 +123,7 @@ struct EditMedicationSheetView: View {
                 message: Text("Möchten Sie die Änderungen an diesem Medikament wirklich speichern?"),
                 primaryButton: .default(Text("Speichern")) {
                     if let userId = userViewModel.userId {
+                        // Aktualisiert das Medikament mit den neuen Eingabedaten
                         let intakeTimeComponents = getTimeComponents(from: intakeTime)
                         medication.intakeTime = intakeTimeComponents
                         if let nextDay = nextIntakeDay, let nextTime = nextIntakeTime {
@@ -151,20 +154,22 @@ struct EditMedicationSheetView: View {
             }
         }
     }
-
+    
     // MARK: - Helper Methods
 
-    /**
-     Konvertiert eine Uhrzeit als String in DateComponents.
-     
-     - Parameter time: Die Uhrzeit als String.
-     - Returns: Die entsprechenden DateComponents.
-     */
+        /**
+         Konvertiert eine Uhrzeit als String in DateComponents.
+         
+         - Parameter time: Die Uhrzeit als String.
+         - Returns: Die entsprechenden DateComponents.
+         */
     private func getTimeComponents(from time: String) -> DateComponents {
         let parts = time.split(separator: ":").map { Int($0) }
         return DateComponents(hour: parts[0], minute: parts[1])
     }
 }
+
+
 
 
 

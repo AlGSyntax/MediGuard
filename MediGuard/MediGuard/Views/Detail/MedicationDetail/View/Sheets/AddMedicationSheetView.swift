@@ -25,8 +25,6 @@ import SwiftUI
     - dosageUnit: Die Einheit der Dosierung.
     - showSaveConfirmation: Ein Boolescher Zustand, der angibt, ob die Bestätigung zum Speichern angezeigt werden soll.
  */
-
-
 struct AddMedicationSheetView: View {
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var medicationViewModel: MedicationDetailViewModel
@@ -96,22 +94,22 @@ struct AddMedicationSheetView: View {
 
             // MARK: - Dosierung
             Section(header: Text("Dosierung")) {
-                                HStack {
-                                    TextField("Dosierung", value: $dosage, formatter: NumberFormatter())
-                                        .keyboardType(.numberPad)
-                                    Picker("Einheit", selection: $dosageUnit) {
-                                        ForEach(DosageUnit.allCases, id: \.self) { unit in
-                                            if let image = unit.image {
-                                                image.tag(unit)
-                                            } else {
-                                                Text(unit.displayName).tag(unit)
-                                            }
-                                        }
-                                    }
-                                    .pickerStyle(SegmentedPickerStyle())
-                                }
+                HStack {
+                    TextField("Dosierung", value: $dosage, formatter: NumberFormatter())
+                        .keyboardType(.numberPad)
+                    Picker("Einheit", selection: $dosageUnit) {
+                        ForEach(DosageUnit.allCases, id: \.self) { unit in
+                            if let image = unit.image {
+                                image.tag(unit)
+                            } else {
+                                Text(unit.displayName).tag(unit)
                             }
                         }
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                }
+            }
+        }
         .navigationBarTitle("Neues Medikament", displayMode: .inline)
         .navigationBarItems(leading: Button("Abbrechen") {
             self.presentationMode.wrappedValue.dismiss()
@@ -131,7 +129,8 @@ struct AddMedicationSheetView: View {
                             nextIntakeTimeComponents = getTimeComponents(from: nextTime)
                             nextIntakeTimeComponents?.weekday = nextDay.rawValue
                         }
-                        medicationViewModel.addMedication(name: medicationName, intakeTime: intakeTimeComponents, day: day.name, nextIntakeDate: nextIntakeTimeComponents, color: selectedColor, dosage: dosage, dosageUnit: dosageUnit, userId: userId)
+                        let newMedication = Medication(name: medicationName, intakeTime: intakeTimeComponents, day: day.name, nextIntakeDate: nextIntakeTimeComponents, color: selectedColor, dosage: dosage, dosageUnit: dosageUnit)
+                        medicationViewModel.addMedication(name: newMedication.name, intakeTime: newMedication.intakeTime, day: newMedication.day, nextIntakeDate: newMedication.nextIntakeDate, color: newMedication.color, dosage: newMedication.dosage, dosageUnit: newMedication.dosageUnit, userId: userId)
                     }
                     self.presentationMode.wrappedValue.dismiss()
                 },
@@ -153,14 +152,3 @@ struct AddMedicationSheetView: View {
         return DateComponents(hour: parts[0], minute: parts[1])
     }
 }
-
-
-
-
-
-
-
-
-
-
-

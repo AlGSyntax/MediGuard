@@ -21,6 +21,7 @@ import SwiftUI
  */
 struct MedicationCardView: View {
     var medication: Medication
+    var showNextIntakeDate: Bool = true
     var onDelete: () -> Void
     var onEdit: () -> Void
     
@@ -32,15 +33,24 @@ struct MedicationCardView: View {
      - Parameter dateComponents: Die zu formatierenden `DateComponents`.
      - Returns: Eine formatierte Zeit als `String` oder "N/A", wenn die `DateComponents` ungültig sind.
      */
-    private func formatDateComponents(_ dateComponents: DateComponents?) -> String {
+    private func formatTime(_ dateComponents: DateComponents?) -> String {
         guard let dateComponents = dateComponents else { return "N/A" }
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
-        if let date = Calendar.current.date(from: dateComponents) {
-            return formatter.string(from: date)
-        } else {
-            return "N/A"
-        }
+        let hour = dateComponents.hour ?? 0
+        let minute = dateComponents.minute ?? 0
+        return String(format: "%02d:%02d", hour, minute)
+    }
+
+    /**
+     Formatiert die `DateComponents` in eine lesbare Darstellung von Wochentag und Uhrzeit.
+     
+     - Parameter dateComponents: Die zu formatierenden `DateComponents`.
+     - Returns: Eine formatierte Darstellung von Wochentag und Uhrzeit als `String` oder "N/A", wenn die `DateComponents` ungültig sind.
+     */
+    private func formatWeekdayAndTime(_ dateComponents: DateComponents?) -> String {
+        guard let dateComponents = dateComponents else { return "N/A" }
+        let weekday = Weekday.from(dateComponents.weekday ?? 1)?.name ?? "N/A"
+        let time = formatTime(dateComponents)
+        return "\(weekday), \(time)"
     }
 
     // MARK: - Body
@@ -53,14 +63,14 @@ struct MedicationCardView: View {
                 .padding(.bottom, 5)
             
             // Einnahmezeit
-            Text("Einnahmezeit: \(formatDateComponents(medication.intakeTime))")
+            Text("Einnahmezeit: \(formatTime(medication.intakeTime))")
                 .font(.title2)
                 .foregroundColor(.white)
                 .padding(.bottom, 5)
             
-            // Nächstes Einnahmedatum (falls vorhanden)
-            if let nextIntakeDate = medication.nextIntakeDate {
-                Text("Nächstes Einnahmedatum: \(formatDateComponents(nextIntakeDate))")
+            // Nächstes Einnahmedatum (falls vorhanden und wenn angezeigt werden soll)
+            if showNextIntakeDate, let nextIntakeDate = medication.nextIntakeDate {
+                Text("Nächstes Einnahmedatum: \(formatWeekdayAndTime(nextIntakeDate))")
                     .font(.title2)
                     .foregroundColor(.white)
                     .padding(.bottom, 5)
@@ -112,7 +122,7 @@ struct MedicationCardView_Previews: PreviewProvider {
             name: "Ibuprofen",
             intakeTime: DateComponents(hour: 14, minute: 30),
             day: "Montag",
-            nextIntakeDate: DateComponents(hour: 14, minute: 30),
+            nextIntakeDate: DateComponents(hour: 14, minute: 30, weekday: 3),
             color: .blue,
             dosage: 100,
             dosageUnit: .mg
@@ -120,6 +130,9 @@ struct MedicationCardView_Previews: PreviewProvider {
         MedicationCardView(medication: sampleMedication, onDelete: {}, onEdit: {})
     }
 }
+
+
+
 
 
 

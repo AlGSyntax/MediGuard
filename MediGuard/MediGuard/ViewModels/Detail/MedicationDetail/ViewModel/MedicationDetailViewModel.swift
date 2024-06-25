@@ -133,67 +133,39 @@ class MedicationDetailViewModel: ObservableObject {
      - Parameter userId: Die eindeutige Kennung des Benutzers.
      */
     func addMedication(name: String, intakeTime: DateComponents, day: String, nextIntakeDate: DateComponents?, color: MedicationColor, dosage: Int, dosageUnit: DosageUnit, userId: String) {
-        let firestore = Firestore.firestore()
-        let medicationRef = firestore.collection("users").document(userId).collection("medications").document()
+            let firestore = Firestore.firestore()
+            let medicationRef = firestore.collection("users").document(userId).collection("medications")
 
-        medicationRef.addSnapshotListener { documentSnapshot, error in
-            guard let document = documentSnapshot else {
-                self.errorMessage = "Error fetching document: \(error!.localizedDescription)"
-                return
-            }
-            guard document.data() != nil else {
-                self.errorMessage = "Document data was empty."
-                return
-            }
-
+            let newMedication = Medication(id: UUID().uuidString, name: name, intakeTime: intakeTime, day: day, nextIntakeDate: nextIntakeDate, color: color, dosage: dosage, dosageUnit: dosageUnit)
+            
             do {
-                let medication = try document.data(as: Medication.self)
-                self.medications.append(medication)
-                self.scheduleNotification(for: medication)
+                try medicationRef.addDocument(from: newMedication) { error in
+                    if let error = error {
+                        self.errorMessage = "Error adding medication: \(error.localizedDescription)"
+                        return
+                    }
+                }
             } catch let error {
-                self.errorMessage = "Error deserializing medication: \(error.localizedDescription)"
+                self.errorMessage = "Error serializing medication: \(error.localizedDescription)"
             }
-        }
 
-        let newMedication = Medication(id: medicationRef.documentID, name: name, intakeTime: intakeTime, day: day, nextIntakeDate: nil, color: color, dosage: dosage, dosageUnit: dosageUnit)
-
-        do {
-            try medicationRef.setData(from: newMedication)
-        } catch let error {
-            self.errorMessage = "Error adding medication: \(error.localizedDescription)"
-        }
-
-        if let nextIntakeDate = nextIntakeDate {
-            let nextMedicationRef = firestore.collection("users").document(userId).collection("medications").document()
-            let nextDay = Weekday.from(nextIntakeDate.weekday)?.name ?? "Unbekannt"
-            let nextMedication = Medication(id: nextMedicationRef.documentID, name: name, intakeTime: nextIntakeDate, day: nextDay, nextIntakeDate: nil, color: color, dosage: dosage, dosageUnit: dosageUnit)
-
-            nextMedicationRef.addSnapshotListener { documentSnapshot, error in
-                guard let document = documentSnapshot else {
-                    self.errorMessage = "Error fetching document: \(error!.localizedDescription)"
-                    return
-                }
-                guard document.data() != nil else {
-                    self.errorMessage = "Document data was empty."
-                    return
-                }
-
+            if let nextIntakeDate = nextIntakeDate {
+                let nextMedicationRef = firestore.collection("users").document(userId).collection("medications")
+                let nextDay = Weekday.from(nextIntakeDate.weekday)?.name ?? "Unbekannt"
+                let nextMedication = Medication(id: UUID().uuidString, name: name, intakeTime: nextIntakeDate, day: nextDay, nextIntakeDate: nil, color: color, dosage: dosage, dosageUnit: dosageUnit)
+                
                 do {
-                    let medication = try document.data(as: Medication.self)
-                    self.medications.append(medication)
-                    self.scheduleNotification(for: medication)
+                    try nextMedicationRef.addDocument(from: nextMedication) { error in
+                        if let error = error {
+                            self.errorMessage = "Error adding next medication: \(error.localizedDescription)"
+                            return
+                        }
+                    }
                 } catch let error {
-                    self.errorMessage = "Error deserializing medication: \(error.localizedDescription)"
+                    self.errorMessage = "Error serializing next medication: \(error.localizedDescription)"
                 }
             }
-
-            do {
-                try nextMedicationRef.setData(from: nextMedication)
-            } catch let error {
-                self.errorMessage = "Error adding medication: \(error.localizedDescription)"
-            }
         }
-    }
     
     
     
@@ -207,31 +179,19 @@ class MedicationDetailViewModel: ObservableObject {
      - Parameter userId: Die eindeutige Kennung des Benutzers.
      */
     func deleteMedication(_ medication: Medication, userId: String) {
-        guard let id = medication.id else { return }
+            guard let id = medication.id else { return }
 
-        let medicationRef = Firestore.firestore().collection("users").document(userId).collection("medications").document(id)
+            let medicationRef = Firestore.firestore().collection("users").document(userId).collection("medications").document(id)
 
-        medicationRef.delete { error in
-            if let error = error {
-                self.errorMessage = "Error deleting medication: \(error.localizedDescription)"
-                return
-            }
-
-            medicationRef.addSnapshotListener { documentSnapshot, error in
+            medicationRef.delete { error in
                 if let error = error {
-                    self.errorMessage = "Error fetching medication: \(error.localizedDescription)"
+                    self.errorMessage = "Error deleting medication: \(error.localizedDescription)"
                     return
                 }
-                guard let document = documentSnapshot else {
-                    self.errorMessage = "Medication document does not exist."
-                    return
-                }
-                if !document.exists {
-                    self.medications.removeAll { $0.id == medication.id }
-                }
+
+                self.medications.removeAll { $0.id == medication.id }
             }
         }
-    }
 
     
     // MARK: - Update Medication

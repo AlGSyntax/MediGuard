@@ -13,13 +13,14 @@ import Foundation
  Die `Weekday`-Enumeration stellt die Wochentage dar und enthält eine Methode, um den Namen des Wochentags von einer Wochentagsnummer abzuleiten.
  */
 enum Weekday: Int, Codable, CaseIterable, Hashable {
-    case sunday = 1
-    case monday = 2
-    case tuesday = 3
-    case wednesday = 4
-    case thursday = 5
-    case friday = 6
-    case saturday = 7
+    
+    case monday = 1
+    case tuesday = 2
+    case wednesday = 3
+    case thursday = 4
+    case friday = 5
+    case saturday = 6
+    case sunday = 7
     
     /**
      Gibt den Namen des Wochentags zurück.
@@ -28,13 +29,14 @@ enum Weekday: Int, Codable, CaseIterable, Hashable {
      */
     var name: String {
         switch self {
-        case .sunday: return "Sonntag"
+        
         case .monday: return "Montag"
         case .tuesday: return "Dienstag"
         case .wednesday: return "Mittwoch"
         case .thursday: return "Donnerstag"
         case .friday: return "Freitag"
         case .saturday: return "Samstag"
+        case .sunday: return "Sonntag"
         }
     }
     

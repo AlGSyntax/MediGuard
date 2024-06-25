@@ -60,17 +60,16 @@ struct MedicationDetailView: View {
             
             // MARK: - Liste der Medikamente
             List {
-                ForEach(["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"], id: \.self) { day in
-                    Section(header: Text(day)
+                ForEach(Weekday.allCases, id: \.self) { day in
+                    Section(header: Text(day.name)
                                 .font(.title2)
                                 .bold()
                                 .padding(.vertical, 10)
                                 .padding(.horizontal, 10)
                                 .background(Color.blue)
-                                .foregroundStyle(.white) // Schriftfarbe auf Weiß setzen
+                                .foregroundColor(.white)
                                 .cornerRadius(8)
-                                .padding(.top, 10)
-                                ) {
+                                .padding(.top, 10)) {
                         
                         // MARK: - Uhrzeit-Sektionen
                         ForEach(["08:00", "12:00", "16:00", "20:00"], id: \.self) { time in
@@ -80,11 +79,24 @@ struct MedicationDetailView: View {
                                         .padding(.horizontal, 10)) {
                                 
                                 // MARK: - Filter für intakeTime
-                                ForEach(viewModel.medications.filter {
-                                    let hourMinute = String(format: "%02d:%02d", $0.intakeTime.hour ?? 0, $0.intakeTime.minute ?? 0)
-                                    return $0.day == day && hourMinute == time
-                                }) { medication in
-                                    MedicationCardView(medication: medication, onDelete: {
+                                let medicationsAtTime = medications(at: time, on: day.name)
+                                ForEach(medicationsAtTime) { medication in
+                                    MedicationCardView(medication: medication, showNextIntakeDate: true, onDelete: {
+                                        medicationToDelete = medication
+                                        showAlert = true
+                                    }, onEdit: {
+                                        medicationToEdit = medication
+                                        showingEditMedicationSheet.toggle()
+                                    })
+                                    .padding(.horizontal, 10)
+                                    .padding(.vertical, 10)
+                                    .cornerRadius(20)
+                                }
+                                
+                                // MARK: - Filter für nextIntakeDate
+                                let nextMedicationsAtTime = nextMedications(at: time, on: day.name)
+                                ForEach(nextMedicationsAtTime) { medication in
+                                    MedicationCardView(medication: medication, showNextIntakeDate: false, onDelete: {
                                         medicationToDelete = medication
                                         showAlert = true
                                     }, onEdit: {
@@ -143,6 +155,24 @@ struct MedicationDetailView: View {
             showErrorAlert = !errorMessage.isEmpty
         }
     }
+
+    // MARK: - Helper Functions
+    
+    private func medications(at time: String, on day: String) -> [Medication] {
+        return viewModel.medications.filter {
+            let hourMinute = String(format: "%02d:%02d", $0.intakeTime.hour ?? 0, $0.intakeTime.minute ?? 0)
+            return $0.day == day && hourMinute == time
+        }
+    }
+
+    private func nextMedications(at time: String, on day: String) -> [Medication] {
+        return viewModel.medications.filter {
+            guard let nextIntakeDate = $0.nextIntakeDate else { return false }
+            let hourMinute = String(format: "%02d:%02d", nextIntakeDate.hour ?? 0, nextIntakeDate.minute ?? 0)
+            let nextDay = Weekday.from(nextIntakeDate.weekday)
+            return nextDay?.name == day && hourMinute == time
+        }
+    }
 }
 
 // MARK: - Vorschau
@@ -153,4 +183,11 @@ struct MedicationDetailView_Previews: PreviewProvider {
             .environmentObject(UserViewModel())
     }
 }
+
+
+
+
+
+
+
 
