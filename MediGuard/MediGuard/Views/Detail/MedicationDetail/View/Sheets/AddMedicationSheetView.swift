@@ -1,29 +1,34 @@
 //
-//  AddMedicationSheet.swift
+//  AddMedicationSheetView.swift
 //  MediGuard
 //
 //  Created by Alvaro Guillermo del Castillo Forero on 13.06.24.
 //
 
+
 import SwiftUI
 
-// MARK: - AddMedicationSheetView
+
+// MARK: - AddMedicationSheetView Struktur
 
 /**
- Die AddMedicationSheetView-Struktur ist eine SwiftUI-View, die eine Eingabeoberfläche zum Hinzufügen eines neuen Medikaments bereitstellt.
+ Die AddMedicationSheetView-Struktur ist eine Ansicht, die ein Formular zum Hinzufügen eines neuen Medikaments bereitstellt.
  
  - Eigenschaften:
-    - medicationViewModel: Das MedicationDetailViewModel-Objekt, das die Daten und Logik für die Medikamentenverwaltung verwaltet.
-    - userViewModel: Das UserViewModel-Objekt, das die Benutzerdaten und Authentifizierungslogik verwaltet.
+    - presentationMode: Eine Umgebungseigenschaft, die den Präsentationsmodus der Ansicht steuert.
+    - medicationViewModel: Das ViewModel für die Medikamentendetails.
+    - userViewModel: Das ViewModel für den Benutzer, das Informationen über den aktuellen Benutzer enthält.
     - medicationName: Der Name des Medikaments.
     - intakeTime: Die Uhrzeit der Einnahme des Medikaments.
-    - day: Der Wochentag der Einnahme des Medikaments.
-    - nextIntakeTime: Die nächste Uhrzeit der Einnahme des Medikaments (optional).
-    - nextIntakeDay: Der nächste Wochentag der Einnahme des Medikaments (optional).
+    - day: Der Tag der Einnahme des Medikaments.
+    - nextIntakeTime: Die Uhrzeit der nächsten Einnahme des Medikaments (optional).
+    - nextIntakeDay: Der Tag der nächsten Einnahme des Medikaments (optional).
     - selectedColor: Die Farbe der Medikamentenkarte.
     - dosage: Die Dosierung des Medikaments.
-    - dosageUnit: Die Einheit der Dosierung.
-    - showSaveConfirmation: Ein Boolescher Zustand, der angibt, ob die Bestätigung zum Speichern angezeigt werden soll.
+    - dosageUnit: Die Einheit der Dosierung des Medikaments.
+    - showSaveConfirmation: Ein Bool zur Steuerung der Anzeige der Bestätigungsspeicherung.
+    - showAlert: Ein Bool zur Steuerung der Anzeige von Fehlermeldungen.
+    - alertMessage: Die Fehlermeldung, die angezeigt wird.
  */
 struct AddMedicationSheetView: View {
     @Environment(\.presentationMode) var presentationMode
@@ -39,16 +44,19 @@ struct AddMedicationSheetView: View {
     @State private var dosage: Int = 10
     @State private var dosageUnit: DosageUnit = .mg
     @State private var showSaveConfirmation = false
+    @State private var showAlert = false
+    @State private var alertMessage = ""
 
+    
     // MARK: - Body
     var body: some View {
         Form {
-            // MARK: - Name des Medikaments
+            // Abschnitt zur Eingabe des Medikamentennamens
             Section(header: Text("Name des Medikaments")) {
                 TextField("Name", text: $medicationName)
             }
-
-            // MARK: - Uhrzeit der Einnahme
+            
+            // Abschnitt zur Auswahl der Einnahmezeit
             Section(header: Text("Uhrzeit der Einnahme")) {
                 Picker("Uhrzeit", selection: $intakeTime) {
                     ForEach(["08:00", "12:00", "16:00", "20:00"], id: \.self) {
@@ -56,8 +64,8 @@ struct AddMedicationSheetView: View {
                     }
                 }
             }
-
-            // MARK: - Tag der Einnahme
+            
+            // Abschnitt zur Auswahl des Einnahmetages
             Section(header: Text("Tag der Einnahme")) {
                 Picker("Tag", selection: $day) {
                     ForEach(Weekday.allCases, id: \.self) {
@@ -65,8 +73,8 @@ struct AddMedicationSheetView: View {
                     }
                 }
             }
-
-            // MARK: - Nächstes Einnahmedatum (optional)
+            
+            // Abschnitt zur optionalen Eingabe der nächsten Einnahmezeit und des nächsten Einnahmetages
             Section(header: Text("Nächstes Einnahmedatum (optional)")) {
                 Picker("Nächster Tag", selection: $nextIntakeDay) {
                     ForEach([nil] + Weekday.allCases, id: \.self) {
@@ -81,8 +89,8 @@ struct AddMedicationSheetView: View {
                     }
                 }
             }
-
-            // MARK: - Farbe der Karte
+                
+            // Abschnitt zur Auswahl der Farbe der Medikamentenkarte
             Section(header: Text("Farbe der Karte")) {
                 Picker("Farbe", selection: $selectedColor) {
                     ForEach(MedicationColor.allCases, id: \.self) { color in
@@ -91,8 +99,8 @@ struct AddMedicationSheetView: View {
                 }
                 .pickerStyle(MenuPickerStyle())
             }
-
-            // MARK: - Dosierung
+            
+            // Abschnitt zur Eingabe der Dosierung und der Dosierungseinheit
             Section(header: Text("Dosierung")) {
                 HStack {
                     TextField("Dosierung", value: $dosage, formatter: NumberFormatter())
@@ -114,39 +122,41 @@ struct AddMedicationSheetView: View {
         .navigationBarItems(leading: Button("Abbrechen") {
             self.presentationMode.wrappedValue.dismiss()
         }, trailing: Button("Hinzufügen") {
-            showSaveConfirmation.toggle()
+            do {
+                // Konvertiert die Einnahmezeit in DateComponents
+                let intakeTimeComponents = getTimeComponents(from: intakeTime)
+                var nextIntakeTimeComponents: DateComponents? = nil
+                if let nextDay = nextIntakeDay, let nextTime = nextIntakeTime {
+                    nextIntakeTimeComponents = getTimeComponents(from: nextTime)
+                    nextIntakeTimeComponents?.weekday = nextDay.rawValue
+                }
+                // Fügt das neue Medikament hinzu und schließt das Formular
+                try medicationViewModel.addMedication(name: medicationName, intakeTime: intakeTimeComponents, day: day.name, nextIntakeDate: nextIntakeTimeComponents, color: selectedColor, dosage: dosage, dosageUnit: dosageUnit, userId: userViewModel.userId ?? "")
+                self.presentationMode.wrappedValue.dismiss()
+            } catch let error as ValidationError {
+                // Fehlerbehandlung für Validierungsfehler
+                alertMessage = error.errorDescription ?? "Unbekannter Fehler"
+                showAlert = true
+            } catch {
+                // Allgemeine Fehlerbehandlung
+                alertMessage = error.localizedDescription
+                showAlert = true
+            }
         })
-        .alert(isPresented: $showSaveConfirmation) {
-            // MARK: - Speicherbestätigung
-            Alert(
-                title: Text("Speichern bestätigen"),
-                message: Text("Möchten Sie dieses Medikament wirklich hinzufügen?"),
-                primaryButton: .default(Text("Hinzufügen")) {
-                    if let userId = userViewModel.userId {
-                        let intakeTimeComponents = getTimeComponents(from: intakeTime)
-                        var nextIntakeTimeComponents: DateComponents? = nil
-                        if let nextDay = nextIntakeDay, let nextTime = nextIntakeTime {
-                            nextIntakeTimeComponents = getTimeComponents(from: nextTime)
-                            nextIntakeTimeComponents?.weekday = nextDay.rawValue
-                        }
-                        let newMedication = Medication(name: medicationName, intakeTime: intakeTimeComponents, day: day.name, nextIntakeDate: nextIntakeTimeComponents, color: selectedColor, dosage: dosage, dosageUnit: dosageUnit)
-                        medicationViewModel.addMedication(name: newMedication.name, intakeTime: newMedication.intakeTime, day: newMedication.day, nextIntakeDate: newMedication.nextIntakeDate, color: newMedication.color, dosage: newMedication.dosage, dosageUnit: newMedication.dosageUnit, userId: userId)
-                    }
-                    self.presentationMode.wrappedValue.dismiss()
-                },
-                secondaryButton: .cancel(Text("Abbrechen"))
-            )
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("Fehler"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
         }
     }
-
+    
+    
     // MARK: - Helper Methods
-
+    
     /**
-     Konvertiert eine Uhrzeit als String in DateComponents.
-     
-     - Parameter time: Die Uhrzeit als String.
-     - Returns: Die entsprechenden DateComponents.
-     */
+         Konvertiert eine Uhrzeit in DateComponents.
+         
+         - Parameter time: Die Uhrzeit im Format "HH:mm".
+         - Returns: Die DateComponents für die angegebene Uhrzeit.
+         */
     private func getTimeComponents(from time: String) -> DateComponents {
         let parts = time.split(separator: ":").map { Int($0) }
         return DateComponents(hour: parts[0], minute: parts[1])

@@ -37,54 +37,49 @@ class MedicationDetailViewModel: ObservableObject {
     
     private var listener: ListenerRegistration?
 
-    // MARK: - Initializer
-    
+    /// Initialisiert das ViewModel und listet geplante Benachrichtigungen auf.
     init() {
         listScheduledNotifications()
     }
 
-    // MARK: - Methoden
-    
-    
-    
-    // MARK: - Fetch Medication
+    // MARK: - Medikamente abrufen
     
     /**
-     Fügt einen Listener hinzu, der die Medikamente für den angegebenen Benutzer aus der Firestore-Datenbank in Echtzeit abruft.
+     Ruft die Medikamente für einen gegebenen Benutzer aus Firestore ab und hört auf alle Änderungen.
      
-     - Parameter userId: Die eindeutige Kennung des Benutzers.
+     - Parameter userId: Die ID des Benutzers, dessen Medikamente abgerufen werden sollen.
      */
     func fetchMedications(userId: String) {
+        // Entfernt den vorherigen Listener, falls vorhanden
         listener?.remove()
-        print(medications)
+        // Fügt einen neuen Listener hinzu, um auf Änderungen in der Medikamenten-Sammlung zu hören
         listener = Firestore.firestore().collection("users").document(userId).collection("medications")
             .addSnapshotListener { querySnapshot, error in
+                // Fehlerbehandlung
                 if let error = error {
-                    self.errorMessage = "Error fetching medications: \(error.localizedDescription)"
+                    self.errorMessage = "Fehler beim Abrufen der Medikamente: \(error.localizedDescription)"
                     return
                 }
                 
+                // Überprüft, ob Dokumente vorhanden sind
                 guard let documents = querySnapshot?.documents else {
-                    self.errorMessage = "No medications found"
+                    self.errorMessage = "Keine Medikamente gefunden"
                     return
                 }
                 
+                // Konvertiert die Dokumente in Medication-Objekte und speichert sie in der medications-Array
                 self.medications = documents.compactMap { doc -> Medication? in
                     try? doc.data(as: Medication.self)
                 }
             }
-        
     }
-    
-   
-    
-    // MARK: - Notifications
-    
 
+    // MARK: - Benachrichtigung planen
+    
     /**
-     Plant eine Benachrichtigung für das angegebene Medikament.
+     Plant eine lokale Benachrichtigung für ein gegebenes Medikament.
      
-     - Parameter medication: Das Medikament, für das die Benachrichtigung geplant werden soll.
+     - Parameter medication: Das `Medication`-Objekt, für das die Benachrichtigung geplant werden soll.
      */
     func scheduleNotification(for medication: Medication) {
         let content = UNMutableNotificationContent()
@@ -92,157 +87,179 @@ class MedicationDetailViewModel: ObservableObject {
         content.body = "Es ist Zeit, \(medication.name) einzunehmen."
         content.sound = UNNotificationSound.default
         
+        // Erstellt ein Datum-Objekt basierend auf der Einnahmezeit des Medikaments
         let date = Date().setTime(hour: medication.intakeTime.hour!, minute: medication.intakeTime.minute!)
         let comps = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)
         
+        // Erstellt einen Benachrichtigungstrigger basierend auf den Datumskomponenten
         let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: true)
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
 
+        // Fügt die Benachrichtigungsanforderung hinzu
         UNUserNotificationCenter.current().add(request) { error in
             if let error = error {
-                self.errorMessage = "Error scheduling notification: \(error.localizedDescription)"
+                self.errorMessage = "Fehler beim Planen der Benachrichtigung: \(error.localizedDescription)"
             }
         }
     }
+
+    // MARK: - Geplante Benachrichtigungen auflisten
     
     /**
-     Listet alle geplanten Benachrichtigungen auf.
+     Listet alle geplanten Benachrichtigungen auf und gibt deren Details aus.
      */
     func listScheduledNotifications() {
         UNUserNotificationCenter.current().getPendingNotificationRequests { notifications in
             notifications.forEach { notification in
                 guard let dateComponents = (notification.trigger as? UNCalendarNotificationTrigger)?.dateComponents,
                       let date = Calendar.current.date(from: dateComponents) else { return }
-                print("-----> Notifications: ", date, notification.identifier)
+                print("-----> Benachrichtigungen: ", date, notification.identifier)
             }
         }
     }
 
-    
-    // MARK: - Add Medication
+    // MARK: - Medikament hinzufügen
     
     /**
-     Fügt ein neues Medikament hinzu und plant eine Benachrichtigung dafür.
+     Fügt ein neues Medikament zur Firestore-Datenbank hinzu.
      
      - Parameter name: Der Name des Medikaments.
-     - Parameter intakeTime: Die Uhrzeit, zu der das Medikament eingenommen werden soll.
-     - Parameter day: Der Wochentag, an dem das Medikament eingenommen werden soll.
-     - Parameter nextIntakeDate: Das nächste geplante Einnahmedatum und -zeit (optional).
-     - Parameter color: Die Farbe, die dem Medikament zugewiesen ist.
+     - Parameter intakeTime: Die Zeit, zu der das Medikament eingenommen werden soll.
+     - Parameter day: Der Tag, an dem das Medikament eingenommen werden soll.
+     - Parameter nextIntakeDate: Das Datum der nächsten Einnahme, falls vorhanden.
+     - Parameter color: Die Farbe des Medikaments.
      - Parameter dosage: Die Dosierung des Medikaments.
      - Parameter dosageUnit: Die Einheit der Dosierung.
-     - Parameter userId: Die eindeutige Kennung des Benutzers.
+     - Parameter userId: Die ID des Benutzers, dem das Medikament gehört.
+     - Throws: `ValidationError` falls die Validierung fehlschlägt.
      */
-    func addMedication(name: String, intakeTime: DateComponents, day: String, nextIntakeDate: DateComponents?, color: MedicationColor, dosage: Int, dosageUnit: DosageUnit, userId: String) {
-            let firestore = Firestore.firestore()
-            let medicationRef = firestore.collection("users").document(userId).collection("medications")
+    func addMedication(name: String, intakeTime: DateComponents, day: String, nextIntakeDate: DateComponents?, color: MedicationColor, dosage: Int, dosageUnit: DosageUnit, userId: String) throws {
+        // Validiert den Namen des Medikaments
+        if name.isEmpty {
+            throw ValidationError.emptyName
+        }
+        
+        // Überprüft auf doppelte Medikamente
+        if medications.contains(where: { $0.name == name && $0.intakeTime == intakeTime }) {
+            throw ValidationError.duplicateMedication
+        }
 
-            let newMedication = Medication(id: UUID().uuidString, name: name, intakeTime: intakeTime, day: day, nextIntakeDate: nextIntakeDate, color: color, dosage: dosage, dosageUnit: dosageUnit)
+        // Referenz zur Firestore-Datenbank
+        let firestore = Firestore.firestore()
+        let medicationRef = firestore.collection("users").document(userId).collection("medications")
+
+        // Erstellt ein neues Medikamentenobjekt
+        let newMedication = Medication(id: UUID().uuidString, name: name, intakeTime: intakeTime, day: day, nextIntakeDate: nextIntakeDate, color: color, dosage: dosage, dosageUnit: dosageUnit)
+        
+        // Fügt das neue Medikament zur Datenbank hinzu
+        do {
+            try medicationRef.addDocument(from: newMedication) { error in
+                if let error = error {
+                    self.errorMessage = "Fehler beim Hinzufügen des Medikaments: \(error.localizedDescription)"
+                    return
+                }
+            }
+        } catch let error {
+            self.errorMessage = "Fehler beim Serialisieren des Medikaments: \(error.localizedDescription)"
+        }
+
+        // Fügt ggf. die nächste Einnahme des Medikaments hinzu
+        if let nextIntakeDate = nextIntakeDate {
+            let nextMedicationRef = firestore.collection("users").document(userId).collection("medications")
+            let nextDay = Weekday.from(nextIntakeDate.weekday)?.name ?? "Unbekannt"
+            let nextMedication = Medication(id: UUID().uuidString, name: name, intakeTime: nextIntakeDate, day: nextDay, nextIntakeDate: nil, color: color, dosage: dosage, dosageUnit: dosageUnit)
             
             do {
-                try medicationRef.addDocument(from: newMedication) { error in
+                try nextMedicationRef.addDocument(from: nextMedication) { error in
                     if let error = error {
-                        self.errorMessage = "Error adding medication: \(error.localizedDescription)"
+                        self.errorMessage = "Fehler beim Hinzufügen der nächsten Medikation: \(error.localizedDescription)"
                         return
                     }
                 }
             } catch let error {
-                self.errorMessage = "Error serializing medication: \(error.localizedDescription)"
+                self.errorMessage = "Fehler beim Serialisieren der nächsten Medikation: \(error.localizedDescription)"
             }
-
-                     if let nextIntakeDate = nextIntakeDate {
-               let nextMedicationRef = firestore.collection("users").document(userId).collection("medications")
-                let nextDay = Weekday.from(nextIntakeDate.weekday)?.name ?? "Unbekannt"
-                let nextMedication = Medication(id: UUID().uuidString, name: name, intakeTime: nextIntakeDate, day: nextDay, nextIntakeDate: nil, color: color, dosage: dosage, dosageUnit: dosageUnit)
-                
-                do {
-                    try nextMedicationRef.addDocument(from: nextMedication)
-                    { error in
-                        if let error = error {
-                            self.errorMessage = "Error adding next medication: \(error.localizedDescription)"
-                            return
-                        }
-                    }
-                } catch let error {
-                    self.errorMessage = "Error serializing next medication: \(error.localizedDescription)"
-                }
-            }
-        print(medications)
         }
-    
-    
-    
-    
-    // MARK: - Delete Medication
+    }
 
+    // MARK: - Medikament löschen
+    
     /**
-     Löscht ein Medikament und entfernt die zugehörige Benachrichtigung.
+     Löscht ein Medikament aus der Firestore-Datenbank.
      
-     - Parameter medication: Das zu löschende Medikament.
-     - Parameter userId: Die eindeutige Kennung des Benutzers.
+     - Parameter medication: Das `Medication`-Objekt, das gelöscht werden soll.
+     - Parameter userId: Die ID des Benutzers, dem das Medikament gehört.
      */
     func deleteMedication(_ medication: Medication, userId: String) {
-            guard let id = medication.id else { return }
+        // Überprüft, ob das Medikament eine ID hat
+        guard let id = medication.id else { return }
 
-            let medicationRef = Firestore.firestore().collection("users").document(userId).collection("medications").document(id)
+        // Referenz zum zu löschenden Medikament
+        let medicationRef = Firestore.firestore().collection("users").document(userId).collection("medications").document(id)
 
-            medicationRef.delete { error in
+        // Löscht das Medikament aus der Datenbank
+        medicationRef.delete { error in
+            if let error = error {
+                self.errorMessage = "Fehler beim Löschen des Medikaments: \(error.localizedDescription)"
+                return
+            }
+
+            // Entfernt das Medikament aus dem lokalen Array
+            self.medications.removeAll { $0.id == medication.id }
+        }
+    }
+
+    // MARK: - Medikament aktualisieren
+    
+    /**
+     Aktualisiert ein vorhandenes Medikament in der Firestore-Datenbank.
+     
+     - Parameter medication: Das `Medication`-Objekt, das aktualisiert werden soll.
+     - Parameter userId: Die ID des Benutzers, dem das Medikament gehört.
+     - Throws: `ValidationError` falls die Validierung fehlschlägt.
+     */
+    func updateMedication(_ medication: Medication, userId: String) throws {
+        // Überprüft, ob das Medikament eine ID hat
+        guard let id = medication.id else {
+            throw ValidationError.other("Medikations-ID fehlt")
+        }
+
+        // Validiert den Namen des Medikaments
+        if medication.name.isEmpty {
+            throw ValidationError.emptyName
+        }
+        
+        // Referenz zum zu aktualisierenden Medikament
+        let medicationRef = Firestore.firestore().collection("users").document(userId).collection("medications").document(id)
+
+        // Aktualisiert das Medikament in der Datenbank
+        do {
+            try medicationRef.setData(from: medication) { error in
                 if let error = error {
-                    self.errorMessage = "Error deleting medication: \(error.localizedDescription)"
+                    self.errorMessage = "Fehler beim Aktualisieren des Medikaments: \(error.localizedDescription)"
                     return
                 }
 
-                self.medications.removeAll { $0.id == medication.id }
-            }
-        }
-
-    
-    // MARK: - Update Medication
-    
-
-    /**
-     Aktualisiert ein Medikament und plant eine neue Benachrichtigung.
-     
-     - Parameter medication: Das zu aktualisierende Medikament.
-     - Parameter userId: Die eindeutige Kennung des Benutzers.
-     */
-    func updateMedication(_ medication: Medication, userId: String) {
-        guard let id = medication.id else {
-            self.errorMessage = "Medication ID is missing"
-            return
-        }
-
-        let medicationRef = Firestore.firestore().collection("users").document(userId).collection("medications").document(id)
-        
-        medicationRef.addSnapshotListener { documentSnapshot, error in
-            guard let document = documentSnapshot else {
-                self.errorMessage = "Error fetching document: \(error!.localizedDescription)"
-                return
-            }
-            guard document.data() != nil else {
-                self.errorMessage = "Document data was empty."
-                return
-            }
-
-            do {
-                let updatedMedication = try document.data(as: Medication.self)
-                if let index = self.medications.firstIndex(where: { $0.id == updatedMedication.id }) {
-                    self.medications[index] = updatedMedication
-                    self.scheduleNotification(for: updatedMedication)
-                   
-                    print("Medication updated successfully")
+                // Fügt ggf. die nächste Einnahme des Medikaments hinzu
+                if let nextIntakeDate = medication.nextIntakeDate {
+                    let nextMedicationRef = Firestore.firestore().collection("users").document(userId).collection("medications")
+                    let nextDay = Weekday.from(nextIntakeDate.weekday)?.name ?? "Unbekannt"
+                    let nextMedication = Medication(id: UUID().uuidString, name: medication.name, intakeTime: nextIntakeDate, day: nextDay, nextIntakeDate: nil, color: medication.color, dosage: medication.dosage, dosageUnit: medication.dosageUnit)
+                    
+                    do {
+                        try nextMedicationRef.addDocument(from: nextMedication) { error in
+                            if let error = error {
+                                self.errorMessage = "Fehler beim Hinzufügen der nächsten Medikation: \(error.localizedDescription)"
+                                return
+                            }
+                        }
+                    } catch let error {
+                        self.errorMessage = "Fehler beim Serialisieren der nächsten Medikation: \(error.localizedDescription)"
+                    }
                 }
-            } catch let error {
-                self.errorMessage = "Error deserializing medication: \(error.localizedDescription)"
             }
-        }
-
-        do {
-            try medicationRef.setData(from: medication)
         } catch let error {
-            self.errorMessage = "Error updating medication: \(error.localizedDescription)"
+            self.errorMessage = "Fehler beim Aktualisieren des Medikaments: \(error.localizedDescription)"
         }
     }
 }
-
-
