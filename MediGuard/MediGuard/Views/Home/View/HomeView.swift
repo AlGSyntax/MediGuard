@@ -48,15 +48,15 @@ struct HomeView: View {
                 // MARK: - Navigation Links
                 
                 VStack(spacing: 8) {
-                    NavigationLink(destination: MedicationDetailView()) {
+                    NavigationLink(destination: MedicationAdiminstrationView()) {
                         DetailViewButton(title: "Medikamente", iconName: "pills.fill")
                     }
                     
-                    NavigationLink(destination: MealDetailView()) {
+                    NavigationLink(destination: MealAdministrationView()) {
                         DetailViewButton(title: "Mahlzeiten", iconName: "fork.knife")
                     }
                     
-                    NavigationLink(destination: DrinksDetailView()) {
+                    NavigationLink(destination: DrinksAdministrationView()) {
                         DetailViewButton(title: "Getränke", iconName: "cup.and.saucer.fill")
                     }
                 }

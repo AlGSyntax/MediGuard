@@ -62,11 +62,7 @@ struct MedicationCardView: View {
                 .foregroundColor(.white)
                 .padding(.bottom, 5)
             
-            // Einnahmezeit
-            Text("Einnahmezeit: \(formatTime(medication.intakeTime))")
-                .font(.title2)
-                .foregroundColor(.white)
-                .padding(.bottom, 5)
+            
             
             // Nächstes Einnahmedatum (falls vorhanden und wenn angezeigt werden soll)
             if showNextIntakeDate, let nextIntakeDate = medication.nextIntakeDate {

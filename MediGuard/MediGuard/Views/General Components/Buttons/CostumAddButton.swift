@@ -15,12 +15,9 @@ struct CustomAddButton: View {
             self.action()
         }) {
             HStack {
-                Image(systemName: "plus")
+                Image(systemName: "plus.circle.fill")
                     .aspectRatio(contentMode: .fit)
-                    .foregroundColor(.blue)
-                    .font(.system(size: 24, weight: .bold))
-                Text("Hinzufügen")
-                    .foregroundColor(.blue)
+                    .foregroundStyle(.blue)
                     .font(.system(size: 24, weight: .bold))
             }
             .padding(40)

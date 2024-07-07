@@ -47,13 +47,9 @@ struct MedicationAdiminstrationView: View {
                     .font(.title)
                     .foregroundColor(.blue)
                 Spacer()
-                Button(action: {
+                CustomAddButton(action: {
                     showingAddMedicationSheet.toggle()
-                }) {
-                    Image(systemName: "plus.circle.fill")
-                        .foregroundColor(.blue)
-                        .font(.title)
-                }
+                })
                 .padding(.trailing, 20)
             }
             .padding(.top, 20)
@@ -72,7 +68,7 @@ struct MedicationAdiminstrationView: View {
                                 .padding(.top, 10)) {
                         
                         // ForEach-Schleife zum Durchlaufen der vordefinierten Zeiten
-                        ForEach(PredefinedTime.allCases, id: \.self) { time in
+                        ForEach(PredefinedMedicationTime.allCases, id: \.self) { time in
                             Section(header: Text(time.rawValue)
                                         .font(.headline)
                                         .padding(.top, 5)

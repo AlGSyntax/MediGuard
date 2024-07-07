@@ -12,35 +12,12 @@ struct MealCardView: View {
     var onDelete: () -> Void
     var onEdit: () -> Void
 
-    private func formatDateComponents(_ dateComponents: DateComponents?) -> String {
-        guard let dateComponents = dateComponents else { return "N/A" }
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
-        if let date = Calendar.current.date(from: dateComponents) {
-            return formatter.string(from: date)
-        } else {
-            return "N/A"
-        }
-    }
-
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text(meal.name)
                 .font(.title)
                 .foregroundColor(.white)
                 .padding(.bottom, 5)
-            
-            Text("Einnahmezeit: \(formatDateComponents(meal.intakeTime))")
-                .font(.title2)
-                .foregroundColor(.white)
-                .padding(.bottom, 5)
-            
-            if let nextIntakeDate = meal.nextIntakeDate {
-                Text("Nächstes Mahlzeitdatum: \(formatDateComponents(nextIntakeDate))")
-                    .font(.title2)
-                    .foregroundColor(.white)
-                    .padding(.bottom, 5)
-            }
             
             if let photoURL = meal.photoURL, let url = URL(string: photoURL) {
                 AsyncImage(url: url) { image in
@@ -82,14 +59,12 @@ struct MealCardView: View {
 struct MealCardView_Previews: PreviewProvider {
     static var previews: some View {
         let sampleMeal = Meal(
+            id: UUID().uuidString,
             name: "Frühstück",
-            intakeTime: DateComponents(hour: 8, minute: 0),
-            day: "Montag",
-            nextIntakeDate: DateComponents(hour: 8, minute: 0),
+            intakeDate: Date(),
             photoURL: nil,
             description: "Leckeres Frühstück"
         )
         MealCardView(meal: sampleMeal, onDelete: {}, onEdit: {})
     }
 }
-
