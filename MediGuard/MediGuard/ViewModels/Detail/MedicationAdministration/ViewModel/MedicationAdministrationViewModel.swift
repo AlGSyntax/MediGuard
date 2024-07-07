@@ -31,7 +31,7 @@ import FirebaseFirestoreSwift
     - updateMedication(_:userId:): Aktualisiert ein Medikament und plant eine neue Benachrichtigung.
  */
 @MainActor
-class MedicationDetailViewModel: ObservableObject {
+class MedicationAdminstrationViewModel: ObservableObject {
     @Published var medications: [Medication] = []
     @Published var errorMessage: String = ""
     

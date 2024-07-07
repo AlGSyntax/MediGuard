@@ -26,9 +26,9 @@ import SwiftUI
     - medicationToDelete: Das Medikament, das gelöscht werden soll. Wird verwendet, um den Lösch-Alert zu initialisieren.
  */
 
-struct MedicationDetailView: View {
+struct MedicationAdiminstrationView: View {
     @EnvironmentObject private var userViewModel: UserViewModel
-    @StateObject private var viewModel = MedicationDetailViewModel()
+    @StateObject private var viewModel = MedicationAdminstrationViewModel()
 
     @State private var showingAddMedicationSheet = false
     @State private var showingEditMedicationSheet = false
@@ -37,10 +37,6 @@ struct MedicationDetailView: View {
     @State private var medicationToDelete: Medication?
     @State private var showErrorAlert = false
 
-    // Vordefinierte Zeiten
-    let predefinedTimes = ["08:00", "12:00", "16:00", "20:00"]
-    
-    
     // MARK: - Body
     var body: some View {
         VStack {
@@ -76,8 +72,8 @@ struct MedicationDetailView: View {
                                 .padding(.top, 10)) {
                         
                         // ForEach-Schleife zum Durchlaufen der vordefinierten Zeiten
-                        ForEach(predefinedTimes, id: \.self) { time in
-                            Section(header: Text(time)
+                        ForEach(PredefinedTime.allCases, id: \.self) { time in
+                            Section(header: Text(time.rawValue)
                                         .font(.headline)
                                         .padding(.top, 5)
                                         .padding(.horizontal, 10)) {
@@ -85,7 +81,7 @@ struct MedicationDetailView: View {
                                 // Filtert die Medikamente nach Tag und Uhrzeit
                                 let medicationsAtTime = viewModel.medications.filter {
                                     $0.day == day.name &&
-                                    String(format: "%02d:%02d", $0.intakeTime.hour ?? 0, $0.intakeTime.minute ?? 0) == time
+                                    String(format: "%02d:%02d", $0.intakeTime.hour ?? 0, $0.intakeTime.minute ?? 0) == time.rawValue
                                 }
                                 
                                 // ForEach-Schleife zum Durchlaufen der gefilterten Medikamente
@@ -154,11 +150,10 @@ struct MedicationDetailView: View {
     }
 }
 
-
 // Vorschau der MedicationDetailView
 struct MedicationDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        MedicationDetailView()
+        MedicationAdiminstrationView()
             .environmentObject(UserViewModel())
     }
 }
