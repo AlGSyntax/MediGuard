@@ -7,6 +7,20 @@
 
 import SwiftUI
 
+/**
+ Ein Enum zur Darstellung von Farben, die Medikamenten zugewiesen werden können.
+ 
+ Dieses Enum unterstützt die Zuweisung einer Farbe zu einem Medikament und ermöglicht die einfache Konvertierung der Farbnamen in `Color`-Objekte für die Verwendung in SwiftUI.
+ 
+ - Fälle:
+    - `red`: Rot
+    - `green`: Grün
+    - `blue`: Blau
+    - `yellow`: Gelb
+    - `orange`: Orange
+    - `purple`: Lila
+    - `gray`: Grau (Standardfarbe)
+ */
 enum MedicationColor: String, Codable, CaseIterable {
     case red
     case green
@@ -16,6 +30,11 @@ enum MedicationColor: String, Codable, CaseIterable {
     case purple
     case gray // Default fallback color
 
+    /**
+     Eine berechnete Eigenschaft, die die SwiftUI-Farbe für den Enum-Wert zurückgibt.
+     
+     - Returns: Die SwiftUI `Color`, die dem Enum-Wert entspricht.
+     */
     var color: Color {
         switch self {
         case .red:
@@ -35,4 +54,5 @@ enum MedicationColor: String, Codable, CaseIterable {
         }
     }
 }
+
 

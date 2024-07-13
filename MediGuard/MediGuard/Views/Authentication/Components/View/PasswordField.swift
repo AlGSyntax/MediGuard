@@ -38,10 +38,12 @@ struct PasswordField: View {
                     // Normales Textfeld, wenn das Passwort sichtbar ist
                     TextField(title, text: $text)
                         .padding()
+                        .font(Fonts.headline)
                 } else {
                     // Sicheres Textfeld, wenn das Passwort unsichtbar ist
                     SecureField(title, text: $text)
                         .padding()
+                        .font(Fonts.headline)
                 }
                 // Button, um die Sichtbarkeit des Passworts umzuschalten
                 Button(action: {
@@ -49,7 +51,7 @@ struct PasswordField: View {
                 }) {
                     // Symbol, das die aktuelle Sichtbarkeit des Passworts anzeigt
                     Image(systemName: isVisible ? "eye.slash" : "eye")
-                        .foregroundColor(.gray)
+                        .foregroundStyle(.gray)
                 }
                 .padding(.trailing, 8)
             }

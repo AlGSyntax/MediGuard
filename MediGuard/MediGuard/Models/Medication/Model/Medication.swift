@@ -24,6 +24,7 @@ import FirebaseFirestoreSwift
     - `color`: Die Farbe, die dem Medikament zugewiesen ist, um es visuell zu unterscheiden.
     - `dosage`: Die Dosierung des Medikaments.
     - `dosageUnit`: Die Einheit der Dosierung (z.B. mg, ml).
+    - `daily`: Eigenschaft für tägliche Einnahme.
  */
 struct Medication: Identifiable, Codable,Hashable {
     @DocumentID var id: String?
@@ -34,6 +35,7 @@ struct Medication: Identifiable, Codable,Hashable {
     var color: MedicationColor
     var dosage: Int
     var dosageUnit: DosageUnit
+    var daily : Bool
     
     /**
      Initialisiert eine neue `Medication`-Instanz.
@@ -47,7 +49,7 @@ struct Medication: Identifiable, Codable,Hashable {
      - Parameter dosage: Die Dosierung des Medikaments.
      - Parameter dosageUnit: Die Einheit der Dosierung (z.B. mg, ml).
      */
-    init(id: String? = nil, name: String, intakeTime: DateComponents, day: String, nextIntakeDate: DateComponents?, color: MedicationColor, dosage: Int, dosageUnit: DosageUnit) {
+    init(id: String? = nil, name: String, intakeTime: DateComponents, day: String, nextIntakeDate: DateComponents?, color: MedicationColor, dosage: Int, dosageUnit: DosageUnit, daily: Bool = false) {
         self.id = id
         self.name = name
         self.intakeTime = intakeTime
@@ -56,6 +58,7 @@ struct Medication: Identifiable, Codable,Hashable {
         self.color = color
         self.dosage = dosage
         self.dosageUnit = dosageUnit
+        self.daily = daily 
     }
 }
 

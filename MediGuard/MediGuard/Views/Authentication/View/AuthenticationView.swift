@@ -40,8 +40,8 @@ struct AuthenticationView: View {
                 
                 // Header-Text, der je nach Modus entweder "Anmelden" oder "Registrieren" anzeigt
                 Text(userViewModel.mode.headerText)
-                    .foregroundColor(.blue)
-                    .font(.system(size: 28, weight: .bold))
+                    .foregroundStyle(.blue)
+                    .font(Fonts.largeTitle)
             }
             .padding(.top, 50)
             
@@ -56,6 +56,7 @@ struct AuthenticationView: View {
                     
                     TextField("Name", text: $userViewModel.name)
                         .padding()
+                        .font(Fonts.headline)
                 }
                 
                 // Bedingte Anzeige der Passwortfelder basierend auf dem Modus
@@ -93,11 +94,14 @@ struct AuthenticationView: View {
         .cornerRadius(12)
         .padding(.horizontal, 36)
         .frame(maxHeight: .infinity, alignment: .top)
+        .background(Color("Background")) // Hier wird der Hintergrund gesetzt
+        .edgesIgnoringSafeArea(.all)
         .onReceive(userViewModel.$errorMessage) { errorMessage in
             // Überwachung von Änderungen der Fehlermeldung und Anzeige des Alerts
             showAlert = !errorMessage.isEmpty
         }
     }
+       
 }
 
 // MARK: - Vorschau

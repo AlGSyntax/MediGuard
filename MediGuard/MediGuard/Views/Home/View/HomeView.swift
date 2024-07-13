@@ -28,22 +28,21 @@ struct HomeView: View {
         NavigationStack {
             VStack {
                 
-                // MARK: - Begrüßung
+                // MARK: - Begrüßung je nach Tageszeit
                 
                 Text(homeViewModel.greeting)
-                    .font(.largeTitle)
+                    .font(Fonts.hugeTitle)
                     .padding(.top, 16)
+                    .foregroundStyle(.blue)
                 
-                // MARK: - Grafisches Element
+                // MARK: - Name des aktuellen Benutzers 
                 
-                Rectangle()
-                    .fill(Color.gray)
-                    .frame(height: 100)
-                    .overlay(
-                        Text("Grafisches Element")
-                            .foregroundColor(.white)
-                    )
-                    .padding(.vertical, 16)
+                Text("\(userViewModel.nameDisplay)!")
+                    .font(Fonts.hugeTitle)
+                    .padding(.top, 16)
+                    .foregroundStyle(.blue)
+                
+                Spacer()
                 
                 // MARK: - Navigation Links
                 
@@ -70,6 +69,7 @@ struct HomeView: View {
                 Spacer()
             }
             .padding()
+            .background(Color("Background")) // Hier wird der Hintergrund gesetzt
             .onAppear {
                 homeViewModel.updateGreeting()
             }
@@ -79,6 +79,7 @@ struct HomeView: View {
                 }
             )
         }
+        
         .environmentObject(homeViewModel)
         .environmentObject(settingsViewModel)
     }

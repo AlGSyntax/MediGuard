@@ -7,10 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3810345C2C3BD6B9003865AC /* DrinksAdministrationCostumButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3810345B2C3BD6B9003865AC /* DrinksAdministrationCostumButton.swift */; };
+		3810345F2C3BD788003865AC /* Progressbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3810345E2C3BD788003865AC /* Progressbar.swift */; };
+		381034612C3BD7ED003865AC /* EmptyIntakesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381034602C3BD7ED003865AC /* EmptyIntakesView.swift */; };
+		381034662C3BD908003865AC /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381034652C3BD908003865AC /* InfoView.swift */; };
+		3810346D2C3BDB1D003865AC /* AddIntakeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3810346C2C3BDB1D003865AC /* AddIntakeView.swift */; };
+		381034702C3BDBF2003865AC /* DrinksAdministrationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3810346F2C3BDBF2003865AC /* DrinksAdministrationSettingsView.swift */; };
+		381034732C3BDC41003865AC /* IntakeRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381034722C3BDC41003865AC /* IntakeRowView.swift */; };
+		3810347A2C3BE116003865AC /* UserDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381034792C3BE116003865AC /* UserDefaultKeys.swift */; };
+		3810347D2C3BE2FF003865AC /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3810347C2C3BE2FF003865AC /* DateHelper.swift */; };
 		3836C2792C2574B40030D13A /* MealAdministrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3836C2782C2574B40030D13A /* MealAdministrationViewModel.swift */; };
 		3836C27E2C2574E70030D13A /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3836C27D2C2574E70030D13A /* Meal.swift */; };
 		3836C2802C2575680030D13A /* AddMealSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3836C27F2C2575680030D13A /* AddMealSheetView.swift */; };
-		3836C2842C2575A30030D13A /* EditMealSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3836C2832C2575A30030D13A /* EditMealSheetView.swift */; };
 		3836C2862C2575E50030D13A /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3836C2852C2575E50030D13A /* ImagePicker.swift */; };
 		3836C28A2C25763A0030D13A /* MealCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3836C2892C25763A0030D13A /* MealCardView.swift */; };
 		3836C28E2C2586A70030D13A /* Weekday.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3836C28D2C2586A70030D13A /* Weekday.swift */; };
@@ -50,10 +58,6 @@
 		3886F36D2C188B01004C3203 /* DrinksAdministrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3886F36C2C188B01004C3203 /* DrinksAdministrationView.swift */; };
 		388827192C2D1E81009D2FC3 /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388827182C2D1E81009D2FC3 /* ValidationError.swift */; };
 		388C1D432C30172F00191A7C /* PredefinedMedicationTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388C1D422C30172F00191A7C /* PredefinedMedicationTime.swift */; };
-		389DD9282C2BC4A100E10AA6 /* RainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389DD9272C2BC4A100E10AA6 /* RainView.swift */; };
-		389DD92A2C2BC4B100E10AA6 /* RaindropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389DD9292C2BC4B100E10AA6 /* RaindropView.swift */; };
-		389DD92C2C2BC4C400E10AA6 /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389DD92B2C2BC4C400E10AA6 /* ConfettiView.swift */; };
-		389DD92E2C2BC4E100E10AA6 /* ConfettiPieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389DD92D2C2BC4E100E10AA6 /* ConfettiPieceView.swift */; };
 		38A4AA4F2C15AFB3004FE7FA /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 38A4AA4E2C15AFB3004FE7FA /* FirebaseAnalytics */; };
 		38A4AA512C15AFB3004FE7FA /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 38A4AA502C15AFB3004FE7FA /* FirebaseAnalyticsOnDeviceConversion */; };
 		38A4AA532C15AFB3004FE7FA /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 38A4AA522C15AFB3004FE7FA /* FirebaseAnalyticsSwift */; };
@@ -77,58 +81,43 @@
 		38A4AA772C15AFB3004FE7FA /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 38A4AA762C15AFB3004FE7FA /* FirebaseRemoteConfigSwift */; };
 		38A4AA792C15AFB3004FE7FA /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 38A4AA782C15AFB3004FE7FA /* FirebaseStorage */; };
 		38A4AA7B2C15AFB3004FE7FA /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 38A4AA7A2C15AFB3004FE7FA /* FirebaseStorageCombine-Community */; };
+		38A59EEF2C42619A003B6E49 /* MealDocumentationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A59EEE2C42619A003B6E49 /* MealDocumentationButton.swift */; };
 		38A88A0E2C21390B0063ACEA /* MedicationColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A88A0D2C21390B0063ACEA /* MedicationColor.swift */; };
-		38A88A332C216F650063ACEA /* OpenSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A0F2C216F630063ACEA /* OpenSans-ExtraBoldItalic.ttf */; };
-		38A88A342C216F650063ACEA /* OpenSans-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A102C216F630063ACEA /* OpenSans-SemiBoldItalic.ttf */; };
-		38A88A352C216F650063ACEA /* OpenSans_Condensed-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A112C216F630063ACEA /* OpenSans_Condensed-MediumItalic.ttf */; };
-		38A88A362C216F650063ACEA /* OpenSans_SemiCondensed-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A122C216F630063ACEA /* OpenSans_SemiCondensed-SemiBold.ttf */; };
-		38A88A372C216F650063ACEA /* OpenSans_SemiCondensed-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A132C216F630063ACEA /* OpenSans_SemiCondensed-ExtraBold.ttf */; };
-		38A88A382C216F650063ACEA /* OpenSans_Condensed-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A142C216F630063ACEA /* OpenSans_Condensed-SemiBold.ttf */; };
-		38A88A392C216F650063ACEA /* OpenSans_Condensed-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A152C216F630063ACEA /* OpenSans_Condensed-Medium.ttf */; };
-		38A88A3A2C216F650063ACEA /* OpenSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A162C216F630063ACEA /* OpenSans-Medium.ttf */; };
-		38A88A3B2C216F650063ACEA /* OpenSans_SemiCondensed-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A172C216F630063ACEA /* OpenSans_SemiCondensed-ExtraBoldItalic.ttf */; };
-		38A88A3C2C216F650063ACEA /* OpenSans_SemiCondensed-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A182C216F630063ACEA /* OpenSans_SemiCondensed-LightItalic.ttf */; };
-		38A88A3D2C216F650063ACEA /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A192C216F630063ACEA /* OpenSans-Regular.ttf */; };
-		38A88A3E2C216F650063ACEA /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A1A2C216F630063ACEA /* OpenSans-Light.ttf */; };
-		38A88A3F2C216F650063ACEA /* OpenSans_SemiCondensed-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A1B2C216F630063ACEA /* OpenSans_SemiCondensed-MediumItalic.ttf */; };
-		38A88A402C216F650063ACEA /* OpenSans_Condensed-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A1C2C216F630063ACEA /* OpenSans_Condensed-Bold.ttf */; };
-		38A88A412C216F650063ACEA /* OpenSans_SemiCondensed-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A1D2C216F640063ACEA /* OpenSans_SemiCondensed-BoldItalic.ttf */; };
-		38A88A422C216F650063ACEA /* OpenSans_Condensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A1E2C216F640063ACEA /* OpenSans_Condensed-Regular.ttf */; };
-		38A88A432C216F650063ACEA /* OpenSans_Condensed-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A1F2C216F640063ACEA /* OpenSans_Condensed-ExtraBold.ttf */; };
-		38A88A442C216F650063ACEA /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A202C216F640063ACEA /* OpenSans-ExtraBold.ttf */; };
-		38A88A452C216F650063ACEA /* OpenSans_SemiCondensed-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A212C216F640063ACEA /* OpenSans_SemiCondensed-SemiBoldItalic.ttf */; };
-		38A88A462C216F650063ACEA /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A222C216F640063ACEA /* OpenSans-Bold.ttf */; };
-		38A88A472C216F650063ACEA /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A232C216F640063ACEA /* OpenSans-Italic.ttf */; };
-		38A88A482C216F650063ACEA /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A242C216F640063ACEA /* OpenSans-BoldItalic.ttf */; };
-		38A88A492C216F650063ACEA /* OpenSans_SemiCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A252C216F640063ACEA /* OpenSans_SemiCondensed-Regular.ttf */; };
-		38A88A4A2C216F650063ACEA /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A262C216F640063ACEA /* OpenSans-SemiBold.ttf */; };
-		38A88A4B2C216F650063ACEA /* OpenSans_Condensed-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A272C216F640063ACEA /* OpenSans_Condensed-SemiBoldItalic.ttf */; };
-		38A88A4C2C216F650063ACEA /* OpenSans_Condensed-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A282C216F640063ACEA /* OpenSans_Condensed-BoldItalic.ttf */; };
-		38A88A4D2C216F650063ACEA /* OpenSans_SemiCondensed-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A292C216F640063ACEA /* OpenSans_SemiCondensed-Light.ttf */; };
-		38A88A4E2C216F650063ACEA /* OpenSans_Condensed-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A2A2C216F640063ACEA /* OpenSans_Condensed-ExtraBoldItalic.ttf */; };
-		38A88A4F2C216F650063ACEA /* OpenSans_Condensed-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A2B2C216F640063ACEA /* OpenSans_Condensed-LightItalic.ttf */; };
-		38A88A502C216F650063ACEA /* OpenSans_Condensed-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A2C2C216F640063ACEA /* OpenSans_Condensed-Italic.ttf */; };
-		38A88A512C216F650063ACEA /* OpenSans_SemiCondensed-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A2D2C216F650063ACEA /* OpenSans_SemiCondensed-Italic.ttf */; };
-		38A88A522C216F650063ACEA /* OpenSans_SemiCondensed-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A2E2C216F650063ACEA /* OpenSans_SemiCondensed-Medium.ttf */; };
-		38A88A532C216F650063ACEA /* OpenSans_Condensed-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A2F2C216F650063ACEA /* OpenSans_Condensed-Light.ttf */; };
-		38A88A542C216F650063ACEA /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A302C216F650063ACEA /* OpenSans-LightItalic.ttf */; };
-		38A88A552C216F650063ACEA /* OpenSans-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A312C216F650063ACEA /* OpenSans-MediumItalic.ttf */; };
-		38A88A562C216F650063ACEA /* OpenSans_SemiCondensed-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A88A322C216F650063ACEA /* OpenSans_SemiCondensed-Bold.ttf */; };
 		38A88A5B2C21708A0063ACEA /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A88A5A2C21708A0063ACEA /* Fonts.swift */; };
+		38A8922B2C412E5E00FE89CE /* Ubuntu-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A892232C412E5E00FE89CE /* Ubuntu-LightItalic.ttf */; };
+		38A8922C2C412E5E00FE89CE /* Ubuntu-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A892242C412E5E00FE89CE /* Ubuntu-Italic.ttf */; };
+		38A8922D2C412E5E00FE89CE /* Ubuntu-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A892252C412E5E00FE89CE /* Ubuntu-Light.ttf */; };
+		38A8922E2C412E5E00FE89CE /* Ubuntu-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A892262C412E5E00FE89CE /* Ubuntu-Medium.ttf */; };
+		38A8922F2C412E5E00FE89CE /* Ubuntu-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A892272C412E5E00FE89CE /* Ubuntu-MediumItalic.ttf */; };
+		38A892302C412E5E00FE89CE /* Ubuntu-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A892282C412E5E00FE89CE /* Ubuntu-Regular.ttf */; };
+		38A892312C412E5E00FE89CE /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A892292C412E5E00FE89CE /* Ubuntu-Bold.ttf */; };
+		38A892322C412E5E00FE89CE /* Ubuntu-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A8922A2C412E5E00FE89CE /* Ubuntu-BoldItalic.ttf */; };
 		38A8A29E2C1445CD00950F82 /* AuthenticationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A8A29D2C1445CD00950F82 /* AuthenticationError.swift */; };
+		38D0E7C42C3E97B100EE2A0A /* IntakeTypeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D0E7C32C3E97B100EE2A0A /* IntakeTypeColor.swift */; };
+		38D0E7C72C3EBB3D00EE2A0A /* DrinksDocumentationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D0E7C62C3EBB3D00EE2A0A /* DrinksDocumentationView.swift */; };
+		38D0E7CB2C3EBBD300EE2A0A /* DrinksDocumentationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D0E7CA2C3EBBD300EE2A0A /* DrinksDocumentationViewModel.swift */; };
+		38D0E7D12C3EBCD000EE2A0A /* Week.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D0E7D02C3EBCD000EE2A0A /* Week.swift */; };
 		38D2BBAC2C22A223002E62E2 /* DosageUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D2BBAB2C22A223002E62E2 /* DosageUnit.swift */; };
 		38D6E3AA2C38029600589F72 /* PastWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D6E3A92C38029600589F72 /* PastWeek.swift */; };
 		38D6E3AE2C38066F00589F72 /* MealDocumentationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D6E3AD2C38066F00589F72 /* MealDocumentationViewModel.swift */; };
 		38D6E3B42C3806F300589F72 /* MealDocumentationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D6E3B32C3806F300589F72 /* MealDocumentationView.swift */; };
-		38E8A7AE2C32A545005BB28A /* WaterIntake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E8A7AD2C32A545005BB28A /* WaterIntake.swift */; };
-		38E8A7B12C32A643005BB28A /* DrinksAdiminstrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E8A7B02C32A643005BB28A /* DrinksAdiminstrationViewModel.swift */; };
+		38E8A7AE2C32A545005BB28A /* Intake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E8A7AD2C32A545005BB28A /* Intake.swift */; };
+		38E8A7B12C32A643005BB28A /* DrinksAdministrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E8A7B02C32A643005BB28A /* DrinksAdministrationViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3810345B2C3BD6B9003865AC /* DrinksAdministrationCostumButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinksAdministrationCostumButton.swift; sourceTree = "<group>"; };
+		3810345E2C3BD788003865AC /* Progressbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Progressbar.swift; sourceTree = "<group>"; };
+		381034602C3BD7ED003865AC /* EmptyIntakesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyIntakesView.swift; sourceTree = "<group>"; };
+		381034652C3BD908003865AC /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		3810346C2C3BDB1D003865AC /* AddIntakeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIntakeView.swift; sourceTree = "<group>"; };
+		3810346F2C3BDBF2003865AC /* DrinksAdministrationSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinksAdministrationSettingsView.swift; sourceTree = "<group>"; };
+		381034722C3BDC41003865AC /* IntakeRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntakeRowView.swift; sourceTree = "<group>"; };
+		381034792C3BE116003865AC /* UserDefaultKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKeys.swift; sourceTree = "<group>"; };
+		3810347C2C3BE2FF003865AC /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		3836C2782C2574B40030D13A /* MealAdministrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealAdministrationViewModel.swift; sourceTree = "<group>"; };
 		3836C27D2C2574E70030D13A /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
 		3836C27F2C2575680030D13A /* AddMealSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMealSheetView.swift; sourceTree = "<group>"; };
-		3836C2832C2575A30030D13A /* EditMealSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMealSheetView.swift; sourceTree = "<group>"; };
 		3836C2852C2575E50030D13A /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		3836C2892C25763A0030D13A /* MealCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCardView.swift; sourceTree = "<group>"; };
 		3836C28D2C2586A70030D13A /* Weekday.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weekday.swift; sourceTree = "<group>"; };
@@ -169,56 +158,29 @@
 		3886F36C2C188B01004C3203 /* DrinksAdministrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinksAdministrationView.swift; sourceTree = "<group>"; };
 		388827182C2D1E81009D2FC3 /* ValidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationError.swift; sourceTree = "<group>"; };
 		388C1D422C30172F00191A7C /* PredefinedMedicationTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredefinedMedicationTime.swift; sourceTree = "<group>"; };
-		389DD9272C2BC4A100E10AA6 /* RainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RainView.swift; sourceTree = "<group>"; };
-		389DD9292C2BC4B100E10AA6 /* RaindropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaindropView.swift; sourceTree = "<group>"; };
-		389DD92B2C2BC4C400E10AA6 /* ConfettiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
-		389DD92D2C2BC4E100E10AA6 /* ConfettiPieceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiPieceView.swift; sourceTree = "<group>"; };
+		38A59EEE2C42619A003B6E49 /* MealDocumentationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDocumentationButton.swift; sourceTree = "<group>"; };
 		38A88A0D2C21390B0063ACEA /* MedicationColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationColor.swift; sourceTree = "<group>"; };
-		38A88A0F2C216F630063ACEA /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
-		38A88A102C216F630063ACEA /* OpenSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
-		38A88A112C216F630063ACEA /* OpenSans_Condensed-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans_Condensed-MediumItalic.ttf"; sourceTree = "<group>"; };
-		38A88A122C216F630063ACEA /* OpenSans_SemiCondensed-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans_SemiCondensed-SemiBold.ttf"; sourceTree = "<group>"; };
-		38A88A132C216F630063ACEA /* OpenSans_SemiCondensed-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans_SemiCondensed-ExtraBold.ttf"; sourceTree = "<group>"; };
-		38A88A142C216F630063ACEA /* OpenSans_Condensed-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans_Condensed-SemiBold.ttf"; sourceTree = "<group>"; };
-		38A88A152C216F630063ACEA /* OpenSans_Condensed-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans_Condensed-Medium.ttf"; sourceTree = "<group>"; };
-		38A88A162C216F630063ACEA /* OpenSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Medium.ttf"; sourceTree = "<group>"; };
-		38A88A172C216F630063ACEA /* OpenSans_SemiCondensed-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans_SemiCondensed-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
-		38A88A182C216F630063ACEA /* OpenSans_SemiCondensed-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans_SemiCondensed-LightItalic.ttf"; sourceTree = "<group>"; };
-		38A88A192C216F630063ACEA /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
-		38A88A1A2C216F630063ACEA /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
-		38A88A1B2C216F630063ACEA /* OpenSans_SemiCondensed-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans_SemiCondensed-MediumItalic.ttf"; sourceTree = "<group>"; };
-		38A88A1C2C216F630063ACEA /* OpenSans_Condensed-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans_Condensed-Bold.ttf"; sourceTree = "<group>"; };
-		38A88A1D2C216F640063ACEA /* OpenSans_SemiCondensed-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans_SemiCondensed-BoldItalic.ttf"; sourceTree = "<group>"; };
-		38A88A1E2C216F640063ACEA /* OpenSans_Condensed-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans_Condensed-Regular.ttf"; sourceTree = "<group>"; };
-		38A88A1F2C216F640063ACEA /* OpenSans_Condensed-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans_Condensed-ExtraBold.ttf"; sourceTree = "<group>"; };
-		38A88A202C216F640063ACEA /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
-		38A88A212C216F640063ACEA /* OpenSans_SemiCondensed-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans_SemiCondensed-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
-		38A88A222C216F640063ACEA /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
-		38A88A232C216F640063ACEA /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Italic.ttf"; sourceTree = "<group>"; };
-		38A88A242C216F640063ACEA /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
-		38A88A252C216F640063ACEA /* OpenSans_SemiCondensed-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans_SemiCondensed-Regular.ttf"; sourceTree = "<group>"; };
-		38A88A262C216F640063ACEA /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
-		38A88A272C216F640063ACEA /* OpenSans_Condensed-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans_Condensed-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
-		38A88A282C216F640063ACEA /* OpenSans_Condensed-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans_Condensed-BoldItalic.ttf"; sourceTree = "<group>"; };
-		38A88A292C216F640063ACEA /* OpenSans_SemiCondensed-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans_SemiCondensed-Light.ttf"; sourceTree = "<group>"; };
-		38A88A2A2C216F640063ACEA /* OpenSans_Condensed-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans_Condensed-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
-		38A88A2B2C216F640063ACEA /* OpenSans_Condensed-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans_Condensed-LightItalic.ttf"; sourceTree = "<group>"; };
-		38A88A2C2C216F640063ACEA /* OpenSans_Condensed-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans_Condensed-Italic.ttf"; sourceTree = "<group>"; };
-		38A88A2D2C216F650063ACEA /* OpenSans_SemiCondensed-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans_SemiCondensed-Italic.ttf"; sourceTree = "<group>"; };
-		38A88A2E2C216F650063ACEA /* OpenSans_SemiCondensed-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans_SemiCondensed-Medium.ttf"; sourceTree = "<group>"; };
-		38A88A2F2C216F650063ACEA /* OpenSans_Condensed-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans_Condensed-Light.ttf"; sourceTree = "<group>"; };
-		38A88A302C216F650063ACEA /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
-		38A88A312C216F650063ACEA /* OpenSans-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-MediumItalic.ttf"; sourceTree = "<group>"; };
-		38A88A322C216F650063ACEA /* OpenSans_SemiCondensed-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans_SemiCondensed-Bold.ttf"; sourceTree = "<group>"; };
 		38A88A572C216F9D0063ACEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		38A88A5A2C21708A0063ACEA /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		38A892232C412E5E00FE89CE /* Ubuntu-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-LightItalic.ttf"; sourceTree = "<group>"; };
+		38A892242C412E5E00FE89CE /* Ubuntu-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Italic.ttf"; sourceTree = "<group>"; };
+		38A892252C412E5E00FE89CE /* Ubuntu-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Light.ttf"; sourceTree = "<group>"; };
+		38A892262C412E5E00FE89CE /* Ubuntu-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Medium.ttf"; sourceTree = "<group>"; };
+		38A892272C412E5E00FE89CE /* Ubuntu-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-MediumItalic.ttf"; sourceTree = "<group>"; };
+		38A892282C412E5E00FE89CE /* Ubuntu-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Regular.ttf"; sourceTree = "<group>"; };
+		38A892292C412E5E00FE89CE /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
+		38A8922A2C412E5E00FE89CE /* Ubuntu-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-BoldItalic.ttf"; sourceTree = "<group>"; };
 		38A8A29D2C1445CD00950F82 /* AuthenticationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationError.swift; sourceTree = "<group>"; };
+		38D0E7C32C3E97B100EE2A0A /* IntakeTypeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntakeTypeColor.swift; sourceTree = "<group>"; };
+		38D0E7C62C3EBB3D00EE2A0A /* DrinksDocumentationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinksDocumentationView.swift; sourceTree = "<group>"; };
+		38D0E7CA2C3EBBD300EE2A0A /* DrinksDocumentationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinksDocumentationViewModel.swift; sourceTree = "<group>"; };
+		38D0E7D02C3EBCD000EE2A0A /* Week.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Week.swift; sourceTree = "<group>"; };
 		38D2BBAB2C22A223002E62E2 /* DosageUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DosageUnit.swift; sourceTree = "<group>"; };
 		38D6E3A92C38029600589F72 /* PastWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastWeek.swift; sourceTree = "<group>"; };
 		38D6E3AD2C38066F00589F72 /* MealDocumentationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDocumentationViewModel.swift; sourceTree = "<group>"; };
 		38D6E3B32C3806F300589F72 /* MealDocumentationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDocumentationView.swift; sourceTree = "<group>"; };
-		38E8A7AD2C32A545005BB28A /* WaterIntake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterIntake.swift; sourceTree = "<group>"; };
-		38E8A7B02C32A643005BB28A /* DrinksAdiminstrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinksAdiminstrationViewModel.swift; sourceTree = "<group>"; };
+		38E8A7AD2C32A545005BB28A /* Intake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intake.swift; sourceTree = "<group>"; };
+		38E8A7B02C32A643005BB28A /* DrinksAdministrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinksAdministrationViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,6 +217,88 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		381034592C3BD508003865AC /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				3886F36C2C188B01004C3203 /* DrinksAdministrationView.swift */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
+		3810345A2C3BD6AD003865AC /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				3810345B2C3BD6B9003865AC /* DrinksAdministrationCostumButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		3810345D2C3BD776003865AC /* View-Components */ = {
+			isa = PBXGroup;
+			children = (
+				381034712C3BDC1F003865AC /* IntakeRowView */,
+				381034632C3BD834003865AC /* HydrationEmptyView */,
+				381034622C3BD82A003865AC /* Progressbar */,
+			);
+			path = "View-Components";
+			sourceTree = "<group>";
+		};
+		381034622C3BD82A003865AC /* Progressbar */ = {
+			isa = PBXGroup;
+			children = (
+				3810345E2C3BD788003865AC /* Progressbar.swift */,
+			);
+			path = Progressbar;
+			sourceTree = "<group>";
+		};
+		381034632C3BD834003865AC /* HydrationEmptyView */ = {
+			isa = PBXGroup;
+			children = (
+				381034602C3BD7ED003865AC /* EmptyIntakesView.swift */,
+			);
+			path = HydrationEmptyView;
+			sourceTree = "<group>";
+		};
+		381034642C3BD8F1003865AC /* InfoView */ = {
+			isa = PBXGroup;
+			children = (
+				381034652C3BD908003865AC /* InfoView.swift */,
+			);
+			path = InfoView;
+			sourceTree = "<group>";
+		};
+		3810346E2C3BDBC9003865AC /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				3810346F2C3BDBF2003865AC /* DrinksAdministrationSettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		381034712C3BDC1F003865AC /* IntakeRowView */ = {
+			isa = PBXGroup;
+			children = (
+				381034722C3BDC41003865AC /* IntakeRowView.swift */,
+			);
+			path = IntakeRowView;
+			sourceTree = "<group>";
+		};
+		381034782C3BE102003865AC /* UserDefault */ = {
+			isa = PBXGroup;
+			children = (
+				381034792C3BE116003865AC /* UserDefaultKeys.swift */,
+			);
+			path = UserDefault;
+			sourceTree = "<group>";
+		};
+		3810347B2C3BE2F5003865AC /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				3810347C2C3BE2FF003865AC /* DateHelper.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		3836C27B2C2574D50030D13A /* Meal */ = {
 			isa = PBXGroup;
 			children = (
@@ -278,14 +322,6 @@
 				3836C27F2C2575680030D13A /* AddMealSheetView.swift */,
 			);
 			path = AddMeal;
-			sourceTree = "<group>";
-		};
-		3836C2822C25758A0030D13A /* EditMeal */ = {
-			isa = PBXGroup;
-			children = (
-				3836C2832C2575A30030D13A /* EditMealSheetView.swift */,
-			);
-			path = EditMeal;
 			sourceTree = "<group>";
 		};
 		3836C2872C2576050030D13A /* ImagePicker */ = {
@@ -372,14 +408,14 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		38630DEC2C1AD98F002671BD /* Detail */ = {
+		38630DEC2C1AD98F002671BD /* Administration */ = {
 			isa = PBXGroup;
 			children = (
-				388FF34E2C1C24AF0048AB7B /* DrinksDetail */,
+				388FF34E2C1C24AF0048AB7B /* DrinksAdministration */,
 				388FF34D2C1C24A60048AB7B /* MealAdiminstration */,
 				38630DED2C1AD9A2002671BD /* MedicationAdministration */,
 			);
-			path = Detail;
+			path = Administration;
 			sourceTree = "<group>";
 		};
 		38630DED2C1AD9A2002671BD /* MedicationAdministration */ = {
@@ -413,7 +449,7 @@
 		38630DF42C1ADCDF002671BD /* User */ = {
 			isa = PBXGroup;
 			children = (
-				386DBDCD2C12D88B00FE3A41 /* FireUser.swift */,
+				38C0DA822C3ABA0B0016F846 /* Model */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -458,7 +494,6 @@
 				38D2BBAA2C22A217002E62E2 /* Enum */,
 				38630E012C1B27BC002671BD /* EditMedication */,
 				38630E002C1B27B2002671BD /* AddMedication */,
-				38630DFE2C1B218E002671BD /* AddMedicationSheetView.swift */,
 			);
 			path = Sheets;
 			sourceTree = "<group>";
@@ -466,6 +501,7 @@
 		38630E002C1B27B2002671BD /* AddMedication */ = {
 			isa = PBXGroup;
 			children = (
+				38630DFE2C1B218E002671BD /* AddMedicationSheetView.swift */,
 			);
 			path = AddMedication;
 			sourceTree = "<group>";
@@ -532,7 +568,7 @@
 			isa = PBXGroup;
 			children = (
 				38A8A29A2C14458F00950F82 /* User */,
-				38630DEC2C1AD98F002671BD /* Detail */,
+				38630DEC2C1AD98F002671BD /* Administration */,
 				3886F35B2C184251004C3203 /* Settings */,
 				3855EF912C16F9440037B169 /* Home */,
 			);
@@ -552,7 +588,7 @@
 				386DBDD22C12DF3B00FE3A41 /* Home */,
 				386B324F2C19D10A0068F0CA /* General Components */,
 				386DBDEA2C12F0F300FE3A41 /* Fonts */,
-				386DBDD52C12DF8300FE3A41 /* Detail */,
+				386DBDD52C12DF8300FE3A41 /* Administration */,
 				386DBDD12C12DF3000FE3A41 /* Authentication */,
 				386DBDD42C12DF5100FE3A41 /* Settings */,
 			);
@@ -608,14 +644,14 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
-		386DBDD52C12DF8300FE3A41 /* Detail */ = {
+		386DBDD52C12DF8300FE3A41 /* Administration */ = {
 			isa = PBXGroup;
 			children = (
 				3886F3632C1889FF004C3203 /* DrinksAdministration */,
 				3886F3622C1889C4004C3203 /* MealAdministration */,
 				3886F3542C1800C9004C3203 /* MedicationAdministration */,
 			);
-			path = Detail;
+			path = Administration;
 			sourceTree = "<group>";
 		};
 		386DBDD62C12DF8C00FE3A41 /* Enum */ = {
@@ -780,8 +816,9 @@
 		3886F3642C188A1A004C3203 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				38D0E7C52C3EBB2A00EE2A0A /* DetailView */,
+				381034592C3BD508003865AC /* MainView */,
 				388FF3502C1C24CC0048AB7B /* Sheets */,
-				3886F36C2C188B01004C3203 /* DrinksAdministrationView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -789,6 +826,9 @@
 		3886F3652C188A22004C3203 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				3810347B2C3BE2F5003865AC /* Helper */,
+				3810345D2C3BD776003865AC /* View-Components */,
+				3810345A2C3BD6AD003865AC /* Buttons */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -796,6 +836,8 @@
 		3886F3662C188A30004C3203 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				38D0E7C22C3E978500EE2A0A /* IntakeTypeColor */,
+				381034782C3BE102003865AC /* UserDefault */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -810,7 +852,7 @@
 		3886F3682C188A7A004C3203 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				389DD9242C2BC46D00E10AA6 /* View Components */,
+				389DD9242C2BC46D00E10AA6 /* Buttons */,
 				3836C2882C2576260030D13A /* Cards */,
 				3836C2872C2576050030D13A /* ImagePicker */,
 			);
@@ -844,18 +886,18 @@
 			path = MealAdiminstration;
 			sourceTree = "<group>";
 		};
-		388FF34E2C1C24AF0048AB7B /* DrinksDetail */ = {
+		388FF34E2C1C24AF0048AB7B /* DrinksAdministration */ = {
 			isa = PBXGroup;
 			children = (
-				38E8A7AF2C32A627005BB28A /* ViewModel */,
+				38D0E7C92C3EBBA300EE2A0A /* DrinksAdministrationWeekDocumentation */,
+				38D0E7C82C3EBB7600EE2A0A /* DrinksAdministrationCurrentDay */,
 			);
-			path = DrinksDetail;
+			path = DrinksAdministration;
 			sourceTree = "<group>";
 		};
 		388FF34F2C1C24C20048AB7B /* Sheets */ = {
 			isa = PBXGroup;
 			children = (
-				3836C2822C25758A0030D13A /* EditMeal */,
 				3836C2812C2575800030D13A /* AddMeal */,
 			);
 			path = Sheets;
@@ -864,6 +906,8 @@
 		388FF3502C1C24CC0048AB7B /* Sheets */ = {
 			isa = PBXGroup;
 			children = (
+				3810346E2C3BDBC9003865AC /* Settings */,
+				381034642C3BD8F1003865AC /* InfoView */,
 				388FF3522C1C25470048AB7B /* AddDrinks */,
 				388FF3512C1C25360048AB7B /* EditDrinks */,
 			);
@@ -880,35 +924,17 @@
 		388FF3522C1C25470048AB7B /* AddDrinks */ = {
 			isa = PBXGroup;
 			children = (
+				3810346C2C3BDB1D003865AC /* AddIntakeView.swift */,
 			);
 			path = AddDrinks;
 			sourceTree = "<group>";
 		};
-		389DD9242C2BC46D00E10AA6 /* View Components */ = {
+		389DD9242C2BC46D00E10AA6 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
-				389DD9262C2BC48100E10AA6 /* Confetti */,
-				389DD9252C2BC47B00E10AA6 /* Rain */,
+				38A59EEE2C42619A003B6E49 /* MealDocumentationButton.swift */,
 			);
-			path = "View Components";
-			sourceTree = "<group>";
-		};
-		389DD9252C2BC47B00E10AA6 /* Rain */ = {
-			isa = PBXGroup;
-			children = (
-				389DD9272C2BC4A100E10AA6 /* RainView.swift */,
-				389DD9292C2BC4B100E10AA6 /* RaindropView.swift */,
-			);
-			path = Rain;
-			sourceTree = "<group>";
-		};
-		389DD9262C2BC48100E10AA6 /* Confetti */ = {
-			isa = PBXGroup;
-			children = (
-				389DD92B2C2BC4C400E10AA6 /* ConfettiView.swift */,
-				389DD92D2C2BC4E100E10AA6 /* ConfettiPieceView.swift */,
-			);
-			path = Confetti;
+			path = Buttons;
 			sourceTree = "<group>";
 		};
 		38A88A0B2C2138E90063ACEA /* Model */ = {
@@ -930,42 +956,14 @@
 		38A88A582C21704E0063ACEA /* TTF-Files */ = {
 			isa = PBXGroup;
 			children = (
-				38A88A1C2C216F630063ACEA /* OpenSans_Condensed-Bold.ttf */,
-				38A88A282C216F640063ACEA /* OpenSans_Condensed-BoldItalic.ttf */,
-				38A88A1F2C216F640063ACEA /* OpenSans_Condensed-ExtraBold.ttf */,
-				38A88A2A2C216F640063ACEA /* OpenSans_Condensed-ExtraBoldItalic.ttf */,
-				38A88A2C2C216F640063ACEA /* OpenSans_Condensed-Italic.ttf */,
-				38A88A2F2C216F650063ACEA /* OpenSans_Condensed-Light.ttf */,
-				38A88A2B2C216F640063ACEA /* OpenSans_Condensed-LightItalic.ttf */,
-				38A88A152C216F630063ACEA /* OpenSans_Condensed-Medium.ttf */,
-				38A88A112C216F630063ACEA /* OpenSans_Condensed-MediumItalic.ttf */,
-				38A88A1E2C216F640063ACEA /* OpenSans_Condensed-Regular.ttf */,
-				38A88A142C216F630063ACEA /* OpenSans_Condensed-SemiBold.ttf */,
-				38A88A272C216F640063ACEA /* OpenSans_Condensed-SemiBoldItalic.ttf */,
-				38A88A322C216F650063ACEA /* OpenSans_SemiCondensed-Bold.ttf */,
-				38A88A1D2C216F640063ACEA /* OpenSans_SemiCondensed-BoldItalic.ttf */,
-				38A88A132C216F630063ACEA /* OpenSans_SemiCondensed-ExtraBold.ttf */,
-				38A88A172C216F630063ACEA /* OpenSans_SemiCondensed-ExtraBoldItalic.ttf */,
-				38A88A2D2C216F650063ACEA /* OpenSans_SemiCondensed-Italic.ttf */,
-				38A88A292C216F640063ACEA /* OpenSans_SemiCondensed-Light.ttf */,
-				38A88A182C216F630063ACEA /* OpenSans_SemiCondensed-LightItalic.ttf */,
-				38A88A2E2C216F650063ACEA /* OpenSans_SemiCondensed-Medium.ttf */,
-				38A88A1B2C216F630063ACEA /* OpenSans_SemiCondensed-MediumItalic.ttf */,
-				38A88A252C216F640063ACEA /* OpenSans_SemiCondensed-Regular.ttf */,
-				38A88A122C216F630063ACEA /* OpenSans_SemiCondensed-SemiBold.ttf */,
-				38A88A212C216F640063ACEA /* OpenSans_SemiCondensed-SemiBoldItalic.ttf */,
-				38A88A222C216F640063ACEA /* OpenSans-Bold.ttf */,
-				38A88A242C216F640063ACEA /* OpenSans-BoldItalic.ttf */,
-				38A88A202C216F640063ACEA /* OpenSans-ExtraBold.ttf */,
-				38A88A0F2C216F630063ACEA /* OpenSans-ExtraBoldItalic.ttf */,
-				38A88A232C216F640063ACEA /* OpenSans-Italic.ttf */,
-				38A88A1A2C216F630063ACEA /* OpenSans-Light.ttf */,
-				38A88A302C216F650063ACEA /* OpenSans-LightItalic.ttf */,
-				38A88A162C216F630063ACEA /* OpenSans-Medium.ttf */,
-				38A88A312C216F650063ACEA /* OpenSans-MediumItalic.ttf */,
-				38A88A192C216F630063ACEA /* OpenSans-Regular.ttf */,
-				38A88A262C216F640063ACEA /* OpenSans-SemiBold.ttf */,
-				38A88A102C216F630063ACEA /* OpenSans-SemiBoldItalic.ttf */,
+				38A892292C412E5E00FE89CE /* Ubuntu-Bold.ttf */,
+				38A8922A2C412E5E00FE89CE /* Ubuntu-BoldItalic.ttf */,
+				38A892242C412E5E00FE89CE /* Ubuntu-Italic.ttf */,
+				38A892252C412E5E00FE89CE /* Ubuntu-Light.ttf */,
+				38A892232C412E5E00FE89CE /* Ubuntu-LightItalic.ttf */,
+				38A892262C412E5E00FE89CE /* Ubuntu-Medium.ttf */,
+				38A892272C412E5E00FE89CE /* Ubuntu-MediumItalic.ttf */,
+				38A892282C412E5E00FE89CE /* Ubuntu-Regular.ttf */,
 			);
 			path = "TTF-Files";
 			sourceTree = "<group>";
@@ -1034,6 +1032,62 @@
 			path = Enum;
 			sourceTree = "<group>";
 		};
+		38C0DA822C3ABA0B0016F846 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				386DBDCD2C12D88B00FE3A41 /* FireUser.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		38D0E7C22C3E978500EE2A0A /* IntakeTypeColor */ = {
+			isa = PBXGroup;
+			children = (
+				38D0E7C32C3E97B100EE2A0A /* IntakeTypeColor.swift */,
+			);
+			path = IntakeTypeColor;
+			sourceTree = "<group>";
+		};
+		38D0E7C52C3EBB2A00EE2A0A /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				38D0E7C62C3EBB3D00EE2A0A /* DrinksDocumentationView.swift */,
+			);
+			path = DetailView;
+			sourceTree = "<group>";
+		};
+		38D0E7C82C3EBB7600EE2A0A /* DrinksAdministrationCurrentDay */ = {
+			isa = PBXGroup;
+			children = (
+				38E8A7B02C32A643005BB28A /* DrinksAdministrationViewModel.swift */,
+			);
+			path = DrinksAdministrationCurrentDay;
+			sourceTree = "<group>";
+		};
+		38D0E7C92C3EBBA300EE2A0A /* DrinksAdministrationWeekDocumentation */ = {
+			isa = PBXGroup;
+			children = (
+				38D0E7CA2C3EBBD300EE2A0A /* DrinksDocumentationViewModel.swift */,
+			);
+			path = DrinksAdministrationWeekDocumentation;
+			sourceTree = "<group>";
+		};
+		38D0E7CC2C3EBC9300EE2A0A /* Administration */ = {
+			isa = PBXGroup;
+			children = (
+				38E8A7AD2C32A545005BB28A /* Intake.swift */,
+			);
+			path = Administration;
+			sourceTree = "<group>";
+		};
+		38D0E7CD2C3EBCAE00EE2A0A /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+				38D0E7D02C3EBCD000EE2A0A /* Week.swift */,
+			);
+			path = Documentation;
+			sourceTree = "<group>";
+		};
 		38D2BBAA2C22A217002E62E2 /* Enum */ = {
 			isa = PBXGroup;
 			children = (
@@ -1078,25 +1132,18 @@
 		38E8A7AB2C32A52A005BB28A /* Drink */ = {
 			isa = PBXGroup;
 			children = (
-				38E8A7AC2C32A52F005BB28A /* Model */,
+				38E8A7AC2C32A52F005BB28A /* Models */,
 			);
 			path = Drink;
 			sourceTree = "<group>";
 		};
-		38E8A7AC2C32A52F005BB28A /* Model */ = {
+		38E8A7AC2C32A52F005BB28A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				38E8A7AD2C32A545005BB28A /* WaterIntake.swift */,
+				38D0E7CD2C3EBCAE00EE2A0A /* Documentation */,
+				38D0E7CC2C3EBC9300EE2A0A /* Administration */,
 			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		38E8A7AF2C32A627005BB28A /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				38E8A7B02C32A643005BB28A /* DrinksAdiminstrationViewModel.swift */,
-			);
-			path = ViewModel;
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1185,45 +1232,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38A88A352C216F650063ACEA /* OpenSans_Condensed-MediumItalic.ttf in Resources */,
-				38A88A512C216F650063ACEA /* OpenSans_SemiCondensed-Italic.ttf in Resources */,
-				38A88A552C216F650063ACEA /* OpenSans-MediumItalic.ttf in Resources */,
-				38A88A372C216F650063ACEA /* OpenSans_SemiCondensed-ExtraBold.ttf in Resources */,
-				38A88A442C216F650063ACEA /* OpenSans-ExtraBold.ttf in Resources */,
-				38A88A392C216F650063ACEA /* OpenSans_Condensed-Medium.ttf in Resources */,
-				38A88A3E2C216F650063ACEA /* OpenSans-Light.ttf in Resources */,
-				38A88A542C216F650063ACEA /* OpenSans-LightItalic.ttf in Resources */,
-				38A88A382C216F650063ACEA /* OpenSans_Condensed-SemiBold.ttf in Resources */,
-				38A88A422C216F650063ACEA /* OpenSans_Condensed-Regular.ttf in Resources */,
-				38A88A432C216F650063ACEA /* OpenSans_Condensed-ExtraBold.ttf in Resources */,
-				38A88A362C216F650063ACEA /* OpenSans_SemiCondensed-SemiBold.ttf in Resources */,
-				38A88A472C216F650063ACEA /* OpenSans-Italic.ttf in Resources */,
-				38A88A492C216F650063ACEA /* OpenSans_SemiCondensed-Regular.ttf in Resources */,
+				38A892312C412E5E00FE89CE /* Ubuntu-Bold.ttf in Resources */,
+				38A8922B2C412E5E00FE89CE /* Ubuntu-LightItalic.ttf in Resources */,
 				386DBD9F2C12B88C00FE3A41 /* Preview Assets.xcassets in Resources */,
-				38A88A4B2C216F650063ACEA /* OpenSans_Condensed-SemiBoldItalic.ttf in Resources */,
+				38A8922F2C412E5E00FE89CE /* Ubuntu-MediumItalic.ttf in Resources */,
+				38A8922E2C412E5E00FE89CE /* Ubuntu-Medium.ttf in Resources */,
 				386DBDA62C12B93200FE3A41 /* GoogleService-Info.plist in Resources */,
+				38A8922C2C412E5E00FE89CE /* Ubuntu-Italic.ttf in Resources */,
+				38A892322C412E5E00FE89CE /* Ubuntu-BoldItalic.ttf in Resources */,
+				38A892302C412E5E00FE89CE /* Ubuntu-Regular.ttf in Resources */,
+				38A8922D2C412E5E00FE89CE /* Ubuntu-Light.ttf in Resources */,
 				386DBD9C2C12B88C00FE3A41 /* Assets.xcassets in Resources */,
-				38A88A452C216F650063ACEA /* OpenSans_SemiCondensed-SemiBoldItalic.ttf in Resources */,
-				38A88A3C2C216F650063ACEA /* OpenSans_SemiCondensed-LightItalic.ttf in Resources */,
-				38A88A562C216F650063ACEA /* OpenSans_SemiCondensed-Bold.ttf in Resources */,
-				38A88A462C216F650063ACEA /* OpenSans-Bold.ttf in Resources */,
-				38A88A4D2C216F650063ACEA /* OpenSans_SemiCondensed-Light.ttf in Resources */,
-				38A88A3A2C216F650063ACEA /* OpenSans-Medium.ttf in Resources */,
-				38A88A3D2C216F650063ACEA /* OpenSans-Regular.ttf in Resources */,
-				38A88A4A2C216F650063ACEA /* OpenSans-SemiBold.ttf in Resources */,
-				38A88A502C216F650063ACEA /* OpenSans_Condensed-Italic.ttf in Resources */,
-				38A88A412C216F650063ACEA /* OpenSans_SemiCondensed-BoldItalic.ttf in Resources */,
-				38A88A522C216F650063ACEA /* OpenSans_SemiCondensed-Medium.ttf in Resources */,
-				38A88A4C2C216F650063ACEA /* OpenSans_Condensed-BoldItalic.ttf in Resources */,
-				38A88A4E2C216F650063ACEA /* OpenSans_Condensed-ExtraBoldItalic.ttf in Resources */,
-				38A88A3B2C216F650063ACEA /* OpenSans_SemiCondensed-ExtraBoldItalic.ttf in Resources */,
-				38A88A4F2C216F650063ACEA /* OpenSans_Condensed-LightItalic.ttf in Resources */,
-				38A88A532C216F650063ACEA /* OpenSans_Condensed-Light.ttf in Resources */,
-				38A88A332C216F650063ACEA /* OpenSans-ExtraBoldItalic.ttf in Resources */,
-				38A88A402C216F650063ACEA /* OpenSans_Condensed-Bold.ttf in Resources */,
-				38A88A3F2C216F650063ACEA /* OpenSans_SemiCondensed-MediumItalic.ttf in Resources */,
-				38A88A342C216F650063ACEA /* OpenSans-SemiBoldItalic.ttf in Resources */,
-				38A88A482C216F650063ACEA /* OpenSans-BoldItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1234,6 +1253,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3810345F2C3BD788003865AC /* Progressbar.swift in Sources */,
+				3810347A2C3BE116003865AC /* UserDefaultKeys.swift in Sources */,
 				3836C2862C2575E50030D13A /* ImagePicker.swift in Sources */,
 				386DBDCC2C12C28100FE3A41 /* FirebaseManager.swift in Sources */,
 				386DBDE32C12E27800FE3A41 /* AuthenticationView.swift in Sources */,
@@ -1243,24 +1264,30 @@
 				3836C27E2C2574E70030D13A /* Meal.swift in Sources */,
 				386DBDEE2C130BCF00FE3A41 /* HomeView.swift in Sources */,
 				386D8E522C1EC55400FA151C /* LogoutButton.swift in Sources */,
+				38A59EEF2C42619A003B6E49 /* MealDocumentationButton.swift in Sources */,
 				38630E032C1B27D8002671BD /* EditMedicationSheetView.swift in Sources */,
 				3886F35A2C18350A004C3203 /* SettingsView.swift in Sources */,
+				381034612C3BD7ED003865AC /* EmptyIntakesView.swift in Sources */,
 				38630DFF2C1B218E002671BD /* AddMedicationSheetView.swift in Sources */,
+				381034702C3BDBF2003865AC /* DrinksAdministrationSettingsView.swift in Sources */,
 				386DBDCE2C12D88B00FE3A41 /* FireUser.swift in Sources */,
 				38D2BBAC2C22A223002E62E2 /* DosageUnit.swift in Sources */,
 				3855EF992C16FEF40037B169 /* DetailViewButton.swift in Sources */,
-				38E8A7B12C32A643005BB28A /* DrinksAdiminstrationViewModel.swift in Sources */,
+				38E8A7B12C32A643005BB28A /* DrinksAdministrationViewModel.swift in Sources */,
 				3886F36B2C188AF0004C3203 /* MealAdministrationView.swift in Sources */,
 				3836C28E2C2586A70030D13A /* Weekday.swift in Sources */,
-				389DD92E2C2BC4E100E10AA6 /* ConfettiPieceView.swift in Sources */,
 				38A88A0E2C21390B0063ACEA /* MedicationColor.swift in Sources */,
+				38D0E7D12C3EBCD000EE2A0A /* Week.swift in Sources */,
 				3836C28A2C25763A0030D13A /* MealCardView.swift in Sources */,
+				38D0E7CB2C3EBBD300EE2A0A /* DrinksDocumentationViewModel.swift in Sources */,
 				388C1D432C30172F00191A7C /* PredefinedMedicationTime.swift in Sources */,
+				381034732C3BDC41003865AC /* IntakeRowView.swift in Sources */,
 				386DBDE92C12E2D300FE3A41 /* AuthenticationMode.swift in Sources */,
 				3886F36D2C188B01004C3203 /* DrinksAdministrationView.swift in Sources */,
 				38D6E3AE2C38066F00589F72 /* MealDocumentationViewModel.swift in Sources */,
 				38630DF12C1ADA1C002671BD /* CostumAddButton.swift in Sources */,
 				38630DFA2C1ADD61002671BD /* MedicationCardView.swift in Sources */,
+				3810346D2C3BDB1D003865AC /* AddIntakeView.swift in Sources */,
 				38D6E3B42C3806F300589F72 /* MealDocumentationView.swift in Sources */,
 				386DBDE72C12E2A100FE3A41 /* AuthModeSwitchButton.swift in Sources */,
 				3855EFA22C1736600037B169 /* PasswordField.swift in Sources */,
@@ -1268,23 +1295,24 @@
 				3855EF952C16F9650037B169 /* HomeViewModel.swift in Sources */,
 				386DBDE52C12E29700FE3A41 /* AuthButton.swift in Sources */,
 				388827192C2D1E81009D2FC3 /* ValidationError.swift in Sources */,
-				3836C2842C2575A30030D13A /* EditMealSheetView.swift in Sources */,
 				38630DF72C1ADD03002671BD /* Medication.swift in Sources */,
 				386DBDD02C12DABF00FE3A41 /* UserViewModel.swift in Sources */,
-				389DD92A2C2BC4B100E10AA6 /* RaindropView.swift in Sources */,
 				3855EF972C16FD1A0037B169 /* TimePeriod.swift in Sources */,
-				389DD92C2C2BC4C400E10AA6 /* ConfettiView.swift in Sources */,
+				3810345C2C3BD6B9003865AC /* DrinksAdministrationCostumButton.swift in Sources */,
+				3810347D2C3BE2FF003865AC /* DateHelper.swift in Sources */,
 				3886F3562C1800F6004C3203 /* MedicationAdiminstrationView.swift in Sources */,
 				386D8E542C1EC5DB00FA151C /* SaveEmergencyContactButton.swift in Sources */,
 				386DBD982C12B88B00FE3A41 /* MediGuardApp.swift in Sources */,
 				3855EF9B2C16FF2A0037B169 /* EmergencyCallButton.swift in Sources */,
 				38D6E3AA2C38029600589F72 /* PastWeek.swift in Sources */,
+				381034662C3BD908003865AC /* InfoView.swift in Sources */,
 				38A8A29E2C1445CD00950F82 /* AuthenticationError.swift in Sources */,
 				3836C2922C25C3660030D13A /* Date.swift in Sources */,
 				3886F3612C18815B004C3203 /* CostumBackButton.swift in Sources */,
+				38D0E7C42C3E97B100EE2A0A /* IntakeTypeColor.swift in Sources */,
 				3886F3582C18026F004C3203 /* SettingsButton.swift in Sources */,
-				38E8A7AE2C32A545005BB28A /* WaterIntake.swift in Sources */,
-				389DD9282C2BC4A100E10AA6 /* RainView.swift in Sources */,
+				38E8A7AE2C32A545005BB28A /* Intake.swift in Sources */,
+				38D0E7C72C3EBB3D00EE2A0A /* DrinksDocumentationView.swift in Sources */,
 				3836C2792C2574B40030D13A /* MealAdministrationViewModel.swift in Sources */,
 				3886F35F2C184271004C3203 /* SettingsViewModel.swift in Sources */,
 			);

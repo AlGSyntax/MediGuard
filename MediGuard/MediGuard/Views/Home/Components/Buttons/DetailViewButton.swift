@@ -32,7 +32,7 @@ struct DetailViewButton: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 48, height: 48)
-                .foregroundColor(.white)
+                .foregroundStyle(.white)
                 
             // Text auf dem Button
             Text(title)
@@ -42,7 +42,7 @@ struct DetailViewButton: View {
         }
         .padding()
         .background(Color.blue)
-        .foregroundColor(.white)
+        .foregroundStyle(.white)
         .cornerRadius(24)
     }
 }

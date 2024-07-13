@@ -33,8 +33,9 @@ struct AuthModeSwitchButton: View {
         Button(action: action) {
             // Text, der auf dem Button angezeigt wird
             Text(title)
-                .font(.headline)
+                .font(Fonts.title1)
                 .frame(maxWidth: .infinity)
+                
         }
     }
 }

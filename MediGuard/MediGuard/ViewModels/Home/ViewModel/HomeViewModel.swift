@@ -45,11 +45,11 @@ class HomeViewModel: ObservableObject {
         let timePeriod = TimePeriod.current(from: hour)
         switch timePeriod {
         case .morning:
-            greeting = "Guten Morgen!"
+            greeting = "Guten Morgen,"
         case .afternoon:
-            greeting = "Guten Tag!"
+            greeting = "Guten Tag,"
         case .evening:
-            greeting = "Guten Abend!"
+            greeting = "Guten Abend,"
         }
     }
     
@@ -66,6 +66,7 @@ class HomeViewModel: ObservableObject {
         }
     }
 }
+
 
 
 

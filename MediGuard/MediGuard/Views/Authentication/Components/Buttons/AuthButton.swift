@@ -31,10 +31,13 @@ struct AuthButton: View {
         Button(action: action) {
             // Text, der auf dem Button angezeigt wird
             Text(title)
-                .font(.headline)
+                .font(Fonts.body)
                 .frame(maxWidth: .infinity)
-                .foregroundColor(.white)
+                .foregroundStyle(.white)
+                
+                
         }
+        
         .padding(.vertical, 12)
         .background(Color.blue)
         .cornerRadius(12)

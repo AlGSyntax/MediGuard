@@ -4,17 +4,14 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>OpenSans-Condensed-Bold</string>
-		<string></string>
-		<string></string>
-		<string></string>
-		<string></string>
-		<string></string>
-		<string></string>
-		<string></string>
-		<string></string>
-		<string></string>
-		<string></string>
+		<string>Ubuntu-Bold.ttf</string>
+		<string>Ubuntu-BoldItalic.ttf</string>
+		<string>Ubuntu-Italic</string>
+		<string>Ubuntu-Light</string>
+		<string>Ubuntu-LightItalic</string>
+		<string>Ubuntu-Medium</string>
+		<string>Ubuntu-MediumItalic</string>
+		<string>Ubuntu-Regular</string>
 	</array>
 </dict>
 </plist>
