@@ -41,8 +41,11 @@ class HomeViewModel: ObservableObject {
         - "Guten Abend!" für die Zeit von 16 Uhr bis 5 Uhr.
      */
     func updateGreeting() {
+        // Aktuelle Stunde des Tages abrufen
         let hour = Calendar.current.component(.hour, from: Date())
+        // Bestimmt die Tageszeit basierend auf der aktuellen Stunde
         let timePeriod = TimePeriod.current(from: hour)
+        // Wechselt die Begrüßungsnachricht basierend auf der Tageszeit
         switch timePeriod {
         case .morning:
             greeting = "Guten Morgen,"
