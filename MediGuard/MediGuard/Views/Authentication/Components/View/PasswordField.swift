@@ -51,7 +51,7 @@ struct PasswordField: View {
                 }) {
                     // Symbol, das die aktuelle Sichtbarkeit des Passworts anzeigt
                     Image(systemName: isVisible ? "eye.slash" : "eye")
-                        .foregroundStyle(.gray)
+                        .foregroundStyle(.blue)
                 }
                 .padding(.trailing, 8)
             }

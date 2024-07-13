@@ -40,7 +40,7 @@ struct AuthButton: View {
         
         .padding(.vertical, 12)
         .background(Color.blue)
-        .cornerRadius(12)
+        .cornerRadius(16)
     }
 }
 
