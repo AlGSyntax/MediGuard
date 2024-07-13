@@ -11,11 +11,11 @@ import SwiftUI
  Die `HomeView`-Struktur ist eine SwiftUI-View, die den Hauptbildschirm der App darstellt.
  
  Diese View wird angezeigt, wenn der Benutzer erfolgreich authentifiziert ist und bietet Navigation zu verschiedenen Detailansichten sowie eine Notruffunktion.
-
+ 
  - Eigenschaften:
-    - `homeViewModel`: Das `HomeViewModel`-Objekt, das die Daten und Logik für die `HomeView` verwaltet.
-    - `settingsViewModel`: Das `SettingsViewModel`-Objekt, das die Daten und Logik für die Einstellungen verwaltet.
-    - `userViewModel`: Das `UserViewModel`-Objekt, das die Benutzerdaten verwaltet.
+ - `homeViewModel`: Das `HomeViewModel`-Objekt, das die Daten und Logik für die `HomeView` verwaltet.
+ - `settingsViewModel`: Das `SettingsViewModel`-Objekt, das die Daten und Logik für die Einstellungen verwaltet.
+ - `userViewModel`: Das `UserViewModel`-Objekt, das die Benutzerdaten verwaltet.
  */
 struct HomeView: View {
     
@@ -31,52 +31,52 @@ struct HomeView: View {
                 // MARK: - Begrüßung je nach Tageszeit
                 
                 Text(homeViewModel.greeting)
-                    .font(Fonts.hugeTitle)
-                    .padding(.top, 16)
-                    .foregroundStyle(.blue)
+                    .hugeTitleStyle()// Verwendet den benutzerdefinierten Modifier für große Titel
                 
-                // MARK: - Name des aktuellen Benutzers 
+                // MARK: - Name des aktuellen Benutzers
                 
                 Text("\(userViewModel.nameDisplay)!")
-                    .font(Fonts.hugeTitle)
-                    .padding(.top, 16)
-                    .foregroundStyle(.blue)
+                    .hugeTitleStyle()// Verwendet den benutzerdefinierten Modifier für große Titel
                 
                 Spacer()
                 
                 // MARK: - Navigation Links
                 
                 VStack(spacing: 8) {
+                    
+                    // NavigationLink zur Medikamentenverwaltung
                     NavigationLink(destination: MedicationAdiminstrationView()) {
-                        DetailViewButton(title: "Medikamente", iconName: "pills.fill")
+                        AdministrationViewButton(title: "Medikamente", iconName: "pills.fill")
                     }
                     
+                    // NavigationLink zur Mahlzeitenverwaltung
                     NavigationLink(destination: MealAdministrationView()) {
-                        DetailViewButton(title: "Mahlzeiten", iconName: "fork.knife")
+                        AdministrationViewButton(title: "Mahlzeiten", iconName: "fork.knife")
                     }
                     
+                    // NavigationLink zur Getränkeverwaltung
                     NavigationLink(destination: DrinksAdministrationView()) {
-                        DetailViewButton(title: "Getränke", iconName: "cup.and.saucer.fill")
+                        AdministrationViewButton(title: "Getränke", iconName: "cup.and.saucer.fill")
                     }
                 }
                 .padding()
                 
                 // MARK: - Notruf Button
                 
-                EmergencyCallButton.callButton(homeViewModel: homeViewModel)
-
+                EmergencyCallButton.callButton(homeViewModel: homeViewModel)// EmergencyCallButton zum Auslösen eines Notrufs bzw. der für den Notruf hinterlegten Nummer
+                
                 
                 Spacer()
             }
             .padding()
             .background(Color("Background")) // Hier wird der Hintergrund gesetzt
             .onAppear {
-                homeViewModel.updateGreeting()
+                homeViewModel.updateGreeting()// Aktualisiert die Begrüßungsnachricht, wenn die View erscheint
             }
             .navigationBarItems(trailing:
-                NavigationLink(destination: SettingsView()) {
-                    SettingsButton()
-                }
+                                    NavigationLink(destination: SettingsView()) {
+                SettingsButton()// Zeigt einen Button in der Navigation Bar an, um zu den Einstellungen zu navigieren
+            }
             )
         }
         

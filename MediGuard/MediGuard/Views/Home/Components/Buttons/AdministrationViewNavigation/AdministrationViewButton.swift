@@ -16,7 +16,7 @@ import SwiftUI
     - `title`: Der Text, der auf dem Button angezeigt wird.
     - `iconName`: Der Name des Symbols, das auf dem Button angezeigt wird.
  */
-struct DetailViewButton: View {
+struct AdministrationViewButton: View {
     
     // MARK: - Variables
     
@@ -51,7 +51,7 @@ struct DetailViewButton: View {
 
 struct DetailViewButton_Previews: PreviewProvider {
     static var previews: some View {
-        DetailViewButton(title: "Button", iconName: "star")
+        AdministrationViewButton(title: "Button", iconName: "star")
     }
 }
 

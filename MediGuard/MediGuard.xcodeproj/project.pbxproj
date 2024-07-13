@@ -25,7 +25,7 @@
 		3836C2922C25C3660030D13A /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3836C2912C25C3660030D13A /* Date.swift */; };
 		3855EF952C16F9650037B169 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3855EF942C16F9650037B169 /* HomeViewModel.swift */; };
 		3855EF972C16FD1A0037B169 /* TimePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3855EF962C16FD1A0037B169 /* TimePeriod.swift */; };
-		3855EF992C16FEF40037B169 /* DetailViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3855EF982C16FEF40037B169 /* DetailViewButton.swift */; };
+		3855EF992C16FEF40037B169 /* AdministrationViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3855EF982C16FEF40037B169 /* AdministrationViewButton.swift */; };
 		3855EF9B2C16FF2A0037B169 /* EmergencyCallButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3855EF9A2C16FF2A0037B169 /* EmergencyCallButton.swift */; };
 		3855EF9E2C1704000037B169 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3855EF9D2C1704000037B169 /* Calendar.swift */; };
 		3855EFA22C1736600037B169 /* PasswordField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3855EFA12C1736600037B169 /* PasswordField.swift */; };
@@ -82,6 +82,7 @@
 		38A4AA792C15AFB3004FE7FA /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 38A4AA782C15AFB3004FE7FA /* FirebaseStorage */; };
 		38A4AA7B2C15AFB3004FE7FA /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 38A4AA7A2C15AFB3004FE7FA /* FirebaseStorageCombine-Community */; };
 		38A59EEF2C42619A003B6E49 /* MealDocumentationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A59EEE2C42619A003B6E49 /* MealDocumentationButton.swift */; };
+		38A59EF42C427BDD003B6E49 /* HugeTitleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A59EF32C427BDD003B6E49 /* HugeTitleModifier.swift */; };
 		38A88A0E2C21390B0063ACEA /* MedicationColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A88A0D2C21390B0063ACEA /* MedicationColor.swift */; };
 		38A88A5B2C21708A0063ACEA /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A88A5A2C21708A0063ACEA /* Fonts.swift */; };
 		38A8922B2C412E5E00FE89CE /* Ubuntu-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A892232C412E5E00FE89CE /* Ubuntu-LightItalic.ttf */; };
@@ -124,7 +125,7 @@
 		3836C2912C25C3660030D13A /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		3855EF942C16F9650037B169 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		3855EF962C16FD1A0037B169 /* TimePeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePeriod.swift; sourceTree = "<group>"; };
-		3855EF982C16FEF40037B169 /* DetailViewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewButton.swift; sourceTree = "<group>"; };
+		3855EF982C16FEF40037B169 /* AdministrationViewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministrationViewButton.swift; sourceTree = "<group>"; };
 		3855EF9A2C16FF2A0037B169 /* EmergencyCallButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyCallButton.swift; sourceTree = "<group>"; };
 		3855EF9D2C1704000037B169 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		3855EFA12C1736600037B169 /* PasswordField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordField.swift; sourceTree = "<group>"; };
@@ -159,6 +160,7 @@
 		388827182C2D1E81009D2FC3 /* ValidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationError.swift; sourceTree = "<group>"; };
 		388C1D422C30172F00191A7C /* PredefinedMedicationTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredefinedMedicationTime.swift; sourceTree = "<group>"; };
 		38A59EEE2C42619A003B6E49 /* MealDocumentationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDocumentationButton.swift; sourceTree = "<group>"; };
+		38A59EF32C427BDD003B6E49 /* HugeTitleModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HugeTitleModifier.swift; sourceTree = "<group>"; };
 		38A88A0D2C21390B0063ACEA /* MedicationColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationColor.swift; sourceTree = "<group>"; };
 		38A88A572C216F9D0063ACEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		38A88A5A2C21708A0063ACEA /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
@@ -439,9 +441,9 @@
 		38630DF32C1ADC79002671BD /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
-				3855EF982C16FEF40037B169 /* DetailViewButton.swift */,
-				3855EF9A2C16FF2A0037B169 /* EmergencyCallButton.swift */,
-				3886F3572C18026F004C3203 /* SettingsButton.swift */,
+				38A59EF22C427902003B6E49 /* SettingsViewNavigation */,
+				38A59EF12C4278F0003B6E49 /* EmergencyCallIntent */,
+				38A59EF02C4278D4003B6E49 /* AdministrationViewNavigation */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -590,7 +592,6 @@
 				386DBDEA2C12F0F300FE3A41 /* Fonts */,
 				386DBDD52C12DF8300FE3A41 /* Administration */,
 				386DBDD12C12DF3000FE3A41 /* Authentication */,
-				386DBDD42C12DF5100FE3A41 /* Settings */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -627,7 +628,8 @@
 		386DBDD22C12DF3B00FE3A41 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				386DBDDB2C12DFBC00FE3A41 /* Enum */,
+				386DBDD42C12DF5100FE3A41 /* Settings */,
+				386DBDDB2C12DFBC00FE3A41 /* Extensions */,
 				386DBDDA2C12DFB300FE3A41 /* Components */,
 				386DBDD92C12DFAE00FE3A41 /* View */,
 			);
@@ -695,11 +697,12 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
-		386DBDDB2C12DFBC00FE3A41 /* Enum */ = {
+		386DBDDB2C12DFBC00FE3A41 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				38A59EF32C427BDD003B6E49 /* HugeTitleModifier.swift */,
 			);
-			path = Enum;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		386DBDDC2C12DFC600FE3A41 /* Enums */ = {
@@ -737,8 +740,7 @@
 		386DBDE02C12DFE400FE3A41 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				386D8E512C1EC55400FA151C /* LogoutButton.swift */,
-				386D8E532C1EC5DB00FA151C /* SaveEmergencyContactButton.swift */,
+				38A59EF72C427CFC003B6E49 /* Buttons */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -933,6 +935,55 @@
 			isa = PBXGroup;
 			children = (
 				38A59EEE2C42619A003B6E49 /* MealDocumentationButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		38A59EF02C4278D4003B6E49 /* AdministrationViewNavigation */ = {
+			isa = PBXGroup;
+			children = (
+				3855EF982C16FEF40037B169 /* AdministrationViewButton.swift */,
+			);
+			path = AdministrationViewNavigation;
+			sourceTree = "<group>";
+		};
+		38A59EF12C4278F0003B6E49 /* EmergencyCallIntent */ = {
+			isa = PBXGroup;
+			children = (
+				3855EF9A2C16FF2A0037B169 /* EmergencyCallButton.swift */,
+			);
+			path = EmergencyCallIntent;
+			sourceTree = "<group>";
+		};
+		38A59EF22C427902003B6E49 /* SettingsViewNavigation */ = {
+			isa = PBXGroup;
+			children = (
+				3886F3572C18026F004C3203 /* SettingsButton.swift */,
+			);
+			path = SettingsViewNavigation;
+			sourceTree = "<group>";
+		};
+		38A59EF52C427CCE003B6E49 /* Logout */ = {
+			isa = PBXGroup;
+			children = (
+				386D8E512C1EC55400FA151C /* LogoutButton.swift */,
+			);
+			path = Logout;
+			sourceTree = "<group>";
+		};
+		38A59EF62C427CE3003B6E49 /* SaveEmergencyContact */ = {
+			isa = PBXGroup;
+			children = (
+				386D8E532C1EC5DB00FA151C /* SaveEmergencyContactButton.swift */,
+			);
+			path = SaveEmergencyContact;
+			sourceTree = "<group>";
+		};
+		38A59EF72C427CFC003B6E49 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				38A59EF52C427CCE003B6E49 /* Logout */,
+				38A59EF62C427CE3003B6E49 /* SaveEmergencyContact */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -1270,9 +1321,10 @@
 				381034612C3BD7ED003865AC /* EmptyIntakesView.swift in Sources */,
 				38630DFF2C1B218E002671BD /* AddMedicationSheetView.swift in Sources */,
 				381034702C3BDBF2003865AC /* DrinksAdministrationSettingsView.swift in Sources */,
+				38A59EF42C427BDD003B6E49 /* HugeTitleModifier.swift in Sources */,
 				386DBDCE2C12D88B00FE3A41 /* FireUser.swift in Sources */,
 				38D2BBAC2C22A223002E62E2 /* DosageUnit.swift in Sources */,
-				3855EF992C16FEF40037B169 /* DetailViewButton.swift in Sources */,
+				3855EF992C16FEF40037B169 /* AdministrationViewButton.swift in Sources */,
 				38E8A7B12C32A643005BB28A /* DrinksAdministrationViewModel.swift in Sources */,
 				3886F36B2C188AF0004C3203 /* MealAdministrationView.swift in Sources */,
 				3836C28E2C2586A70030D13A /* Weekday.swift in Sources */,
