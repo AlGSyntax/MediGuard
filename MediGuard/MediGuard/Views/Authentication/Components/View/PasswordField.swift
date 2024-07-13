@@ -28,8 +28,8 @@ struct PasswordField: View {
     var body: some View {
         ZStack {
             // Hintergrund des Passwortfelds
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(Color.blue, lineWidth: 1)
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(Color.blue, lineWidth: 2)
                 .frame(height: 50)
             
             HStack {

@@ -53,14 +53,16 @@ struct AuthenticationView: View {
             VStack(spacing: 12) {
                 // Eingabefeld für den Namen
                 ZStack {
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.blue, lineWidth: 1)
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(Color.blue, lineWidth: 2)
                         .frame(height: 50)
                     
                     TextField("Name", text: $userViewModel.name)
                         .padding()
                         .font(Fonts.headline)
                 }
+                
+                
                 
                 // Bedingte Anzeige der Passwortfelder basierend auf dem Modus
                 if userViewModel.mode == .register {
@@ -95,7 +97,6 @@ struct AuthenticationView: View {
             Spacer()
         }
         .padding(.vertical, 16)
-        .cornerRadius(12)
         .padding(.horizontal, 36)
         .frame(maxHeight: .infinity, alignment: .top)
         .background(Color("Background")) // Hier wird der Hintergrund gesetzt
