@@ -30,13 +30,14 @@ struct AuthenticationView: View {
         VStack(spacing: 24) {
             
             // MARK: - Logo und Header
-            
+            Spacer()
             VStack(spacing: 12) {
                 // Anzeige des Logos der App
                 Image("Logo")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 200, height: 200)
+                        
                 
                 // Header-Text, der je nach Modus entweder "Anmelden" oder "Registrieren" anzeigt
                 Text(userViewModel.mode.headerText)
@@ -44,6 +45,8 @@ struct AuthenticationView: View {
                     .font(Fonts.largeTitle)
             }
             .padding(.top, 50)
+            
+            
             
             // MARK: - Eingabefelder
             
@@ -70,8 +73,9 @@ struct AuthenticationView: View {
                     PasswordField(title: "Passwort", text: $userViewModel.password, isVisible: $isPasswordVisible)
                 }
             }
-            .font(.headline)
-            .textInputAutocapitalization(.never)
+            .textInputAutocapitalization(.never)// Deaktiviert die automatische Großschreibung für alle Textfelder in diesem VStack
+            
+            
             
             // MARK: - Authentifizierungsbutton
             
@@ -81,6 +85,7 @@ struct AuthenticationView: View {
                     // Anzeige eines Alerts bei Fehlern
                     Alert(title: Text("Fehler"), message: Text(userViewModel.errorMessage), dismissButton: .default(Text("OK")))
                 }
+            Spacer()
             
             // MARK: - Modus wechseln
             
@@ -90,7 +95,6 @@ struct AuthenticationView: View {
             Spacer()
         }
         .padding(.vertical, 16)
-        .padding(.horizontal, 24)
         .cornerRadius(12)
         .padding(.horizontal, 36)
         .frame(maxHeight: .infinity, alignment: .top)
