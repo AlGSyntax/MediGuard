@@ -99,7 +99,7 @@ class UserViewModel: ObservableObject {
         let email = formatEmail(username)
         
         
-        
+        // Versucht, den Benutzer mit der angegebenen E-Mail und Passwort anzumelden
         firebaseManager.auth.signIn(withEmail: email, password: password) { [weak self] authResult, error in
             guard let self = self else { return }
             if let error = error as NSError? {
@@ -111,7 +111,7 @@ class UserViewModel: ObservableObject {
             
             guard let authResult = authResult else { return }
             
-            
+            // Ruft die Benutzerdaten nach erfolgreicher Authentifizierung ab
             self.fetchUser(with: authResult.user.uid)
             
         }
@@ -130,7 +130,7 @@ class UserViewModel: ObservableObject {
         let email = formatEmail(username)
         
         
-        
+        // Versucht, einen neuen Benutzer mit der angegebenen E-Mail und Passwort zu erstellen
         firebaseManager.auth.createUser(withEmail: email, password: password) { [weak self] authResult, error in
             guard let self = self else { return }
             if let error = error as NSError? {
@@ -142,8 +142,10 @@ class UserViewModel: ObservableObject {
             
             guard let authResult = authResult else { return }
             
-            
+            // Erstellt einen neuen Benutzereintrag in der Firestore-Datenbank
             self.createUser(with: authResult.user.uid, name: name)
+            
+            // Meldet den neu registrierten Benutzer direkt an
             self.login(username: username, password: password)
             
         }
