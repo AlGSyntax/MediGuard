@@ -8,7 +8,7 @@
 import SwiftUI
 
 /**
- Die `DetailViewButton`-Struktur ist eine SwiftUI-View-Komponente, die einen Button mit einem Symbol und einem Text darstellt.
+ Die `AdministrationViewButton`-Struktur ist eine SwiftUI-View-Komponente, die einen Button mit einem Symbol und einem Text darstellt.
  
  Dieser Button wird in der `HomeView` verwendet, um zu verschiedenen Detailansichten zu navigieren.
 

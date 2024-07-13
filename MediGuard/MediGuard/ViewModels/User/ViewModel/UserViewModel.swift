@@ -38,6 +38,8 @@ import FirebaseAuth
  - `authenticate()`: Führt die Authentifizierung basierend auf dem aktuellen Modus aus.
  - `clearFields()`: Leert die Eingabefelder für die Authentifizierung.
  - `logout()`: Meldet den aktuell authentifizierten Benutzer ab.
+ - `deleteAccount()`: Löscht den aktuell authentifizierten Benutzer und dessen Daten.
+ -
  */
 @MainActor
 class UserViewModel: ObservableObject {
@@ -58,6 +60,8 @@ class UserViewModel: ObservableObject {
     @Published var confirmPassword: String = ""
     @Published var errorMessage: String = ""
     @Published var authenticationError: AuthenticationError?
+    
+
     
     // MARK: - Computed Properties
     
@@ -151,6 +155,37 @@ class UserViewModel: ObservableObject {
         }
     }
     
+    /**
+     Löscht den aktuell authentifizierten Benutzer und dessen Daten.
+     */
+       func deleteAccount() {
+           guard let currentUser = firebaseManager.auth.currentUser else {
+               self.errorMessage = "Kein Benutzer angemeldet."
+               return
+           }
+           
+           // Löscht das Benutzer-Dokument aus Firestore
+           firebaseManager.database.collection("users").document(currentUser.uid).delete { [weak self] error in
+               guard let self = self else { return }
+               if let error = error {
+                   self.errorMessage = "Fehler beim Löschen der Benutzerdaten: \(error.localizedDescription)"
+                   return
+               }
+               
+               // Löscht den Benutzer aus Firebase Authentication
+               currentUser.delete { error in
+                   if let error = error {
+                       self.errorMessage = "Fehler beim Löschen des Benutzerkontos: \(error.localizedDescription)"
+                   } else {
+                       self.user = nil
+                       self.errorMessage = "Account erfolgreich gelöscht"
+                    print("Benutzerkonto wurde gelöscht!")
+                       
+                   }
+               }
+           }
+       }
+    
     /// Wechselt zwischen den Authentifizierungsmodi (`login` und `register`).
     func switchAuthenticationMode() {
         
@@ -217,6 +252,7 @@ class UserViewModel: ObservableObject {
         }
     }
     
+
     
     
     

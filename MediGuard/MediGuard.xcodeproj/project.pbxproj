@@ -83,6 +83,7 @@
 		38A4AA7B2C15AFB3004FE7FA /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 38A4AA7A2C15AFB3004FE7FA /* FirebaseStorageCombine-Community */; };
 		38A59EEF2C42619A003B6E49 /* MealDocumentationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A59EEE2C42619A003B6E49 /* MealDocumentationButton.swift */; };
 		38A59EF42C427BDD003B6E49 /* HugeTitleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A59EF32C427BDD003B6E49 /* HugeTitleModifier.swift */; };
+		38A59EFA2C42857D003B6E49 /* DeleteAccountButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A59EF92C42857D003B6E49 /* DeleteAccountButton.swift */; };
 		38A88A0E2C21390B0063ACEA /* MedicationColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A88A0D2C21390B0063ACEA /* MedicationColor.swift */; };
 		38A88A5B2C21708A0063ACEA /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A88A5A2C21708A0063ACEA /* Fonts.swift */; };
 		38A8922B2C412E5E00FE89CE /* Ubuntu-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A892232C412E5E00FE89CE /* Ubuntu-LightItalic.ttf */; };
@@ -161,6 +162,7 @@
 		388C1D422C30172F00191A7C /* PredefinedMedicationTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredefinedMedicationTime.swift; sourceTree = "<group>"; };
 		38A59EEE2C42619A003B6E49 /* MealDocumentationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDocumentationButton.swift; sourceTree = "<group>"; };
 		38A59EF32C427BDD003B6E49 /* HugeTitleModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HugeTitleModifier.swift; sourceTree = "<group>"; };
+		38A59EF92C42857D003B6E49 /* DeleteAccountButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountButton.swift; sourceTree = "<group>"; };
 		38A88A0D2C21390B0063ACEA /* MedicationColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationColor.swift; sourceTree = "<group>"; };
 		38A88A572C216F9D0063ACEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		38A88A5A2C21708A0063ACEA /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
@@ -982,10 +984,19 @@
 		38A59EF72C427CFC003B6E49 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				38A59EF82C42856C003B6E49 /* DeleteAccount */,
 				38A59EF52C427CCE003B6E49 /* Logout */,
 				38A59EF62C427CE3003B6E49 /* SaveEmergencyContact */,
 			);
 			path = Buttons;
+			sourceTree = "<group>";
+		};
+		38A59EF82C42856C003B6E49 /* DeleteAccount */ = {
+			isa = PBXGroup;
+			children = (
+				38A59EF92C42857D003B6E49 /* DeleteAccountButton.swift */,
+			);
+			path = DeleteAccount;
 			sourceTree = "<group>";
 		};
 		38A88A0B2C2138E90063ACEA /* Model */ = {
@@ -1320,6 +1331,7 @@
 				3886F35A2C18350A004C3203 /* SettingsView.swift in Sources */,
 				381034612C3BD7ED003865AC /* EmptyIntakesView.swift in Sources */,
 				38630DFF2C1B218E002671BD /* AddMedicationSheetView.swift in Sources */,
+				38A59EFA2C42857D003B6E49 /* DeleteAccountButton.swift in Sources */,
 				381034702C3BDBF2003865AC /* DrinksAdministrationSettingsView.swift in Sources */,
 				38A59EF42C427BDD003B6E49 /* HugeTitleModifier.swift in Sources */,
 				386DBDCE2C12D88B00FE3A41 /* FireUser.swift in Sources */,

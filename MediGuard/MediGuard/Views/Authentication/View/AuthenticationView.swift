@@ -25,6 +25,7 @@ struct AuthenticationView: View {
     @State private var isConfirmPasswordVisible = false
     @State private var showAlert = false
     
+    
     // MARK: - Body
     var body: some View {
         VStack(spacing: 24) {
