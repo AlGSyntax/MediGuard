@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 // MARK: - EditMedicationSheetView Struktur
 
 /**
@@ -26,9 +27,9 @@ import SwiftUI
  - showSaveConfirmation: Ein Bool zur Steuerung der Anzeige der Bestätigungsspeicherung.
  - showAlert: Ein Bool zur Steuerung der Anzeige von Fehlermeldungen.
  - alertMessage: Die Fehlermeldung, die angezeigt wird.
+ - daily: Ein Bool zur Steuerung der täglichen Einnahme.
+ - showConfirmationAlert: Ein Bool zur Steuerung der Anzeige des Bestätigungsalerts.
  */
-
-
 
 struct EditMedicationSheetView: View {
     @Environment(\.presentationMode) var presentationMode
@@ -40,7 +41,7 @@ struct EditMedicationSheetView: View {
     @State private var dosage: Int = 10
     @State private var dosageUnit: DosageUnit = .mg
     @State private var intakeTime: Date = Date()
-    @State private var nextIntakeTime: Date?
+    @State private var nextIntakeTime: Date = Date()
     @State private var nextIntakeDay: Weekday?
     @State private var showSaveConfirmation = false
     @State private var showAlert = false
@@ -48,99 +49,155 @@ struct EditMedicationSheetView: View {
     @State private var daily: Bool = false
     @State private var showConfirmationAlert = false
     
+    
+    // MARK: - Body
+    
     var body: some View {
         Form {
-            Section(header: Text("Name des Medikaments")) {
-                TextField("Name", text: $medication.name)
-            }
             
-            Section(header: Text("Uhrzeit der Einnahme")) {
+            // Sektion für den Namen des Medikaments
+            Section(header: Text("Name des Medikaments")
+                .headlineBlue()) {
+                TextField("Name", text: $medication.name)
+                        
+                        
+                }
+                .customSectionStyle()
+            
+            // Sektion für die Uhrzeit der Einnahme
+            Section(header: Text("Uhrzeit der Einnahme")
+                .headlineBlue()) {
                 DatePicker("Uhrzeit", selection: $intakeTime, displayedComponents: .hourAndMinute)
             }
+                .customSectionStyle()
             
-            Section(header: Text("Tag der Einnahme")) {
+            // Sektion für den Tag der Einnahme
+            Section(header: Text("Tag der Einnahme")
+                .headlineBlue()) {
                 Picker("Tag", selection: $medication.day) {
                     ForEach(Weekday.allCases.map { $0.name }, id: \.self) {
                         Text($0).tag($0)
+                            .font(Fonts.body)
+                            
                     }
                 }
             }
+                .customSectionStyle()
             
-            Section(header: Text("Nächstes Einnahmedatum (optional)")) {
+            // Sektion für das nächste Einnahmedatum (optional)
+            Section(header: Text("Nächstes Einnahmedatum (optional)")
+                .headlineBlue()) {
                 Picker("Nächster Tag", selection: $nextIntakeDay) {
+                    // 'nil' + Weekday.allCases: Ermöglicht die Auswahl von "Keine Auswahl"
                     ForEach([nil] + Weekday.allCases, id: \.self) {
                         Text($0?.name ?? "Keine Auswahl").tag($0)
+                            
                     }
                 }
                 if nextIntakeDay != nil {
-                    Picker("Nächste Uhrzeit", selection: $nextIntakeTime) {
-                        ForEach([nil] + ["08:00", "12:00", "16:00", "20:00"], id: \.self) {
-                            Text($0 ?? "Keine Auswahl").tag($0)
+                    DatePicker("Uhrzeit", selection: $nextIntakeTime, displayedComponents: .hourAndMinute)
+                        .onAppear {
+                            
+                                nextIntakeTime = Date()
+                            
                         }
-                    }
                 }
             }
+                .customSectionStyle()
             
-            Section {
-                Toggle("Täglich", isOn: $daily)
+            // Sektion für die tägliche Einnahme
+            Section(header: Text("Tägliche Einnahme (optional)")
+                .headlineBlue())
+            {
+                Toggle("", isOn: $daily)
             }
+            .customSectionStyle()
             
-            Section(header: Text("Farbe der Karte")) {
+            // Sektion für die Farbe der Medikamentenkarte
+            Section(header: Text("Farbe der Karte")
+                .headlineBlue()) {
                 Picker("Farbe", selection: $selectedColor) {
                     ForEach(MedicationColor.allCases, id: \.self) { color in
                         Text(color.rawValue.capitalized).tag(color)
+                            
                     }
                 }
                 .pickerStyle(MenuPickerStyle())
             }
+                .customSectionStyle()
             
-            Section(header: Text("Dosierung")) {
+            // Sektion für die Dosierung des Medikaments
+            Section(header: Text("Dosierung")
+                .headlineBlue()) {
                 HStack {
                     TextField("Dosierung", value: $dosage, formatter: NumberFormatter())
                         .keyboardType(.numberPad)
+                        
+                        
+                        
                     Picker("Einheit", selection: $dosageUnit) {
                         ForEach(DosageUnit.allCases, id: \.self) { unit in
                             if let image = unit.image {
                                 image.tag(unit)
                             } else {
                                 Text(unit.displayName).tag(unit)
+                                    
+                                    
                             }
                         }
                     }
                     .pickerStyle(SegmentedPickerStyle())
                 }
             }
+                .customSectionStyle()
         }
+        // Setzt den Hintergrund der gesamten Ansicht
+                .background(Color("Background").ignoresSafeArea())
         .navigationBarTitle("Medikament bearbeiten", displayMode: .inline)
         .navigationBarItems(leading: Button("Abbrechen") {
             self.presentationMode.wrappedValue.dismiss()
         }, trailing: Button("Speichern") {
             self.showConfirmationAlert = true
         })
+        // Fehler-Alert
         .alert(isPresented: $showAlert) {
-            Alert(title: Text("Fehler"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+            Alert(title: Text("Fehler")
+                .font(Fonts.title1)
+                .foregroundStyle(.red), message: Text(alertMessage), dismissButton: .default(Text("OK")
+                    .font(Fonts.body)
+                    .foregroundStyle(.blue)))
         }
+        // Bestätigungs-Alert
         .alert(isPresented: $showConfirmationAlert) {
             Alert(
-                title: Text("Änderungen bestätigen"),
-                message: Text("Bist du mit den Änderungen einverstanden?"),
-                primaryButton: .default(Text("Ja")) {
+                title: Text("Änderungen bestätigen")
+                    .bodyBlue()
+                        
+                    ,
+                message: Text("Bist du mit den Änderungen einverstanden?")
+                    .bodyBlue(),
+                primaryButton: .default(Text("Ja")
+                    .bodyBlue()) {
                     Task {
                         do {
+                            // Extrahiert Stunden- und Minutenkomponenten aus der Einnahmezeit
                             let intakeTimeComponents = Calendar.current.dateComponents([.hour, .minute], from: intakeTime)
                             medication.intakeTime = intakeTimeComponents
-                            if let nextDay = nextIntakeDay, let nextTime = nextIntakeTime {
-                                var nextIntakeTimeComponents = Calendar.current.dateComponents([.hour, .minute], from: nextTime)
+                            if let nextDay = nextIntakeDay {
+                                // Setzt das nächste Einnahmedatum
+                                var nextIntakeTimeComponents = Calendar.current.dateComponents([.hour, .minute], from: nextIntakeTime)
                                 nextIntakeTimeComponents.weekday = nextDay.rawValue
                                 medication.nextIntakeDate = nextIntakeTimeComponents
                             } else {
                                 medication.nextIntakeDate = nil
                             }
+                            // Setzt weitere Eigenschaften des Medikaments
                             medication.color = selectedColor
                             medication.dosage = dosage
                             medication.dosageUnit = dosageUnit
                             medication.daily = daily
                             
+                            // Aktualisiert das Medikament im ViewModel
                             try await medicationViewModel.updateMedication(medication, userId: userViewModel.userId ?? "")
                             self.presentationMode.wrappedValue.dismiss()
                         } catch let error as ValidationError {
@@ -152,9 +209,11 @@ struct EditMedicationSheetView: View {
                         }
                     }
                 },
-                secondaryButton: .cancel(Text("Nein"))
+                secondaryButton: .cancel(Text("Nein")
+                    .bodyBlue())
             )
         }
+        // Setzt die initialen Werte bei Erscheinen der Ansicht
         .onAppear {
             selectedColor = medication.color
             dosage = medication.dosage
@@ -162,17 +221,16 @@ struct EditMedicationSheetView: View {
             intakeTime = Calendar.current.date(from: medication.intakeTime) ?? Date()
             if let nextDate = medication.nextIntakeDate {
                 nextIntakeDay = Weekday.from(nextDate.weekday)
-                nextIntakeTime = Calendar.current.date(from: nextDate)
+                nextIntakeTime = Calendar.current.date(from: nextDate) ?? Date()
             }
             daily = medication.daily
         }
+        
+
     }
+  
     
-    
-    private func getTimeComponents(from time: String) -> DateComponents {
-        let parts = time.split(separator: ":").map { Int($0) }
-        return DateComponents(hour: parts[0], minute: parts[1])
-    }
+   
 }
 
 

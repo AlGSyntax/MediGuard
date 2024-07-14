@@ -23,6 +23,9 @@ struct AdministrationViewButton: View {
     let title: String
     let iconName: String
     
+    // MARK: - State variable for animation
+    @State private var isTapped = false
+    
     // MARK: - Body
     
     var body: some View {
@@ -36,7 +39,7 @@ struct AdministrationViewButton: View {
                 
             // Text auf dem Button
             Text(title)
-                .font(.largeTitle)
+                .font(Fonts.title1)
                 .padding()
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
@@ -49,7 +52,7 @@ struct AdministrationViewButton: View {
 
 // MARK: - Vorschau
 
-struct DetailViewButton_Previews: PreviewProvider {
+struct AdministrationViewButton_Previews: PreviewProvider {
     static var previews: some View {
         AdministrationViewButton(title: "Button", iconName: "star")
     }

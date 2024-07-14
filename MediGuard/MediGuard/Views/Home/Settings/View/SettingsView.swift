@@ -43,12 +43,14 @@ struct SettingsView: View {
                 Text("Hier den Notfallkontakt speichern")
                     .font(Fonts.body)
                     .foregroundStyle(.blue)
+                    .padding()
                 
                 // Eingabefeld für die Notfallkontakt-Telefonnummer
                 TextField("Notfallkontakt Telefonnummer", text: $settingsViewModel.emergencyContact)
                     .padding()
+                    .foregroundStyle(.white)
                     .keyboardType(.phonePad)
-                    .background(.white)
+                    .background(.red)
                     .cornerRadius(8)
                     .font(Fonts.headline)
                 
@@ -56,7 +58,12 @@ struct SettingsView: View {
                 SaveEmergencyContactButton()
                     .environmentObject(settingsViewModel)
             }
-            .padding(.bottom, 20)
+            .background(
+                            RoundedRectangle(cornerRadius: 16)
+                                .fill(Color.white)
+                                
+                        )
+                        .padding(.horizontal)
             Spacer()
             // MARK: - Benutzerkonto
             VStack(alignment: .center, spacing: 10) {
@@ -64,6 +71,7 @@ struct SettingsView: View {
                 Text("Account")
                     .font(Fonts.body)
                     .foregroundStyle(.blue)
+                    .padding()
                 
                 // Button zum Abmelden des Benutzers
                 LogoutButton()
@@ -73,6 +81,12 @@ struct SettingsView: View {
                 DeleteAccountButton()
                     .environmentObject(userViewModel)
             }
+            .background(
+                            RoundedRectangle(cornerRadius: 16)
+                                .fill(Color.white)
+                                
+                        )
+                        .padding(.horizontal)
             
             Spacer()
         }

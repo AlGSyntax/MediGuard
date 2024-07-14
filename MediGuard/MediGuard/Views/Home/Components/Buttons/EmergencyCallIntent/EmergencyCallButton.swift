@@ -40,7 +40,7 @@ struct EmergencyCallButton: View {
                 
                 // Text auf dem Button
                 Text(title)
-                    .font(.largeTitle)
+                    .font(Fonts.title1)
             }
             .padding()
             .background(Color.red)

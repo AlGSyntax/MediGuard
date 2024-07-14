@@ -8,6 +8,7 @@
 import SwiftUI
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import UserNotifications
 
 // MARK: - MedicationDetailViewModel Klasse
 
@@ -40,7 +41,12 @@ class MedicationAdminstrationViewModel: ObservableObject {
     /// Initialisiert das ViewModel und listet geplante Benachrichtigungen auf.
     init() {
         listScheduledNotifications()
+        print("MedicationAdminstrationViewModel initialisiert")
+        
+        
+        
     }
+    
 
     // MARK: - Medikamente abrufen
     
@@ -81,30 +87,74 @@ class MedicationAdminstrationViewModel: ObservableObject {
      
      - Parameter medication: Das `Medication`-Objekt, für das die Benachrichtigung geplant werden soll.
      */
-    func scheduleNotification(for medication: Medication) {
-        let content = UNMutableNotificationContent()
-        content.title = "Medikamentenerinnerung"
-        content.body = "Es ist Zeit, \(medication.name) einzunehmen."
-        content.sound = UNNotificationSound.default
-        
-        // Erstellt ein Datum-Objekt basierend auf der Einnahmezeit des Medikaments
-        let date = Date().setTime(hour: medication.intakeTime.hour!, minute: medication.intakeTime.minute!)
-        let comps = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)
-        
-        // Erstellt einen Benachrichtigungstrigger basierend auf den Datumskomponenten
-        let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: true)
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+    
 
-        // Fügt die Benachrichtigungsanforderung hinzu
-        UNUserNotificationCenter.current().add(request) { error in
-            if let error = error {
-                self.errorMessage = "Fehler beim Planen der Benachrichtigung: \(error.localizedDescription)"
+    func scheduleNotification(for medication: Medication) {
+            let content = UNMutableNotificationContent()
+            content.title = "Medikamentenerinnerung"
+            content.body = "Es ist Zeit, \(medication.name) einzunehmen."
+            content.sound = UNNotificationSound.default
+
+            let now = Date()
+            let calendar = Calendar.current
+            let timeZone = TimeZone.current
+
+            print("Aktuelle Zeit: \(now)")
+
+            guard let weekday = Weekday.from(medication.day) else {
+                self.errorMessage = "Ungültiger Wochentag: \(String(describing: medication.day))"
+                return
+            }
+
+            if let nextDate = Weekday.next(weekday, after: now, intakeHour: medication.intakeTime.hour ?? 0, intakeMinute: medication.intakeTime.minute ?? 0) {
+                print("Nächster \(weekday.name): \(nextDate)")
+
+                var dateComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: nextDate)
+                dateComponents.timeZone = timeZone
+
+                guard let notificationTime = calendar.date(from: dateComponents) else {
+                    self.errorMessage = "Fehler beim Erstellen der Benachrichtigungszeit aus den DateComponents"
+                    return
+                }
+
+                print("Geplante Zeit (local): \(dateComponents)")
+                print("Benachrichtigungszeit (local): \(notificationTime)")
+
+                if notificationTime > now {
+                    print("Benachrichtigung für \(notificationTime == nextDate ? "heute" : "zukünftigen Tag") geplant")
+                    let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+                    let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
+                    UNUserNotificationCenter.current().add(request) { error in
+                        if let error = error {
+                            self.errorMessage = "Fehler beim Planen der Benachrichtigung: \(error.localizedDescription)"
+                            print("Fehler beim Planen der Benachrichtigung: \(error.localizedDescription)")
+                        } else {
+                            print("Benachrichtigung geplant für \(medication.name) um \(dateComponents.hour ?? 0):\(dateComponents.minute ?? 0) am \(weekday.name)")
+                        }
+                    }
+                } else {
+                    print("Die geplante Benachrichtigungszeit liegt in der Vergangenheit")
+                    self.errorMessage = "Die geplante Benachrichtigungszeit liegt in der Vergangenheit"
+                }
+            } else {
+                print("Fehler bei der Berechnung des nächsten Wochentages")
+                self.errorMessage = "Fehler bei der Berechnung des nächsten Wochentages"
             }
         }
-    }
+
+
+
+
+
+
+
+
+
+
 
     // MARK: - Geplante Benachrichtigungen auflisten
-    
+
     /**
      Listet alle geplanten Benachrichtigungen auf und gibt deren Details aus.
      */
@@ -112,8 +162,17 @@ class MedicationAdminstrationViewModel: ObservableObject {
         UNUserNotificationCenter.current().getPendingNotificationRequests { notifications in
             notifications.forEach { notification in
                 guard let dateComponents = (notification.trigger as? UNCalendarNotificationTrigger)?.dateComponents,
-                      let date = Calendar.current.date(from: dateComponents) else { return }
-                print("-----> Benachrichtigungen: ", date, notification.identifier)
+                      let _ = Calendar.current.date(from: dateComponents) else { return }
+
+                // Konvertiere die Benachrichtigungszeit in die lokale Zeitzone
+                let timeZone = TimeZone.current
+                var localDateComponents = dateComponents
+                localDateComponents.timeZone = timeZone
+                if let localDate = Calendar.current.date(from: localDateComponents) {
+                    print("-----> Benachrichtigungen: ", localDate, notification.identifier)
+                } else {
+                    print("-----> Fehler beim Konvertieren der Benachrichtigungszeit in die lokale Zeitzone")
+                }
             }
         }
     }
@@ -133,7 +192,7 @@ class MedicationAdminstrationViewModel: ObservableObject {
      - Parameter userId: Die ID des Benutzers, dem das Medikament gehört.
      - Throws: `ValidationError` falls die Validierung fehlschlägt.
      */
-    func addMedication(name: String, intakeTime: DateComponents, day: String, nextIntakeDate: DateComponents?, color: MedicationColor, dosage: Int, dosageUnit: DosageUnit, userId: String, daily: Bool) throws {
+    func addMedication(name: String, intakeTime: DateComponents, day: Int, nextIntakeDate: DateComponents?, color: MedicationColor, dosage: Int, dosageUnit: DosageUnit, userId: String, daily: Bool) throws {
             if name.isEmpty {
                 throw ValidationError.emptyName
             }
@@ -150,12 +209,15 @@ class MedicationAdminstrationViewModel: ObservableObject {
             do {
                 if daily {
                     for weekday in Weekday.allCases {
-                        let dailyMedication = Medication(id: UUID().uuidString, name: name, intakeTime: intakeTime, day: weekday.name, nextIntakeDate: nextIntakeDate, color: color, dosage: dosage, dosageUnit: dosageUnit, daily: daily)
+                        let dailyMedication = Medication(id: UUID().uuidString, name: name, intakeTime: intakeTime, day: weekday.rawValue, nextIntakeDate: nextIntakeDate, color: color, dosage: dosage, dosageUnit: dosageUnit, daily: daily)
                         try medicationRef.addDocument(from: dailyMedication) { error in
                             if let error = error {
                                 self.errorMessage = "Fehler beim Hinzufügen des Medikaments: \(error.localizedDescription)"
                                 return
                             }
+                            // Planen der Benachrichtigung für tägliche Medikamente
+                            self.scheduleNotification(for: dailyMedication)
+                            self.listScheduledNotifications()
                         }
                     }
                 } else {
@@ -164,6 +226,9 @@ class MedicationAdminstrationViewModel: ObservableObject {
                             self.errorMessage = "Fehler beim Hinzufügen des Medikaments: \(error.localizedDescription)"
                             return
                         }
+                        // Planen der Benachrichtigung für tägliche Medikamente
+                        self.scheduleNotification(for: newMedication)
+                        self.listScheduledNotifications()
                     }
                 }
             } catch let error {
@@ -172,7 +237,7 @@ class MedicationAdminstrationViewModel: ObservableObject {
 
             if let nextIntakeDate = nextIntakeDate {
                 let nextMedicationRef = firestore.collection("users").document(userId).collection("medications")
-                let nextDay = Weekday.from(nextIntakeDate.weekday)?.name ?? "Unbekannt"
+                let nextDay = Weekday.from(nextIntakeDate.weekday)?.rawValue ?? 1
                 let nextMedication = Medication(id: UUID().uuidString, name: name, intakeTime: nextIntakeDate, day: nextDay, nextIntakeDate: nil, color: color, dosage: dosage, dosageUnit: dosageUnit, daily: daily)
                 
                 do {
@@ -181,6 +246,9 @@ class MedicationAdminstrationViewModel: ObservableObject {
                             self.errorMessage = "Fehler beim Hinzufügen der nächsten Medikation: \(error.localizedDescription)"
                             return
                         }
+                        // Planen der Benachrichtigung für tägliche Medikamente
+                        self.scheduleNotification(for: nextMedication)
+                        self.listScheduledNotifications()
                     }
                 } catch let error {
                     self.errorMessage = "Fehler beim Serialisieren der nächsten Medikation: \(error.localizedDescription)"
@@ -212,6 +280,9 @@ class MedicationAdminstrationViewModel: ObservableObject {
 
             // Entfernt das Medikament aus dem lokalen Array
             self.medications.removeAll { $0.id == medication.id }
+            
+            // Entfernt alle damit verbunden Benachrichtigungen
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [id])
         }
     }
 
@@ -257,7 +328,7 @@ class MedicationAdminstrationViewModel: ObservableObject {
                         id: UUID().uuidString,
                         name: medication.name,
                         intakeTime: medication.intakeTime,
-                        day: weekday.name,
+                        day: weekday.rawValue,
                         nextIntakeDate: medication.nextIntakeDate,
                         color: medication.color,
                         dosage: medication.dosage,
@@ -273,7 +344,7 @@ class MedicationAdminstrationViewModel: ObservableObject {
 
             // Füge ggf. die nächste Einnahme des Medikaments hinzu
             if let nextIntakeDate = medication.nextIntakeDate {
-                let nextDay = Weekday.from(nextIntakeDate.weekday)?.name ?? "Unbekannt"
+                let nextDay = Weekday.from(nextIntakeDate.weekday)?.rawValue ?? 1
                 let nextMedication = Medication(
                     id: UUID().uuidString,
                     name: medication.name,
@@ -287,11 +358,17 @@ class MedicationAdminstrationViewModel: ObservableObject {
                 )
                 
                 try  medicationCollectionRef.addDocument(from: nextMedication)
+                
+                // Planen der Benachrichtigung für die nächste Einnahme des Medikaments
+                scheduleNotification(for: nextMedication)
+                self.listScheduledNotifications()
             }
         } catch let error {
             self.errorMessage = "Fehler beim Aktualisieren des Medikaments: \(error.localizedDescription)"
         }
     }
-
+    
+    
+   
 
 }

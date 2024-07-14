@@ -7,18 +7,42 @@
 
 import SwiftUI
 
+// MARK: - DrinksDocumentationView
+
+/**
+ Die Hauptansicht zur Verwaltung und Anzeige des Getränkekonsums.
+
+ Diese Ansicht zeigt eine Liste von Getränken für die aktuelle und vergangene Wochen an. Der Benutzer kann den Gesamtverbrauch sehen und ob das Tagesziel erreicht wurde.
+ 
+ - Properties:
+    - viewModel: Das ViewModel zur Verwaltung der Getränkeverläufe.
+    - userViewModel: Das ViewModel des Benutzers, bereitgestellt durch die Umgebung.
+    - expandedSections: Ein Zustand zur Verfolgung der erweiterten Abschnitte.
+ */
+
 struct DrinksDocumentationView: View {
+    
+    // MARK: - Properties
+       
+    /// Das ViewModel zur Verwaltung der Getränkeverläufe.
     @StateObject private var viewModel = DrinksDocumentationViewModel()
+    
+    /// Das ViewModel des Benutzers, bereitgestellt durch die Umgebung.
     @EnvironmentObject private var userViewModel: UserViewModel
+    
+    /// Ein Zustand zur Verfolgung der erweiterten Abschnitte.
     @State private var expandedSections: [String: Bool] = [:]
     
+    // MARK: - Body
     var body: some View {
         VStack {
-            Text("Getränke Chronik")
-                .font(.largeTitle)
-                .padding()
+            Text("Verlauf")
+                .hugeTitleStyle()
 
             List {
+                
+                // MARK: - Aktuelle Woche
+                
                 // Zeigt die aktuelle Woche an
                 if let currentWeek = viewModel.currentWeek {
                     DisclosureGroup(isExpanded: Binding(
@@ -31,19 +55,28 @@ struct DrinksDocumentationView: View {
                             let intakes = groupedByDay[day] ?? []
                             let totalIntake = intakes.reduce(0) { $0 + $1.amount }
                             Section(header: Text(day)
-                                .background(totalIntake >= viewModel.goal ? Color.blue : Color.red)
-                                .cornerRadius(8)
-                                .foregroundStyle(.white)) {
+                                .font(Fonts.title1)// Setzt die Schriftart
+                                                             .padding(.vertical, 10)
+                                                             .padding(.horizontal, 10)
+                                                             .background(Color.blue)// Hintergrundfarbe des Headers
+                                                             .foregroundStyle(.white)// Schriftfarbe des Headers
+                                                             .cornerRadius(8)// Abrundung des Headers
+                                                             .shadow(color: .mint, radius: 1, x: 0, y: 7)// Schatten des Headers
+                            ) {
                                 Text("Gesamt: \(totalIntake) mL")
-                                    .font(.headline)
+                                    .headlineBlue()
+                                Text(totalIntake >= viewModel.goal ? "Tagesziel erreicht" : "Tagesziel noch nicht erreicht")
+                                                                    .bodyBlue()
                             }
                         }
                     } label: {
                         Text("Aktuelle Woche \(currentWeek.weekNumber)")
-                            .font(.headline)
-                            .padding(.vertical, 5)
+                            .hugeTitleStyle()
                     }
+                    .listRowBackground(Color("Background"))
                 }
+                
+                // MARK: - Vergangene Wochen
 
                 // Zeigt die vergangenen Wochen an
                 ForEach(viewModel.pastWeeks, id: \.id) { week in
@@ -57,20 +90,29 @@ struct DrinksDocumentationView: View {
                             let intakes = groupedByDay[day] ?? []
                             let totalIntake = intakes.reduce(0) { $0 + $1.amount }
                             Section(header: Text(day)
-                                .background(totalIntake >= viewModel.goal ? Color.blue : Color.red)
-                                .cornerRadius(8)
-                                .foregroundStyle(.white)) {
+                                .font(Fonts.title1)// Setzt die Schriftart
+                                                             .padding(.vertical, 10)
+                                                             .padding(.horizontal, 10)
+                                                             .background(Color.blue)// Hintergrundfarbe des Headers
+                                                             .foregroundStyle(.white)// Schriftfarbe des Headers
+                                                             .cornerRadius(8)// Abrundung des Headers
+                                                             .shadow(color: .mint, radius: 1, x: 0, y: 7)
+                            ) {
                                 Text("Gesamt: \(totalIntake) mL")
-                                    .font(.headline)
+                                    .headlineBlue()
+                                Text(totalIntake >= viewModel.goal ? "Tagesziel erreicht" : "Tagesziel nicht erreicht")
+                                                                    .bodyBlue()
                             }
                         }
                     } label: {
                         Text("Woche \(week.weekNumber)")
-                            .font(.headline)
-                            .padding(.vertical, 5)
+                            .hugeTitleStyle()
                     }
+                    .listRowBackground(Color("Background"))
                 }
             }
+            .listStyle(PlainListStyle()) // Setzt den Listenstil
+            .background(Color("Background")) // Hintergrund für die Liste
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: CustomBackButton())
@@ -81,6 +123,7 @@ struct DrinksDocumentationView: View {
             }
             
         }
+        .background(Color("Background").ignoresSafeArea()) //
     }
 }
 

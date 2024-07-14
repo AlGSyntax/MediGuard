@@ -29,7 +29,7 @@ class SettingsViewModel: ObservableObject {
      Wenn kein Notfallkontakt gespeichert ist, wird die Standardnummer "112" verwendet.
      */
     init() {
-        emergencyContact = UserDefaults.standard.string(forKey: "emergencyContact") ?? "112"
+        emergencyContact = UserDefaults.standard.string(forKey: "emergencyContact") ?? " Notrufnummer eingeben"
     }
     
     // MARK: - Functions

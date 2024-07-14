@@ -61,7 +61,7 @@ extension AuthModeSwitchButton {
      */
     @MainActor static func switchModeButton(userViewModel: UserViewModel) -> AuthModeSwitchButton {
         return AuthModeSwitchButton(title: userViewModel.mode.alternativeTitle) {
-            withAnimation {
+            withAnimation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 1)) {
                 userViewModel.switchAuthenticationMode() // Wechselt den Authentifizierungsmodus im ViewModel
             }
         }

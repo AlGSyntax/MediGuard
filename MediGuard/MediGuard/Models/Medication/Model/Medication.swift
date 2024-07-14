@@ -30,7 +30,7 @@ struct Medication: Identifiable, Codable,Hashable {
     @DocumentID var id: String?
     var name: String
     var intakeTime: DateComponents
-    var day: String
+    var day: Int?
     var nextIntakeDate: DateComponents?
     var color: MedicationColor
     var dosage: Int
@@ -49,7 +49,7 @@ struct Medication: Identifiable, Codable,Hashable {
      - Parameter dosage: Die Dosierung des Medikaments.
      - Parameter dosageUnit: Die Einheit der Dosierung (z.B. mg, ml).
      */
-    init(id: String? = nil, name: String, intakeTime: DateComponents, day: String, nextIntakeDate: DateComponents?, color: MedicationColor, dosage: Int, dosageUnit: DosageUnit, daily: Bool = false) {
+    init(id: String? = nil, name: String, intakeTime: DateComponents, day: Int, nextIntakeDate: DateComponents?, color: MedicationColor, dosage: Int, dosageUnit: DosageUnit, daily: Bool = false) {
         self.id = id
         self.name = name
         self.intakeTime = intakeTime

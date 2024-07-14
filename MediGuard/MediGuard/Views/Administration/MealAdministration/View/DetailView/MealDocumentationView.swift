@@ -42,9 +42,8 @@ struct MealDocumentationView: View {
 
     var body: some View {
         VStack {
-            Text("Mahlzeiten Chronik")
-                .font(.largeTitle)
-                .padding()
+            Text("Verlauf")
+                .hugeTitleStyle()
 
             List {
                 // Zeigt die aktuelle Woche an
@@ -57,27 +56,39 @@ struct MealDocumentationView: View {
                         let groupedByDay = viewModel.groupMealsByDay(currentWeek.meals)
                         ForEach(groupedByDay.keys.sorted(), id: \.self) { day in
                             let meals = groupedByDay[day] ?? []
-                            Section(header: Text(day)) {
+                            Section(header: Text(day)
+                                .font(Fonts.title1)// Setzt die Schriftart
+                                .padding(.vertical, 10)
+                                .padding(.horizontal, 10)
+                                .background(Color.blue)// Hintergrundfarbe des Headers
+                                .foregroundStyle(.white)// Schriftfarbe des Headers
+                                .cornerRadius(8)// Abrundung des Headers
+                                .shadow(color: .mint, radius: 1, x: 0, y: 7)// Schatten des Headers
+                            ) {
                                 // Gruppierung der Mahlzeiten des Tages nach Zeit
                                 let groupedByTime = viewModel.groupMealsByTime(meals)
                                 ForEach(groupedByTime.keys.sorted(), id: \.self) { time in
                                     let mealsAtTime = groupedByTime[time] ?? []
-                                    Section(header: Text("Zeit: \(time)")) {
+                                    Section(header: Text("Zeit: \(time)")
+                                        .bodyBlue()) {
                                         ForEach(mealsAtTime, id: \.id) { meal in
                                             MealCardView(meal: meal, onDelete: {
                                                 mealToDelete = meal
                                                 showAlert = true
                                             })
+                                            .listRowBackground(Color("Background"))
                                         }
                                     }
+                                    .listRowBackground(Color("Background"))
                                 }
                             }
+                            .listRowBackground(Color("Background"))
                         }
                     } label: {
                         Text("Aktuelle Woche \(currentWeek.weekNumber)")
-                            .font(.headline)
-                            .padding(.vertical, 5)
+                            .hugeTitleStyle()
                     }
+                    .listRowBackground(Color("Background"))
                 }
 
                 // Zeigt die vergangenen Wochen an
@@ -90,30 +101,49 @@ struct MealDocumentationView: View {
                         let groupedByDay = viewModel.groupMealsByDay(week.meals)
                         ForEach(groupedByDay.keys.sorted(), id: \.self) { day in
                             let meals = groupedByDay[day] ?? []
-                            Section(header: Text(day)) {
+                            Section(header: Text(day)
+                                .font(Fonts.title1)// Setzt die Schriftart
+                                .padding(.vertical, 10)
+                                .padding(.horizontal, 10)
+                                .background(Color.blue)// Hintergrundfarbe des Headers
+                                .foregroundStyle(.white)// Schriftfarbe des Headers
+                                .cornerRadius(8)// Abrundung des Headers
+                                .shadow(color: .mint, radius: 1, x: 0, y: 7)// Schatten des Headers
+                            ) {
                                 // Gruppierung der Mahlzeiten des Tages nach Zeit
                                 let groupedByTime = viewModel.groupMealsByTime(meals)
                                 ForEach(groupedByTime.keys.sorted(), id: \.self) { time in
                                     let mealsAtTime = groupedByTime[time] ?? []
-                                    Section(header: Text("Zeit: \(time)")) {
+                                    Section(header: Text("Zeit: \(time)")
+                                        .bodyBlue()) {
                                         ForEach(mealsAtTime, id: \.id) { meal in
                                             MealCardView(meal: meal, onDelete: {
                                                 mealToDelete = meal
                                                 showAlert = true
                                             })
+                                            .listRowBackground(Color("Background"))
                                         }
                                     }
+                                    .listRowBackground(Color("Background"))
                                 }
                             }
+                            .listRowBackground(Color("Background"))
                         }
                     } label: {
                         Text("Woche  \(week.weekNumber)")
-                            .font(.headline)
-                            .padding(.vertical, 5)
+                            .hugeTitleStyle()
                     }
+                    .listRowBackground(Color("Background"))
                 }
             }
+            .listStyle(PlainListStyle())
+            .background(Color("Background"))
+            .cornerRadius(32)
         }
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: CustomBackButton())
+        .padding(.horizontal)
+        .background(Color("Background").ignoresSafeArea())
         .alert(isPresented: $showAlert) {
             if let mealToDelete = mealToDelete {
                 return Alert(
@@ -127,7 +157,7 @@ struct MealDocumentationView: View {
                     secondaryButton: .cancel(Text("Abbrechen"))
                 )
             } else {
-                return Alert(title: Text("Fehler"), message: Text("Es gibt keine Mahlzeit zum Löschen."), dismissButton: .default(Text("OK")))
+                return Alert(title: Text("Fehler").bodyBlue(), message: Text("Es gibt keine Mahlzeit zum Löschen.").bodyBlue(), dismissButton: .default(Text("OK").bodyBlue()))
             }
         }
         .onAppear {

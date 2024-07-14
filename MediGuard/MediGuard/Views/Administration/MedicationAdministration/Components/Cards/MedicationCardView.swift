@@ -60,7 +60,7 @@ struct MedicationCardView: View {
             Text(medication.name)
                 .font(.title)
                 .foregroundColor(.white)
-                .padding(.bottom, 5)
+                
             
             
             
@@ -69,7 +69,7 @@ struct MedicationCardView: View {
                 Text("Nächstes Einnahmedatum: \(formatWeekdayAndTime(nextIntakeDate))")
                     .font(.title2)
                     .foregroundColor(.white)
-                    .padding(.bottom, 5)
+                    
             }
             
             // Dosierung und Einheit
@@ -79,11 +79,11 @@ struct MedicationCardView: View {
                     .foregroundColor(.white)
                 if medication.dosageUnit == .pills {
                     Image(systemName: "pills")
-                        .foregroundColor(.white)
+                        .foregroundStyle(.white)
                 } else {
                     Text(medication.dosageUnit.displayName)
                         .font(.title2)
-                        .foregroundColor(.white)
+                        .foregroundStyle(.white)
                 }
             }
         }
@@ -117,7 +117,7 @@ struct MedicationCardView_Previews: PreviewProvider {
         let sampleMedication = Medication(
             name: "Ibuprofen",
             intakeTime: DateComponents(hour: 14, minute: 30),
-            day: "Montag",
+            day: Weekday.monday.rawValue,
             nextIntakeDate: DateComponents(hour: 14, minute: 30, weekday: 3),
             color: .blue,
             dosage: 100,

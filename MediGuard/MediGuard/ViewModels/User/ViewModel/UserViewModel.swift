@@ -179,7 +179,7 @@ class UserViewModel: ObservableObject {
                    } else {
                        self.user = nil
                        self.errorMessage = "Account erfolgreich gelöscht"
-                    print("Benutzerkonto wurde gelöscht!")
+                    
                        
                    }
                }
@@ -222,7 +222,7 @@ class UserViewModel: ObservableObject {
             try firebaseManager.auth.signOut()
             
             self.user = nil
-            print("User wurde abgemeldet!")
+            
             
         } catch {
             DispatchQueue.main.async {
@@ -269,7 +269,7 @@ extension UserViewModel {
     private func checkAuth() {
         guard let currentUser = firebaseManager.auth.currentUser else {
             
-            print("Not logged in")
+           
             
             return
         }
@@ -292,7 +292,7 @@ extension UserViewModel {
         do {
             try firebaseManager.database.collection("users").document(id).setData(from: user)
             
-            print("User wurde erstellt")
+            
             
         } catch let error {
             

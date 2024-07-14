@@ -31,6 +31,7 @@ struct MediGuardApp: App {
         FirebaseConfiguration.shared.setLoggerLevel(.min)
         FirebaseApp.configure()
         requestNotificationAuthorization()
+       
     }
     
     // MARK: - Variables
@@ -55,12 +56,18 @@ struct MediGuardApp: App {
             // Entscheidet, welche View basierend auf dem Anmeldestatus des Benutzers angezeigt wird
             if userViewModel.userIsLoggedIn {
                 // Zeigt die HomeView an, wenn der Benutzer angemeldet ist
-                HomeView()
-                    .environmentObject(userViewModel)
+                withAnimation(.easeInOut(duration: 0.7)) {
+                    HomeView()
+                        .transition(.move(edge: .leading))
+                        .environmentObject(userViewModel)
+                }
             } else {
-                // Zeigt die AuthenticationView an, wenn der Benutzer nicht angemeldet ist
-                AuthenticationView()
-                    .environmentObject(userViewModel)
+                withAnimation(.easeInOut(duration: 0.7)) {
+                    // Zeigt die AuthenticationView an, wenn der Benutzer nicht angemeldet ist
+                    AuthenticationView()
+                        .transition(.move(edge: .leading))
+                        .environmentObject(userViewModel)
+                }
             }
         }
     }

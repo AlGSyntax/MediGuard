@@ -17,13 +17,13 @@ import SwiftUI
  Diese View zeigt eine Liste von Medikamenten und ermöglicht das Hinzufügen, Bearbeiten und Löschen von Medikamenten.
  
  - Eigenschaften:
-    - userViewModel: Das UserViewModel-Objekt, das die Benutzerdaten und Authentifizierungslogik verwaltet.
-    - viewModel: Das MedicationDetailViewModel-Objekt, das die Daten und Logik für die Detailansicht von Medikamenten verwaltet.
-    - showingAddMedicationSheet: Ein Boolescher Zustand, der angibt, ob das Blatt zum Hinzufügen eines neuen Medikaments angezeigt wird.
-    - showingEditMedicationSheet: Ein Boolescher Zustand, der angibt, ob das Blatt zum Bearbeiten eines Medikaments angezeigt wird.
-    - medicationToEdit: Das Medikament, das bearbeitet wird. Wird verwendet, um das Bearbeitungsblatt zu initialisieren.
-    - showAlert: Ein Boolescher Zustand, der angibt, ob ein Alert angezeigt werden soll.
-    - medicationToDelete: Das Medikament, das gelöscht werden soll. Wird verwendet, um den Lösch-Alert zu initialisieren.
+ - userViewModel: Das UserViewModel-Objekt, das die Benutzerdaten und Authentifizierungslogik verwaltet.
+ - viewModel: Das MedicationDetailViewModel-Objekt, das die Daten und Logik für die Detailansicht von Medikamenten verwaltet.
+ - showingAddMedicationSheet: Ein Boolescher Zustand, der angibt, ob das Blatt zum Hinzufügen eines neuen Medikaments angezeigt wird.
+ - showingEditMedicationSheet: Ein Boolescher Zustand, der angibt, ob das Blatt zum Bearbeiten eines Medikaments angezeigt wird.
+ - medicationToEdit: Das Medikament, das bearbeitet wird. Wird verwendet, um das Bearbeitungsblatt zu initialisieren.
+ - showAlert: Ein Boolescher Zustand, der angibt, ob ein Alert angezeigt werden soll.
+ - medicationToDelete: Das Medikament, das gelöscht werden soll. Wird verwendet, um den Lösch-Alert zu initialisieren.
  */
 
 
@@ -31,54 +31,71 @@ import SwiftUI
 struct MedicationAdiminstrationView: View {
     @EnvironmentObject private var userViewModel: UserViewModel
     @StateObject private var viewModel = MedicationAdminstrationViewModel()
-
+    
     @State private var showingAddMedicationSheet = false
     @State private var showingEditMedicationSheet = false
     @State private var medicationToEdit: Medication?
     @State private var showAlert = false
     @State private var medicationToDelete: Medication?
     @State private var showErrorAlert = false
-
+    
     var body: some View {
         VStack {
             HStack {
                 Text("Medikamente")
-                    .font(.largeTitle)
-                    .foregroundColor(.blue)
+                    .hugeTitleStyle()
                 
-               
+                
             }
             .padding(.top, 20)
             
             List {
+                // Durchläuft alle Wochentage
                 ForEach(Weekday.allCases, id: \.self) { day in
-                    Section(header: Text(day.name)
-                                .font(.title2)
-                                .bold()
-                                .padding(.vertical, 10)
-                                .padding(.horizontal, 10)
-                                .background(Color.blue)
-                                .foregroundColor(.white)
-                                .cornerRadius(8)
-                                .padding(.top, 10)) {
-                        
-                        let medicationsForDay = viewModel.medications.filter { $0.day == day.name }
+                    Section(header:
+                                HStack{
+                        Spacer()
+                        Text(day.name)
+                            .font(Fonts.title1)// Setzt die Schriftart
+                            .padding(.vertical, 10)
+                            .padding(.horizontal, 10)
+                            .background(Color.blue)// Hintergrundfarbe des Headers
+                            .foregroundStyle(.white)// Schriftfarbe des Headers
+                            .cornerRadius(8)// Abrundung des Headers
+                            .shadow(color: .mint, radius: 1, x: 0, y: 7)// Schatten des Headers
+                        Spacer()
+                    }) {
+                        // Filtert die Medikamente für den aktuellen Tag
+                        let medicationsForDay = viewModel.medications.filter { $0.day == day.rawValue }
+                        // Ermittelt die einzigartigen Einnahmezeiten für den Tag
                         let uniqueTimes = Set(medicationsForDay.map { $0.intakeTime })
                         
                         if medicationsForDay.isEmpty {
+                            // Zeigt eine Nachricht, wenn keine Medikamente für den Tag vorhanden sind
                             Text("Keine Medikamente für diesen Tag.")
-                                .foregroundColor(.gray)
-                                
+                                .foregroundStyle(.black)
+                                .font(Fonts.headline)
+                            
                         } else {
+                            // Durchläuft die Einnahmezeiten für den Tag, sortiert nach Stunde und Minute
                             ForEach(Array(uniqueTimes).sorted(by: { $0.hour! < $1.hour! || ($0.hour! == $1.hour! && $0.minute! < $1.minute!) }), id: \.self) { time in
+                                // Filtert die Medikamente, die zur gleichen Zeit eingenommen werden
                                 let medicationsAtTime = medicationsForDay.filter { $0.intakeTime == time }
                                 
+                                // Header für die Einnahmezeit
                                 Section(header: Text(String(format: "%02d:%02d", time.hour!, time.minute!))
-                                            .font(.headline)
-                                            
-                                            ) {
+                                    .font(Fonts.largeTitle)
+                                    .padding(.vertical, 10)
+                                    .padding(.horizontal, 10)
+                                    .background(Color.white)
+                                    .foregroundStyle(.blue)
+                                    .cornerRadius(8)
                                     
+                                        
+                                ) {
+                                    // Durchläuft die Medikamente für die aktuelle Einnahmezeit
                                     ForEach(medicationsAtTime, id: \.id) { medication in
+                                        // Anzeige des MedicationCardView für jedes Medikament
                                         MedicationCardView(medication: medication, showNextIntakeDate: medication.nextIntakeDate != nil, onDelete: {
                                             medicationToDelete = medication
                                             showAlert = true
@@ -87,28 +104,31 @@ struct MedicationAdiminstrationView: View {
                                             showingEditMedicationSheet.toggle()
                                         })
                                         
-                                        
-                                        .cornerRadius(20)
+                                        .listRowBackground(Color("Background"))
+                                        .cornerRadius(20)// Abrundung der Kartenansicht
                                     }
                                 }
+                                .background(Color("Background"))
+                                .listRowInsets(EdgeInsets())
                             }
                         }
                     }
-                    .listRowBackground(Color.white)
+                    .listRowBackground(Color("Background"))// Hintergrundfarbe der Listenreihe
                 }
             }
-            .listStyle(PlainListStyle())
-            .background(Color.white)
-            .cornerRadius(32)
+            .listStyle(PlainListStyle())// Einfacher Listenstil
+            .background(Color("Background"))// Hintergrundfarbe der Liste
+            .cornerRadius(32)// Abrundung der Liste
         }
         .padding(.horizontal)
-        
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: CustomBackButton())
+        .background(Color("Background"))// Hintergrundfarbe der Ansicht
+        .navigationBarBackButtonHidden(true)// Versteckt den Zurück-Button in der Navigationsleiste
+        .navigationBarItems(leading: CustomBackButton())// Benutzerdefinierter Zurück-Button
         .navigationBarItems(trailing: CustomAddButton(action: {
-            showingAddMedicationSheet.toggle()
+            showingAddMedicationSheet.toggle()// Zeigt das AddMedicationSheet an
         }))
         .sheet(isPresented: $showingAddMedicationSheet) {
+            // SheetView zum Hinzufügen eines neuen Medikaments
             NavigationStack {
                 AddMedicationSheetView(medicationViewModel: viewModel)
                     .environmentObject(userViewModel)
@@ -116,11 +136,13 @@ struct MedicationAdiminstrationView: View {
         }
         .sheet(item: $medicationToEdit) { medication in
             NavigationStack {
+                // SheetView zum Bearbeiten eines bestehenden Medikaments
                 EditMedicationSheetView(medicationViewModel: viewModel, medication: medication)
                     .environmentObject(userViewModel)
             }
         }
         .alert(isPresented: $showAlert) {
+            // Alert zum Bestätigen des Löschens eines Medikaments
             if let medicationToDelete = medicationToDelete {
                 return Alert(
                     title: Text("Löschen bestätigen"),
@@ -135,17 +157,19 @@ struct MedicationAdiminstrationView: View {
             }
         }
         .onAppear {
+            // Ruft die Medikamente des Benutzers ab, wenn die Ansicht erscheint
             if let userId = userViewModel.userId {
                 viewModel.fetchMedications(userId: userId)
             }
         }
         .onReceive(viewModel.$errorMessage) { errorMessage in
+            // Zeigt einen Fehler-Alert an, wenn eine Fehlermeldung vorhanden ist
             showErrorAlert = !errorMessage.isEmpty
         }
     }
 }
 
-struct MedicationDetailView_Previews: PreviewProvider {
+struct MedicationAdiminstrationView_Previews: PreviewProvider {
     static var previews: some View {
         MedicationAdiminstrationView()
             .environmentObject(UserViewModel())

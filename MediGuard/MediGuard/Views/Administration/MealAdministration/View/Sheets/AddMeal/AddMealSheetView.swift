@@ -26,12 +26,7 @@ import SwiftUI
  */
 
 
-/**
- Eine Ansicht zum Hinzufügen einer neuen Mahlzeit.
- 
- Diese Ansicht ermöglicht es dem Benutzer, eine neue Mahlzeit hinzuzufügen, einschließlich Name, Beschreibung, Uhrzeit und einem optionalen Foto.
- Die hinzugefügten Daten werden an das MealAdministrationViewModel weitergeleitet, um sie in der Datenbank zu speichern.
- */
+
 struct AddMealSheetView: View {
     // MARK: - Properties
     
@@ -51,15 +46,22 @@ struct AddMealSheetView: View {
     
     var body: some View {
         Form {
-            Section(header: Text("Name des Essens")) {
+            
+            // Sektion für den Namen des Essens
+            Section(header: Text("Name des Essens")
+                .headlineBlue()) {
                 TextField("Name", text: $mealName)
-            }
-
-            Section(header: Text("Beschreibung")) {
+                }.customSectionStyle()// Benutzerdefinierter Stil für die Sektion
+            
+            // Sektion für die Beschreibung des Essens
+            Section(header: Text("Beschreibung")
+                .headlineBlue()) {
                 TextField("Beschreibung", text: $description)
-            }
-
-            Section(header: Text("Foto")) {
+                }.customSectionStyle()
+            
+            // Sektion für das Foto des Essens
+            Section(header: Text("Foto")
+                .headlineBlue()) {
                 if let photo = photo {
                     Image(uiImage: photo)
                         .resizable()
@@ -73,16 +75,22 @@ struct AddMealSheetView: View {
                         isImagePickerPresented = true
                     }
                 }
+                }
+                .customSectionStyle()
+            // Section für die Uhrzeit der Mahlzeit
+            Section(header: Text("Uhrzeit der Mahlteit")
+                .headlineBlue()) {
+                    
+                DatePicker("", selection: $selectedTime, displayedComponents: .hourAndMinute)
             }
-
-            Section(header: Text("Uhrzeit")) {
-                DatePicker("Uhrzeit", selection: $selectedTime, displayedComponents: .hourAndMinute)
-            }
+                .customSectionStyle()
         }
         .navigationBarTitle("Neues Essen", displayMode: .inline)
         .navigationBarItems(leading: Button("Abbrechen") {
+            // Aktion beim Abbrechen
             self.presentationMode.wrappedValue.dismiss()
         }, trailing: Button("Hinzufügen") {
+            // Aktion beim Hinzufügen
             mealViewModel.validateAndAddMeal(
                 userId: userViewModel.userId,
                 mealName: mealName,
@@ -94,10 +102,12 @@ struct AddMealSheetView: View {
             self.presentationMode.wrappedValue.dismiss()
         })
         .sheet(isPresented: $isImagePickerPresented) {
+            // ImagePicker anzeigen
             ImagePicker(image: $photo)
         }
         .alert(isPresented: $mealViewModel.showAlert) {
-            Alert(title: Text("Fehler"), message: Text(mealViewModel.alertMessage), dismissButton: .default(Text("OK")))
+            // Alert anzeigen bei Fehler
+            Alert(title: Text("Fehler").bodyBlue(), message: Text(mealViewModel.alertMessage).bodyBlue(), dismissButton: .default(Text("OK").bodyBlue()))
         }
     }
 }

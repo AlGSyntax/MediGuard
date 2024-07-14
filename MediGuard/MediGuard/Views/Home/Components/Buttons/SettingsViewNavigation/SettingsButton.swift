@@ -21,7 +21,7 @@ struct SettingsButton: View {
     
     var body: some View {
         // Symbol auf dem Button
-        Image(systemName: "gear")
+        Image(systemName: "gearshape.circle.fill")
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(width: 48, height: 48)

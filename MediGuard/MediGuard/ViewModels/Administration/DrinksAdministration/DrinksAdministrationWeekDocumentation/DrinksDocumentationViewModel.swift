@@ -8,6 +8,16 @@
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
+/**
+ Das `DrinksDocumentationViewModel` verwaltet die Logik für das Abrufen und Verarbeiten der Getränkedaten des Benutzers.
+ Es enthält Methoden zum Abrufen der aktuellen Woche und der vergangenen Wochen, zum Gruppieren von Getränken nach Tagen und Wochen und zum Speichern von vergangenen Wochen.
+ 
+ - Properties:
+    - pastWeeks: Ein Array von `Week`-Objekten, das die vergangenen Wochen des Benutzers enthält.
+    - currentWeek: Ein optionales `Week`-Objekt, das die aktuelle Woche des Benutzers enthält.
+    - errorMessage: Eine Zeichenkette, die Fehlermeldungen speichert.
+    - goal: Ein Zielwert in Millilitern für die tägliche Flüssigkeitsaufnahme.
+ */
 @MainActor
 class DrinksDocumentationViewModel: ObservableObject {
     // MARK: - Properties
@@ -19,6 +29,11 @@ class DrinksDocumentationViewModel: ObservableObject {
 
     // MARK: - Fetch Methods
     
+    /**
+         Ruft die vergangenen Wochen des Benutzers aus Firestore ab.
+         
+         - Parameter userId: Die Benutzer-ID, für die die vergangenen Wochen abgerufen werden sollen.
+         */
     func fetchPastWeeks(userId: String) {
         Firestore.firestore().collection("users").document(userId).collection("pastWeeks")
             .getDocuments { querySnapshot, error in
@@ -35,7 +50,12 @@ class DrinksDocumentationViewModel: ObservableObject {
                 }
             }
     }
-
+    
+    /**
+         Ruft die Getränke der aktuellen Woche des Benutzers aus Firestore ab.
+         
+         - Parameter userId: Die Benutzer-ID, für die die Getränke der aktuellen Woche abgerufen werden sollen.
+         */
     func fetchCurrentWeek(userId: String) {
         Firestore.firestore().collection("users").document(userId).collection("intakes")
             .getDocuments { querySnapshot, error in
@@ -56,6 +76,13 @@ class DrinksDocumentationViewModel: ObservableObject {
 
     // MARK: - Processing Methods
     
+    /**
+         Verarbeitet die abgerufenen Getränke, um sie in aktuelle und vergangene Wochen zu unterteilen.
+         
+         - Parameters:
+            - intakes: Ein Array von `Intake`-Objekten, das die abgerufenen Getränke enthält.
+            - userId: Die Benutzer-ID, für die die Getränke verarbeitet werden sollen.
+         */
     private func processIntakes(_ intakes: [Intake], userId: String) {
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: Date())
@@ -81,7 +108,15 @@ class DrinksDocumentationViewModel: ObservableObject {
         let weekNumber = calendar.component(.weekOfYear, from: today)
         self.currentWeek = Week(weekNumber: weekNumber, intakes: currentWeekIntakes)
     }
-
+    
+    
+    /**
+       Überprüft, ob die vergangene Woche bereits gespeichert wurde, und speichert sie bei Bedarf.
+       
+       - Parameters:
+          - userId: Die Benutzer-ID, für die die vergangene Woche überprüft und gespeichert werden soll.
+          - pastWeek: Ein `Week`-Objekt, das die vergangene Woche enthält.
+       */
     private func checkAndSavePastWeek(userId: String, pastWeek:Week) {
         let pastWeekRef = Firestore.firestore().collection("users").document(userId).collection("pastWeeks")
             .whereField("weekNumber", isEqualTo: pastWeek.weekNumber)
@@ -102,6 +137,13 @@ class DrinksDocumentationViewModel: ObservableObject {
 
     // MARK: - Save Method
     
+    /**
+         Speichert die vergangene Woche in Firestore.
+         
+         - Parameters:
+            - userId: Die Benutzer-ID, für die die vergangene Woche gespeichert werden soll.
+            - pastWeek: Ein `Week`-Objekt, das die vergangene Woche enthält.
+         */
     func savePastWeek(userId: String, pastWeek: Week) {
         let pastWeekRef = Firestore.firestore().collection("users").document(userId).collection("pastWeeks").document(pastWeek.id ?? UUID().uuidString)
         
@@ -120,6 +162,12 @@ class DrinksDocumentationViewModel: ObservableObject {
 
     // MARK: - Grouping Methods
     
+    /**
+         Gruppiert die Getränke nach Wochen.
+         
+         - Parameter intakes: Ein Array von `Intake`-Objekten, das die Getränke enthält.
+         - Returns: Ein Array von `Week`-Objekten, das die Getränke nach Wochen gruppiert enthält.
+         */
     private func groupIntakesByWeek(_ intakes: [Intake]) -> [Week] {
         let calendar = Calendar.current
         let groupedIntakes = Dictionary(grouping: intakes) { intake -> Int in
@@ -131,7 +179,13 @@ class DrinksDocumentationViewModel: ObservableObject {
             Week(weekNumber: weekNumber, intakes: intakes)
         }
     }
-
+    
+    /**
+        Gruppiert die Getränke nach Tagen.
+        
+        - Parameter intakes: Ein Array von `Intake`-Objekten, das die Getränke enthält.
+        - Returns: Ein Dictionary, das die Getränke nach Tagen gruppiert enthält.
+        */
     func groupIntakesByDay(_ intakes: [Intake]) -> [String: [Intake]] {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium

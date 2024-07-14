@@ -8,7 +8,6 @@
 
 import SwiftUI
 
-
 // MARK: - AddMedicationSheetView Struktur
 
 /**
@@ -29,6 +28,7 @@ import SwiftUI
     - showSaveConfirmation: Ein Bool zur Steuerung der Anzeige der Bestätigungsspeicherung.
     - showAlert: Ein Bool zur Steuerung der Anzeige von Fehlermeldungen.
     - alertMessage: Die Fehlermeldung, die angezeigt wird.
+    - daily: Ein Bool zur Steuerung der täglichen Einnahme des Medikaments.
  */
 struct AddMedicationSheetView: View {
     @Environment(\.presentationMode) var presentationMode
@@ -38,7 +38,7 @@ struct AddMedicationSheetView: View {
     @State private var medicationName: String = ""
     @State private var intakeTime: Date = Date()
     @State private var day: Weekday = .monday
-    @State private var nextIntakeTime: String?
+    @State private var nextIntakeTime: Date = Date()
     @State private var nextIntakeDay: Weekday?
     @State private var selectedColor: MedicationColor = .blue
     @State private var dosage: Int = 10
@@ -48,63 +48,66 @@ struct AddMedicationSheetView: View {
     @State private var alertMessage = ""
     @State private var daily: Bool = false
 
-    
     // MARK: - Body
     var body: some View {
         Form {
             // Abschnitt zur Eingabe des Medikamentennamens
-            Section(header: Text("Name des Medikaments")) {
+            Section(header: Text("Name des Medikaments")
+                .headlineBlue())
+            {
                 TextField("Name", text: $medicationName)
-            }
+            }.customSectionStyle()
             
             // Abschnitt zur Auswahl der Einnahmezeit
-            Section(header: Text("Uhrzeit der Einnahme")) {
-                            DatePicker("Uhrzeit", selection: $intakeTime, displayedComponents: .hourAndMinute)
-                        }
+            Section(header: Text("Uhrzeit der Einnahme")
+                .headlineBlue()) {
+                DatePicker("Uhrzeit für das Medikament", selection: $intakeTime, displayedComponents: .hourAndMinute)
+            }.customSectionStyle()
             
             // Abschnitt zur Auswahl des Einnahmetages
-            Section(header: Text("Tag der Einnahme")) {
+            Section(header: Text("Tag der Einnahme")
+                .headlineBlue()) {
                 Picker("Tag", selection: $day) {
                     ForEach(Weekday.allCases, id: \.self) {
                         Text($0.name).tag($0)
                     }
                 }
-            }
+            }.customSectionStyle()
             
             // Abschnitt zur optionalen Eingabe der nächsten Einnahmezeit und des nächsten Einnahmetages
-            Section(header: Text("Nächstes Einnahmedatum (optional)")) {
+            Section(header: Text("Nächstes Einnahmedatum (optional)")
+                .headlineBlue()) {
                 Picker("Nächster Tag", selection: $nextIntakeDay) {
+                    // 'nil' + Weekday.allCases: Ermöglicht die Auswahl von "Keine Auswahl"
                     ForEach([nil] + Weekday.allCases, id: \.self) {
                         Text($0?.name ?? "Keine Auswahl").tag($0)
                     }
                 }
                 if nextIntakeDay != nil {
-                    Picker("Nächste Uhrzeit", selection: $nextIntakeTime) {
-                        ForEach([nil] + ["08:00", "12:00", "16:00", "20:00"], id: \.self) {
-                            Text($0 ?? "Keine Auswahl").tag($0)
-                        }
-                    }
+                    DatePicker("Nächste Uhrzeit", selection: $nextIntakeTime, displayedComponents: .hourAndMinute)
                 }
-            }
-            
+            }.customSectionStyle()
             
             // Abschnitt zur Auswahl der täglichen Einnahme
-                        Section {
-                            Toggle("Täglich", isOn: $daily)
-                        }
+            Section(header: Text("Tägliche Einnahme (optional)")
+                .headlineBlue()) {
+                Toggle("Täglich", isOn: $daily)
+            }.customSectionStyle()
                 
             // Abschnitt zur Auswahl der Farbe der Medikamentenkarte
-            Section(header: Text("Farbe der Karte")) {
+            Section(header: Text("Farbe der Karte")
+                .headlineBlue()) {
                 Picker("Farbe", selection: $selectedColor) {
                     ForEach(MedicationColor.allCases, id: \.self) { color in
                         Text(color.rawValue.capitalized).tag(color)
                     }
                 }
                 .pickerStyle(MenuPickerStyle())
-            }
+            }.customSectionStyle()
             
             // Abschnitt zur Eingabe der Dosierung und der Dosierungseinheit
-            Section(header: Text("Dosierung")) {
+            Section(header: Text("Dosierung")
+                .headlineBlue()) {
                 HStack {
                     TextField("Dosierung", value: $dosage, formatter: NumberFormatter())
                         .keyboardType(.numberPad)
@@ -120,49 +123,43 @@ struct AddMedicationSheetView: View {
                     .pickerStyle(SegmentedPickerStyle())
                 }
             }
+                .customSectionStyle()
         }
+        
         .navigationBarTitle("Neues Medikament", displayMode: .inline)
         .navigationBarItems(leading: Button("Abbrechen") {
             self.presentationMode.wrappedValue.dismiss()
         }, trailing: Button("Hinzufügen") {
-            
-                do {
-                                // Konvertiert die Einnahmezeit in DateComponents
-                                let intakeTimeComponents = Calendar.current.dateComponents([.hour, .minute], from: intakeTime)
-                                var nextIntakeTimeComponents: DateComponents? = nil
-                                if let nextDay = nextIntakeDay, let nextTime = nextIntakeTime {
-                                    nextIntakeTimeComponents = getTimeComponents(from: nextTime)
-                                    nextIntakeTimeComponents?.weekday = nextDay.rawValue
-                                }
-                                // Fügt das neue Medikament hinzu und schließt das Formular
-                                try medicationViewModel.addMedication(name: medicationName, intakeTime: intakeTimeComponents, day: day.name, nextIntakeDate: nextIntakeTimeComponents, color: selectedColor, dosage: dosage, dosageUnit: dosageUnit, userId: userViewModel.userId ?? "", daily: daily)
-                                self.presentationMode.wrappedValue.dismiss()
-                            } catch let error as ValidationError {
-                                // Fehlerbehandlung für Validierungsfehler
-                                alertMessage = error.errorDescription ?? "Unbekannter Fehler"
-                                showAlert = true
-                            } catch {
-                                // Allgemeine Fehlerbehandlung
-                                alertMessage = error.localizedDescription
-                                showAlert = true
-                            }
-                        })
-                        .alert(isPresented: $showAlert) {
-                            Alert(title: Text("Fehler"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
-                        }
-                    }
-    
-    
-    // MARK: - Helper Methods
-    
-    /**
-         Konvertiert eine Uhrzeit in DateComponents.
-         
-         - Parameter time: Die Uhrzeit im Format "HH:mm".
-         - Returns: Die DateComponents für die angegebene Uhrzeit.
-         */
-    private func getTimeComponents(from time: String) -> DateComponents {
-        let parts = time.split(separator: ":").map { Int($0) }
-        return DateComponents(hour: parts[0], minute: parts[1])
+            do {
+                // Konvertiert die Einnahmezeit in DateComponents
+                let intakeTimeComponents = Calendar.current.dateComponents([.hour, .minute], from: intakeTime)
+                var nextIntakeTimeComponents: DateComponents? = nil
+                if let nextDay = nextIntakeDay {
+                    nextIntakeTimeComponents = Calendar.current.dateComponents([.hour, .minute], from: nextIntakeTime)
+                    nextIntakeTimeComponents?.weekday = nextDay.rawValue
+                }
+                // Fügt das neue Medikament hinzu und schließt das Formular
+                try medicationViewModel.addMedication(name: medicationName, intakeTime: intakeTimeComponents, day: day.rawValue, nextIntakeDate: nextIntakeTimeComponents, color: selectedColor, dosage: dosage, dosageUnit: dosageUnit, userId: userViewModel.userId ?? "", daily: daily)
+                self.presentationMode.wrappedValue.dismiss()
+            } catch let error as ValidationError {
+                // Fehlerbehandlung für Validierungsfehler
+                alertMessage = error.errorDescription ?? "Unbekannter Fehler"
+                showAlert = true
+            } catch {
+                // Allgemeine Fehlerbehandlung
+                alertMessage = error.localizedDescription
+                showAlert = true
+            }
+        })
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("Fehler").bodyBlue(), message: Text(alertMessage).bodyBlue(), dismissButton: .default(Text("OK").bodyBlue()))
+        }
+        .onAppear {
+            nextIntakeTime = Date()
+        }
+       
     }
+    
+    
 }
+

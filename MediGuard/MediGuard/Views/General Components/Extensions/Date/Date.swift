@@ -6,13 +6,27 @@
 //
 
 import Foundation
+import SwiftUI
 
 /**
  Eine Erweiterung der `Date`-Struktur, um eine Methode hinzuzufügen, die die Uhrzeit eines `Date`-Objekts auf eine bestimmte Stunde und Minute setzt.
  
  Diese Methode erleichtert die Manipulation von `Date`-Objekten, indem sie eine einfache Möglichkeit bietet, die Uhrzeit eines Datums zu ändern, ohne die ursprüngliche Datumskomponente zu beeinflussen.
  */
+
+
 extension Date {
+    /**
+     Konvertiert das `Date`-Objekt in die angegebene Zeitzone.
+     
+     - Parameter timeZone: Die Zeitzone, in die das Datum konvertiert werden soll.
+     - Returns: Ein neues `Date`-Objekt, das in die angegebene Zeitzone konvertiert wurde.
+     */
+    func with(timeZone: TimeZone) -> Date {
+        let seconds = TimeInterval(timeZone.secondsFromGMT(for: self))
+        return addingTimeInterval(seconds)
+    }
+
     /**
      Setzt die Uhrzeit des `Date`-Objekts auf die angegebene Stunde und Minute.
      
@@ -30,3 +44,4 @@ extension Date {
         }
     }
 }
+
