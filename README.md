@@ -10,7 +10,7 @@ Für wen ist sie geeignet? MediGuard richtet sich an Senioren und ihre Betreuer.
 
 <p>
   <img src="./img/mediguardScreen1.png" width="200">
-  <img src="./img/mediguardScreen2" width="200">
+  <img src="./img/mediguardScreen2.png" width="200">
   <img src="./img/mediguardScreen3.png" width="200">
 </p>
 
