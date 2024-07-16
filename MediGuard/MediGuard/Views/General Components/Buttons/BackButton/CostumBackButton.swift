@@ -35,7 +35,7 @@ struct CustomBackButton: View {
                 Image(systemName: "arrowshape.backward.circle.fill")
                     .aspectRatio(contentMode: .fill)
                     .foregroundColor(.blue)
-                    .font(.system(size: 34, weight: .bold))
+                    .font(.system(size: 34))
                     .scaleEffect(isTapped ? 1.1 : 1.0) // Vergrößert die Ansicht beim Tap
                     .opacity(isTapped ? 0.8 : 1.0) // Verringert die Deckkraft beim Tap
             }

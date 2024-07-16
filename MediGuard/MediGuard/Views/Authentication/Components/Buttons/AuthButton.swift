@@ -54,7 +54,10 @@ extension AuthButton {
                 // Fehlerbehandlung und entsprechende Fehlermeldungen
                 if userViewModel.name.isEmpty {
                     userViewModel.errorMessage = "Bitte geben Sie einen Namen ein."
-                } else if userViewModel.password.isEmpty {
+                }else if userViewModel.mode == .register && userViewModel.city.isEmpty {
+                    userViewModel.errorMessage = "Bitte geben Sie eine Stadt ein."
+                }
+                else if userViewModel.password.isEmpty {
                     userViewModel.errorMessage = "Bitte geben Sie ein Passwort ein."
                 } else if userViewModel.mode == .register && userViewModel.confirmPassword.isEmpty {
                     userViewModel.errorMessage = "Bitte wiederholen Sie das Passwort."

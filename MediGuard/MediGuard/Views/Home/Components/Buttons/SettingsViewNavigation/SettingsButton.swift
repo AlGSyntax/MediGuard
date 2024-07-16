@@ -22,10 +22,9 @@ struct SettingsButton: View {
     var body: some View {
         // Symbol auf dem Button
         Image(systemName: "gearshape.circle.fill")
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(width: 48, height: 48)
-            .foregroundStyle(.primary)
+            .aspectRatio(contentMode: .fill)
+            .foregroundColor(.blue)
+            .font(.system(size: 34))
     }
 }
 

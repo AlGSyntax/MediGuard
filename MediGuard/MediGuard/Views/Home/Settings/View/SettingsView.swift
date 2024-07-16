@@ -61,6 +61,7 @@ struct SettingsView: View {
             .background(
                             RoundedRectangle(cornerRadius: 16)
                                 .fill(Color.white)
+                                .stroke(Color.black, lineWidth: 2)
                                 
                         )
                         .padding(.horizontal)
@@ -84,6 +85,7 @@ struct SettingsView: View {
             .background(
                             RoundedRectangle(cornerRadius: 16)
                                 .fill(Color.white)
+                                .stroke(Color.black, lineWidth: 2)
                                 
                         )
                         .padding(.horizontal)

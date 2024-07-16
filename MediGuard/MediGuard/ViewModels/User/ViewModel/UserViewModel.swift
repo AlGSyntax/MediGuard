@@ -8,6 +8,7 @@
 
 import Foundation
 import FirebaseAuth
+import SwiftUI
 
 
 
@@ -56,10 +57,14 @@ class UserViewModel: ObservableObject {
     @Published var user: FireUser?
     @Published var mode: AuthenticationMode = .login
     @Published var name: String = ""
+    @Published var city: String = ""
     @Published var password: String = ""
     @Published var confirmPassword: String = ""
     @Published var errorMessage: String = ""
     @Published var authenticationError: AuthenticationError?
+    
+    
+    
     
 
     
@@ -130,7 +135,7 @@ class UserViewModel: ObservableObject {
      - password: Das Passwort.
      */
     
-    func register(name: String, username: String, password: String) {
+    func register(name: String,city:String,  username: String, password: String) {
         let email = formatEmail(username)
         
         
@@ -147,7 +152,7 @@ class UserViewModel: ObservableObject {
             guard let authResult = authResult else { return }
             
             // Erstellt einen neuen Benutzereintrag in der Firestore-Datenbank
-            self.createUser(with: authResult.user.uid, name: name)
+            self.createUser(with: authResult.user.uid, name: name,city:city)
             
             // Meldet den neu registrierten Benutzer direkt an
             self.login(username: username, password: password)
@@ -203,7 +208,7 @@ class UserViewModel: ObservableObject {
         case .login:
             login(username: formattedEmail, password: password)
         case .register:
-            register(name: name, username: formattedEmail, password: password)
+            register(name: name,city:city , username: formattedEmail, password: password)
         }
     }
     
@@ -211,8 +216,10 @@ class UserViewModel: ObservableObject {
     func clearFields() {
         
         self.name = ""
+        self.city = ""
         self.password = ""
         self.confirmPassword = ""
+        
         
     }
     
@@ -286,8 +293,8 @@ extension UserViewModel {
      - id: Die Benutzer-ID.
      - name: Der Name des Benutzers.
      */
-    private func createUser(with id: String, name: String) {
-        let user = FireUser(id: id, name: name, registeredAt: Date())
+    private func createUser(with id: String, name: String,city:String) {
+        let user = FireUser(id: id, name: name,city:city, registeredAt: Date())
         
         do {
             try firebaseManager.database.collection("users").document(id).setData(from: user)

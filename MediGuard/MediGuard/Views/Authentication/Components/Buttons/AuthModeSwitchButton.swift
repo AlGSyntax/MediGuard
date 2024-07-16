@@ -54,15 +54,18 @@ struct AuthModeSwitchButton: View {
 extension AuthModeSwitchButton {
     
     /**
-     Erstellt einen `AuthModeSwitchButton`, der die Authentifizierungsmodi im `UserViewModel` wechselt.
-     
-     - Parameter userViewModel: Das `UserViewModel`-Objekt, das die Authentifizierungslogik und -daten verwaltet.
-     - Returns: Ein `AuthModeSwitchButton`, der die Authentifizierungsmodi wechselt.
-     */
-    @MainActor static func switchModeButton(userViewModel: UserViewModel) -> AuthModeSwitchButton {
+         Erstellt einen `AuthModeSwitchButton`, der die Authentifizierungsmodi im `UserViewModel` wechselt und das Textfeld für den Wohnort im `CityViewModel` leert.
+         
+         - Parameters:
+           - userViewModel: Das `UserViewModel`-Objekt, das die Authentifizierungslogik und -daten verwaltet.
+           - cityViewModel: Das `CityViewModel`-Objekt, das die Suchlogik und -daten für Städte verwaltet.
+         - Returns: Ein `AuthModeSwitchButton`, der die Authentifizierungsmodi wechselt und das Textfeld für den Wohnort leert.
+         */
+    @MainActor static func switchModeButton(userViewModel: UserViewModel, cityViewModel: CityViewModel) -> AuthModeSwitchButton {
         return AuthModeSwitchButton(title: userViewModel.mode.alternativeTitle) {
             withAnimation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 1)) {
-                userViewModel.switchAuthenticationMode() // Wechselt den Authentifizierungsmodus im ViewModel
+                userViewModel.switchAuthenticationMode()
+                cityViewModel.clearSearchText()// Wechselt den Authentifizierungsmodus im ViewModel
             }
         }
     }

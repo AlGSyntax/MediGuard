@@ -1,12 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "Mediguard (1).png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Mediguard (1) 1.png",
+      "filename" : "Mediguard (1).png",
       "idiom" : "universal",
       "scale" : "2x"
     },

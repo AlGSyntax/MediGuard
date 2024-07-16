@@ -86,7 +86,7 @@ struct MealDocumentationView: View {
                         }
                     } label: {
                         Text("Aktuelle Woche \(currentWeek.weekNumber)")
-                            .hugeTitleStyle()
+                            .headlineBlue()
                     }
                     .listRowBackground(Color("Background"))
                 }
@@ -131,7 +131,7 @@ struct MealDocumentationView: View {
                         }
                     } label: {
                         Text("Woche  \(week.weekNumber)")
-                            .hugeTitleStyle()
+                            .headlineBlue()
                     }
                     .listRowBackground(Color("Background"))
                 }

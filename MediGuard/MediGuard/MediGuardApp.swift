@@ -15,6 +15,16 @@ import Firebase
 
  - Eigenschaften:
     - `userViewModel`: Das `UserViewModel`-Objekt, das die Authentifizierungslogik und -daten verwaltet.
+    - `nameViewModel`: Das `NameViewModel`-Objekt, das die Namensverarbeitung und -vorschläge verwaltet.
+ 
+ - Initializer:
+    - `init()`: Initialisiert die App und konfiguriert Firebase. Fordert auch die Berechtigung für Benachrichtigungen an.
+ 
+ - Private Methoden:
+    - `requestNotificationAuthorization()`: Fordert die Berechtigung für Benachrichtigungen vom Benutzer an.
+ 
+ - Scene:
+    - `body`: Entscheidet basierend auf dem Anmeldestatus des Benutzers, welche View angezeigt wird. Die entsprechenden ViewModel-Objekte werden als EnvironmentObjects bereitgestellt.
  */
 @main
 struct MediGuardApp: App {
@@ -37,9 +47,13 @@ struct MediGuardApp: App {
     // MARK: - Variables
     
     @StateObject private var userViewModel = UserViewModel()
+    @StateObject private var cityViewModel = CityViewModel()
     
     // MARK: - Private Methods
     
+    /**
+         Fordert die Berechtigung für Benachrichtigungen vom Benutzer an.
+         */
     private func requestNotificationAuthorization() {
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
                 if let error = error {
@@ -60,6 +74,7 @@ struct MediGuardApp: App {
                     HomeView()
                         .transition(.move(edge: .leading))
                         .environmentObject(userViewModel)
+                        .environmentObject(cityViewModel)
                 }
             } else {
                 withAnimation(.easeInOut(duration: 0.7)) {
@@ -67,6 +82,7 @@ struct MediGuardApp: App {
                     AuthenticationView()
                         .transition(.move(edge: .leading))
                         .environmentObject(userViewModel)
+                        .environmentObject(cityViewModel)
                 }
             }
         }

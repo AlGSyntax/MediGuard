@@ -71,7 +71,7 @@ struct DrinksDocumentationView: View {
                         }
                     } label: {
                         Text("Aktuelle Woche \(currentWeek.weekNumber)")
-                            .hugeTitleStyle()
+                            .headlineBlue()
                     }
                     .listRowBackground(Color("Background"))
                 }
@@ -106,7 +106,7 @@ struct DrinksDocumentationView: View {
                         }
                     } label: {
                         Text("Woche \(week.weekNumber)")
-                            .hugeTitleStyle()
+                            .headlineBlue()
                     }
                     .listRowBackground(Color("Background"))
                 }

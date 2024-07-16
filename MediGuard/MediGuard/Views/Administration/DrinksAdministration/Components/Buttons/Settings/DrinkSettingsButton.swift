@@ -25,7 +25,7 @@ struct DrinkSettingsButton: View {
             showSettings.toggle()
         }) {
             Image(systemName: "gearshape.circle.fill")
-                .font(.system(size: 34, weight: .bold)) // Setzt die Schriftart und Größe des Symbols
+                .font(.system(size: 34)) // Setzt die Schriftart und Größe des Symbols
                 .foregroundStyle(.blue) // Setzt die Vordergrundfarbe des Symbols auf Blau
                 .aspectRatio(contentMode: .fit) // Setzt das Seitenverhältnis des Symbols
         }

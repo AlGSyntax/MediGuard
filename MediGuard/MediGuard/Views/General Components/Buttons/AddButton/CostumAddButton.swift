@@ -28,7 +28,7 @@ struct CustomAddButton: View {
                 Image(systemName: "plus.circle.fill")
                 .aspectRatio(contentMode: .fill)
                     .foregroundStyle(.blue)
-                    .font(.system(size: 34, weight: .bold))
+                    .font(.system(size: 34))
             }
             
         }

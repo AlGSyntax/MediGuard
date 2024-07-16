@@ -43,7 +43,7 @@ enum AuthenticationMode {
         case .login:
             return "Noch kein Konto? Registrieren →"
         case .register:
-            return "Schon registriert? Anmelden →"
+            return "Hier Anmelden →"
         }
     }
     

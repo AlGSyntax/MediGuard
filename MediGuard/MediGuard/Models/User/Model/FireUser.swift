@@ -16,6 +16,8 @@ import Foundation
     - `id`: Die eindeutige Benutzer-ID (String).
     - `name`: Der Name des Benutzers (String).
     - `registeredAt`: Das Datum, an dem der Benutzer sich registriert hat (Date)
+    - `city`: Der Wohnort des Benutzers (String)
+        
 
  - Bemerkungen:
     - Diese Struktur folgt dem `Codable`-Protokoll, das es ermöglicht, sie einfach in und aus Firestore-Dokumenten zu konvertieren.
@@ -28,6 +30,8 @@ struct FireUser: Codable {
     /// Der Name des Benutzers.
     var name: String
     
+    var city: String
+    
     /// Das Datum, an dem der Benutzer sich registriert hat.
     var registeredAt: Date
     
@@ -36,12 +40,15 @@ struct FireUser: Codable {
      
      - Parameter id: Die eindeutige Benutzer-ID.
      - Parameter name: Der Name des Benutzers.
+     - Parameter city: Der Wohnort des Benutzers.
      - Parameter registeredAt: Das Datum, an dem der Benutzer sich registriert hat.
      */
-    init(id: String, name: String, registeredAt: Date) {
+    init(id: String, name: String,city: String, registeredAt: Date) {
         self.id = id
         self.name = name
+        self.city = city
         self.registeredAt = registeredAt
+        
     }
 }
 

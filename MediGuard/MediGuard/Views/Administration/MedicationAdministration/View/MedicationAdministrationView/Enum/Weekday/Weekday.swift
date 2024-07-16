@@ -14,13 +14,13 @@ import Foundation
  */
 enum Weekday: Int, Codable, CaseIterable, Hashable {
     
-    case monday = 1
-    case tuesday = 2
-    case wednesday = 3
-    case thursday = 4
-    case friday = 5
-    case saturday = 6
-    case sunday = 7
+    case monday = 2
+    case tuesday = 3
+    case wednesday = 4
+    case thursday = 5
+    case friday = 6
+    case saturday = 7
+    case sunday = 1
     
     /**
      Gibt den Namen des Wochentags zurück.
@@ -60,25 +60,32 @@ enum Weekday: Int, Codable, CaseIterable, Hashable {
         - Returns: Das nächste Datum des gewünschten Wochentags.
         */
     static func next(_ weekday: Weekday, after date: Date, intakeHour: Int, intakeMinute: Int) -> Date? {
-           let calendar = Calendar.current
-           let currentWeekday = calendar.component(.weekday, from: date)
+            let calendar = Calendar.current
+            let currentWeekday = calendar.component(.weekday, from: date)
+            print("currentWeekday: \(currentWeekday)")
 
-           var daysToAdd = weekday.rawValue - currentWeekday
-           if daysToAdd < 0 || (daysToAdd == 0 && calendar.date(bySettingHour: intakeHour, minute: intakeMinute, second: 0, of: date)! < date) {
-               daysToAdd += 7
-           } else if daysToAdd == 0 {
-               // If it's the same day and the intake time is in the future, use today's date
-               if let todayWithTime = calendar.date(bySettingHour: intakeHour, minute: intakeMinute, second: 0, of: date), todayWithTime > date {
-                   return todayWithTime
-               }
-           }
+            var daysToAdd = weekday.rawValue - currentWeekday
+            print("Initial daysToAdd: \(daysToAdd)")
 
-           let nextDate = calendar.date(byAdding: .day, value: daysToAdd, to: date)!
-           let nextDateWithTime = calendar.date(bySettingHour: intakeHour, minute: intakeMinute, second: 0, of: nextDate)!
+            if daysToAdd < 0 || (daysToAdd == 0 && calendar.date(bySettingHour: intakeHour, minute: intakeMinute, second: 0, of: date)! < date) {
+                daysToAdd += 7
+                print("Adjusted daysToAdd (for past time): \(daysToAdd)")
+            } else if daysToAdd == 0 {
+                if let todayWithTime = calendar.date(bySettingHour: intakeHour, minute: intakeMinute, second: 0, of: date), todayWithTime > date {
+                    print("Today's date with intake time: \(todayWithTime)")
+                    return todayWithTime
+                }
+            }
 
-           return nextDateWithTime
-       }
-   }
+            let nextDate = calendar.date(byAdding: .day, value: daysToAdd, to: date)!
+            print("Next date (without time): \(nextDate)")
+
+            let nextDateWithTime = calendar.date(bySettingHour: intakeHour, minute: intakeMinute, second: 0, of: nextDate)!
+            print("Next date with intake time: \(nextDateWithTime)")
+
+            return nextDateWithTime
+        }
+    }
 
 
 

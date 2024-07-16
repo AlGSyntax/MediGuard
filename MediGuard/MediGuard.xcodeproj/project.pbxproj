@@ -102,6 +102,10 @@
 		38A892312C412E5E00FE89CE /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A892292C412E5E00FE89CE /* Ubuntu-Bold.ttf */; };
 		38A892322C412E5E00FE89CE /* Ubuntu-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A8922A2C412E5E00FE89CE /* Ubuntu-BoldItalic.ttf */; };
 		38A8A29E2C1445CD00950F82 /* AuthenticationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A8A29D2C1445CD00950F82 /* AuthenticationError.swift */; };
+		38A981B32C44E2E4002E0324 /* CityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A981B22C44E2E4002E0324 /* CityRepository.swift */; };
+		38A981B72C44E357002E0324 /* CityResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A981B62C44E357002E0324 /* CityResponse.swift */; };
+		38A981B92C44E370002E0324 /* CityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A981B82C44E370002E0324 /* CityViewModel.swift */; };
+		38A981BC2C45229E002E0324 /* HTTPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A981BB2C45229E002E0324 /* HTTPError.swift */; };
 		38D0E7C42C3E97B100EE2A0A /* IntakeTypeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D0E7C32C3E97B100EE2A0A /* IntakeTypeColor.swift */; };
 		38D0E7C72C3EBB3D00EE2A0A /* DrinksDocumentationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D0E7C62C3EBB3D00EE2A0A /* DrinksDocumentationView.swift */; };
 		38D0E7CB2C3EBBD300EE2A0A /* DrinksDocumentationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D0E7CA2C3EBBD300EE2A0A /* DrinksDocumentationViewModel.swift */; };
@@ -189,6 +193,10 @@
 		38A892292C412E5E00FE89CE /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
 		38A8922A2C412E5E00FE89CE /* Ubuntu-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-BoldItalic.ttf"; sourceTree = "<group>"; };
 		38A8A29D2C1445CD00950F82 /* AuthenticationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationError.swift; sourceTree = "<group>"; };
+		38A981B22C44E2E4002E0324 /* CityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityRepository.swift; sourceTree = "<group>"; };
+		38A981B62C44E357002E0324 /* CityResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityResponse.swift; sourceTree = "<group>"; };
+		38A981B82C44E370002E0324 /* CityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityViewModel.swift; sourceTree = "<group>"; };
+		38A981BB2C45229E002E0324 /* HTTPError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPError.swift; sourceTree = "<group>"; };
 		38D0E7C32C3E97B100EE2A0A /* IntakeTypeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntakeTypeColor.swift; sourceTree = "<group>"; };
 		38D0E7C62C3EBB3D00EE2A0A /* DrinksDocumentationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinksDocumentationView.swift; sourceTree = "<group>"; };
 		38D0E7CA2C3EBBD300EE2A0A /* DrinksDocumentationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinksDocumentationViewModel.swift; sourceTree = "<group>"; };
@@ -506,7 +514,7 @@
 		38630DFC2C1B15A4002671BD /* View */ = {
 			isa = PBXGroup;
 			children = (
-				3855EFA12C1736600037B169 /* PasswordField.swift */,
+				38A981BD2C454CB4002E0324 /* Password */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -590,6 +598,7 @@
 		386DBDC42C12BBAA00FE3A41 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				38A981B02C44E2BA002E0324 /* API */,
 				38A8A29A2C14458F00950F82 /* User */,
 				38630DEC2C1AD98F002671BD /* Administration */,
 				3886F35B2C184251004C3203 /* Settings */,
@@ -601,6 +610,7 @@
 		386DBDC52C12BBB800FE3A41 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				38A981A72C44E0EF002E0324 /* API */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -620,6 +630,7 @@
 		386DBDC72C12BBCC00FE3A41 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				38A981AC2C44E282002E0324 /* API */,
 				38E8A7AB2C32A52A005BB28A /* Drink */,
 				3836C27B2C2574D50030D13A /* Meal */,
 				38630DF52C1ADCE7002671BD /* Medication */,
@@ -1212,6 +1223,79 @@
 			path = Enums;
 			sourceTree = "<group>";
 		};
+		38A981A72C44E0EF002E0324 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				38A981BA2C45228A002E0324 /* Enum */,
+				38A981AB2C44E155002E0324 /* Repository */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		38A981AB2C44E155002E0324 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				38A981B22C44E2E4002E0324 /* CityRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		38A981AC2C44E282002E0324 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				38A981AD2C44E28C002E0324 /* Models */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		38A981AD2C44E28C002E0324 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				38A981B52C44E33B002E0324 /* Response */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		38A981B02C44E2BA002E0324 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				38A981B12C44E2C6002E0324 /* ViewModel */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		38A981B12C44E2C6002E0324 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				38A981B82C44E370002E0324 /* CityViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		38A981B52C44E33B002E0324 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				38A981B62C44E357002E0324 /* CityResponse.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		38A981BA2C45228A002E0324 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				38A981BB2C45229E002E0324 /* HTTPError.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
+		38A981BD2C454CB4002E0324 /* Password */ = {
+			isa = PBXGroup;
+			children = (
+				3855EFA12C1736600037B169 /* PasswordField.swift */,
+			);
+			path = Password;
+			sourceTree = "<group>";
+		};
 		38C0DA7C2C3A8D370016F846 /* Administration */ = {
 			isa = PBXGroup;
 			children = (
@@ -1477,6 +1561,7 @@
 				389D08342C43F5B00066816E /* AnimatedButtonModifier.swift in Sources */,
 				386D8E522C1EC55400FA151C /* LogoutButton.swift in Sources */,
 				38A59EEF2C42619A003B6E49 /* MealDocumentationButton.swift in Sources */,
+				38A981BC2C45229E002E0324 /* HTTPError.swift in Sources */,
 				38630E032C1B27D8002671BD /* EditMedicationSheetView.swift in Sources */,
 				389D08512C444A320066816E /* AddIntakeButton.swift in Sources */,
 				3886F35A2C18350A004C3203 /* SettingsView.swift in Sources */,
@@ -1489,7 +1574,9 @@
 				38D2BBAC2C22A223002E62E2 /* DosageUnit.swift in Sources */,
 				3855EF992C16FEF40037B169 /* AdministrationViewButton.swift in Sources */,
 				389D084E2C4446EF0066816E /* DrinkDocumantationButton.swift in Sources */,
+				38A981B32C44E2E4002E0324 /* CityRepository.swift in Sources */,
 				38E8A7B12C32A643005BB28A /* DrinksAdministrationViewModel.swift in Sources */,
+				38A981B72C44E357002E0324 /* CityResponse.swift in Sources */,
 				3886F36B2C188AF0004C3203 /* MealAdministrationView.swift in Sources */,
 				3836C28E2C2586A70030D13A /* Weekday.swift in Sources */,
 				38A88A0E2C21390B0063ACEA /* MedicationColor.swift in Sources */,
@@ -1503,6 +1590,7 @@
 				38D6E3AE2C38066F00589F72 /* MealDocumentationViewModel.swift in Sources */,
 				38630DF12C1ADA1C002671BD /* CostumAddButton.swift in Sources */,
 				38630DFA2C1ADD61002671BD /* MedicationCardView.swift in Sources */,
+				38A981B92C44E370002E0324 /* CityViewModel.swift in Sources */,
 				3810346D2C3BDB1D003865AC /* AddIntakeView.swift in Sources */,
 				38D6E3B42C3806F300589F72 /* MealDocumentationView.swift in Sources */,
 				386DBDE72C12E2A100FE3A41 /* AuthModeSwitchButton.swift in Sources */,

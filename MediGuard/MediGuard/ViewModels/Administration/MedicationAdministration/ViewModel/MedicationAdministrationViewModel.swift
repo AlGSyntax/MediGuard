@@ -83,65 +83,68 @@ class MedicationAdminstrationViewModel: ObservableObject {
     // MARK: - Benachrichtigung planen
     
     /**
-     Plant eine lokale Benachrichtigung für ein gegebenes Medikament.
-     
-     - Parameter medication: Das `Medication`-Objekt, für das die Benachrichtigung geplant werden soll.
+     Planen einer Benachrichtigung für ein Medikament.
+
+     Diese Methode plant eine lokale Benachrichtigung für die Einnahme eines Medikaments am nächsten geplanten Wochentag zur angegebenen Uhrzeit.
+
+     - Parameter medication: Das Medikament, für das die Benachrichtigung geplant werden soll. Enthält den Namen, den Wochentag und die Einnahmezeit.
      */
-    
-
     func scheduleNotification(for medication: Medication) {
-            let content = UNMutableNotificationContent()
-            content.title = "Medikamentenerinnerung"
-            content.body = "Es ist Zeit, \(medication.name) einzunehmen."
-            content.sound = UNNotificationSound.default
+        let content = UNMutableNotificationContent()
+        content.title = "Medikamentenerinnerung"
+        content.body = "Es ist Zeit, \(medication.name) einzunehmen."
+        content.sound = UNNotificationSound.default
 
-            let now = Date()
-            let calendar = Calendar.current
-            let timeZone = TimeZone.current
+        // Aktuelles Datum und Zeit in der lokalen Zeitzone
+        let now = Date()
+        let calendar = Calendar.current
+        let timeZone = TimeZone.current
 
-            print("Aktuelle Zeit: \(now)")
+        // Konvertiere den Tag in ein Weekday-Enum
+        guard let weekday = Weekday.from(medication.day) else {
+            self.errorMessage = "Ungültiger Wochentag: \(String(describing: medication.day))"
+            return
+        }
 
-            guard let weekday = Weekday.from(medication.day) else {
-                self.errorMessage = "Ungültiger Wochentag: \(String(describing: medication.day))"
+        // Berechne das nächste Datum für den angegebenen Wochentag und die Einnahmezeit
+        if let nextDate = Weekday.next(weekday, after: now, intakeHour: medication.intakeTime.hour ?? 0, intakeMinute: medication.intakeTime.minute ?? 0) {
+            var dateComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: nextDate)
+            dateComponents.timeZone = timeZone
+
+            // Erstelle das Datum aus den DateComponents
+            guard let notificationTime = calendar.date(from: dateComponents) else {
+                self.errorMessage = "Fehler beim Erstellen der Benachrichtigungszeit aus den DateComponents"
                 return
             }
 
-            if let nextDate = Weekday.next(weekday, after: now, intakeHour: medication.intakeTime.hour ?? 0, intakeMinute: medication.intakeTime.minute ?? 0) {
-                print("Nächster \(weekday.name): \(nextDate)")
+            // Ausgabe der geplanten Zeit in der lokalen Zeitzone
+            print("Geplante Zeit (local): \(dateComponents)")
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            formatter.timeZone = timeZone
+            print("Benachrichtigungszeit (local): \(formatter.string(from: notificationTime))")
 
-                var dateComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: nextDate)
-                dateComponents.timeZone = timeZone
+            // Überprüfe, ob die Benachrichtigungszeit in der Zukunft liegt
+            if notificationTime > now {
+                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
 
-                guard let notificationTime = calendar.date(from: dateComponents) else {
-                    self.errorMessage = "Fehler beim Erstellen der Benachrichtigungszeit aus den DateComponents"
-                    return
-                }
-
-                print("Geplante Zeit (local): \(dateComponents)")
-                print("Benachrichtigungszeit (local): \(notificationTime)")
-
-                if notificationTime > now {
-                    print("Benachrichtigung für \(notificationTime == nextDate ? "heute" : "zukünftigen Tag") geplant")
-                    let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-                    let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-
-                    UNUserNotificationCenter.current().add(request) { error in
-                        if let error = error {
-                            self.errorMessage = "Fehler beim Planen der Benachrichtigung: \(error.localizedDescription)"
-                            print("Fehler beim Planen der Benachrichtigung: \(error.localizedDescription)")
-                        } else {
-                            print("Benachrichtigung geplant für \(medication.name) um \(dateComponents.hour ?? 0):\(dateComponents.minute ?? 0) am \(weekday.name)")
-                        }
+                // Füge die Benachrichtigung hinzu
+                UNUserNotificationCenter.current().add(request) { error in
+                    if let error = error {
+                        self.errorMessage = "Fehler beim Planen der Benachrichtigung: \(error.localizedDescription)"
+                    } else {
+                        print("Benachrichtigung geplant für \(medication.name) um \(dateComponents.hour ?? 0):\(dateComponents.minute ?? 0) am \(weekday.name)")
                     }
-                } else {
-                    print("Die geplante Benachrichtigungszeit liegt in der Vergangenheit")
-                    self.errorMessage = "Die geplante Benachrichtigungszeit liegt in der Vergangenheit"
                 }
             } else {
-                print("Fehler bei der Berechnung des nächsten Wochentages")
-                self.errorMessage = "Fehler bei der Berechnung des nächsten Wochentages"
+                self.errorMessage = "Die geplante Benachrichtigungszeit liegt in der Vergangenheit"
             }
+        } else {
+            self.errorMessage = "Fehler bei der Berechnung des nächsten Wochentages"
         }
+    }
+
 
 
 
