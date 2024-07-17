@@ -20,6 +20,10 @@ extension View {
             .padding()
             .background(Color.white)
             .cornerRadius(10)
+            .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.blue, lineWidth: 2)
+                        )
             
            
     }

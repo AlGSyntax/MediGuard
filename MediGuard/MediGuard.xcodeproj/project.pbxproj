@@ -106,6 +106,7 @@
 		38A981B72C44E357002E0324 /* CityResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A981B62C44E357002E0324 /* CityResponse.swift */; };
 		38A981B92C44E370002E0324 /* CityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A981B82C44E370002E0324 /* CityViewModel.swift */; };
 		38A981BC2C45229E002E0324 /* HTTPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A981BB2C45229E002E0324 /* HTTPError.swift */; };
+		38B4458B2C47753C00628A4A /* SectionHeaderModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B4458A2C47753C00628A4A /* SectionHeaderModifier.swift */; };
 		38D0E7C42C3E97B100EE2A0A /* IntakeTypeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D0E7C32C3E97B100EE2A0A /* IntakeTypeColor.swift */; };
 		38D0E7C72C3EBB3D00EE2A0A /* DrinksDocumentationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D0E7C62C3EBB3D00EE2A0A /* DrinksDocumentationView.swift */; };
 		38D0E7CB2C3EBBD300EE2A0A /* DrinksDocumentationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D0E7CA2C3EBBD300EE2A0A /* DrinksDocumentationViewModel.swift */; };
@@ -197,6 +198,7 @@
 		38A981B62C44E357002E0324 /* CityResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityResponse.swift; sourceTree = "<group>"; };
 		38A981B82C44E370002E0324 /* CityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityViewModel.swift; sourceTree = "<group>"; };
 		38A981BB2C45229E002E0324 /* HTTPError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPError.swift; sourceTree = "<group>"; };
+		38B4458A2C47753C00628A4A /* SectionHeaderModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderModifier.swift; sourceTree = "<group>"; };
 		38D0E7C32C3E97B100EE2A0A /* IntakeTypeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntakeTypeColor.swift; sourceTree = "<group>"; };
 		38D0E7C62C3EBB3D00EE2A0A /* DrinksDocumentationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinksDocumentationView.swift; sourceTree = "<group>"; };
 		38D0E7CA2C3EBBD300EE2A0A /* DrinksDocumentationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinksDocumentationViewModel.swift; sourceTree = "<group>"; };
@@ -398,6 +400,7 @@
 		3836C2902C25C2640030D13A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				38B445872C4773F600628A4A /* SectionModifier */,
 				389D083D2C4410250066816E /* TextModifier */,
 				389D08312C43F58E0066816E /* Date */,
 			);
@@ -732,18 +735,9 @@
 		386DBDDB2C12DFBC00FE3A41 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				389D08422C44152E0066816E /* SectionModifier */,
-				389D08352C43FF550066816E /* HugeTitle */,
 				389D08322C43F5950066816E /* AnimatedButton */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		386DBDDC2C12DFC600FE3A41 /* Enums */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Enums;
 			sourceTree = "<group>";
 		};
 		386DBDDD2C12DFCD00FE3A41 /* Components */ = {
@@ -800,7 +794,6 @@
 			children = (
 				386DBDDE2C12DFD300FE3A41 /* View */,
 				386DBDDD2C12DFCD00FE3A41 /* Components */,
-				386DBDDC2C12DFC600FE3A41 /* Enums */,
 			);
 			path = MedicationAdministration;
 			sourceTree = "<group>";
@@ -1023,6 +1016,7 @@
 		389D083D2C4410250066816E /* TextModifier */ = {
 			isa = PBXGroup;
 			children = (
+				389D08352C43FF550066816E /* HugeTitle */,
 				389D083F2C4411A40066816E /* Body */,
 				389D083E2C44119C0066816E /* Headline */,
 			);
@@ -1043,14 +1037,6 @@
 				389D08402C4411CC0066816E /* TextandBodyBlueModifier.swift */,
 			);
 			path = Body;
-			sourceTree = "<group>";
-		};
-		389D08422C44152E0066816E /* SectionModifier */ = {
-			isa = PBXGroup;
-			children = (
-				389D08432C4415430066816E /* SectionModifier.swift */,
-			);
-			path = SectionModifier;
 			sourceTree = "<group>";
 		};
 		389D08452C4444920066816E /* AddDrink */ = {
@@ -1294,6 +1280,31 @@
 				3855EFA12C1736600037B169 /* PasswordField.swift */,
 			);
 			path = Password;
+			sourceTree = "<group>";
+		};
+		38B445872C4773F600628A4A /* SectionModifier */ = {
+			isa = PBXGroup;
+			children = (
+				38B445892C47752400628A4A /* Header */,
+				38B445882C47751800628A4A /* View */,
+			);
+			path = SectionModifier;
+			sourceTree = "<group>";
+		};
+		38B445882C47751800628A4A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				389D08432C4415430066816E /* SectionModifier.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		38B445892C47752400628A4A /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				38B4458A2C47753C00628A4A /* SectionHeaderModifier.swift */,
+			);
+			path = Header;
 			sourceTree = "<group>";
 		};
 		38C0DA7C2C3A8D370016F846 /* Administration */ = {
@@ -1619,6 +1630,7 @@
 				3886F3612C18815B004C3203 /* CostumBackButton.swift in Sources */,
 				38D0E7C42C3E97B100EE2A0A /* IntakeTypeColor.swift in Sources */,
 				3886F3582C18026F004C3203 /* SettingsButton.swift in Sources */,
+				38B4458B2C47753C00628A4A /* SectionHeaderModifier.swift in Sources */,
 				38E8A7AE2C32A545005BB28A /* Intake.swift in Sources */,
 				38D0E7C72C3EBB3D00EE2A0A /* DrinksDocumentationView.swift in Sources */,
 				3836C2792C2574B40030D13A /* MealAdministrationViewModel.swift in Sources */,

@@ -46,33 +46,36 @@ struct MealDocumentationView: View {
                 .hugeTitleStyle()
 
             List {
-                // Zeigt die aktuelle Woche an
+                // Überprüft, ob `currentWeek` im `viewModel` vorhanden ist.
                 if let currentWeek = viewModel.currentWeek {
+                    // Erstellt eine DisclosureGroup, die eine ausklappbare Ansicht darstellt.
                     DisclosureGroup(isExpanded: Binding(
                         get: { self.expandedSections["currentWeek"] ?? true },
                         set: { self.expandedSections["currentWeek"] = $0 }
                     )) {
-                        // Gruppierung der Mahlzeiten der aktuellen Woche nach Tag
+                        // Gruppiert die Mahlzeiten der aktuellen Woche nach Tag.
                         let groupedByDay = viewModel.groupMealsByDay(currentWeek.meals)
+                        // Iteriert über die gruppierten Tage.
                         ForEach(groupedByDay.keys.sorted(), id: \.self) { day in
+                            // Ruft die Mahlzeiten für den Tag ab oder setzt sie auf eine leere Liste.
                             let meals = groupedByDay[day] ?? []
+                            // Erstellt eine Sektion für jeden Tag.
                             Section(header: Text(day)
-                                .font(Fonts.title1)// Setzt die Schriftart
-                                .padding(.vertical, 10)
-                                .padding(.horizontal, 10)
-                                .background(Color.blue)// Hintergrundfarbe des Headers
-                                .foregroundStyle(.white)// Schriftfarbe des Headers
-                                .cornerRadius(8)// Abrundung des Headers
-                                .shadow(color: .mint, radius: 1, x: 0, y: 7)// Schatten des Headers
+                                    // Definiert den Header der Sektion mit dem Tagesnamen und wendet den benutzerdefinierten Stil an.
+                                .customHeaderStyle()
                             ) {
                                 // Gruppierung der Mahlzeiten des Tages nach Zeit
                                 let groupedByTime = viewModel.groupMealsByTime(meals)
+                                // Iteriert über die gruppierten Zeiten.
                                 ForEach(groupedByTime.keys.sorted(), id: \.self) { time in
                                     let mealsAtTime = groupedByTime[time] ?? []
+                                    // Erstellt eine Sektion für jede Zeit.
                                     Section(header: Text("Zeit: \(time)")
                                         .bodyBlue()) {
+                                            // Iteriert über die Mahlzeiten zu einer bestimmten Zeit.
                                         ForEach(mealsAtTime, id: \.id) { meal in
                                             MealCardView(meal: meal, onDelete: {
+                                                // Setzt die zu löschende Mahlzeit und zeigt das Lösch-Alert an.
                                                 mealToDelete = meal
                                                 showAlert = true
                                             })
@@ -102,13 +105,7 @@ struct MealDocumentationView: View {
                         ForEach(groupedByDay.keys.sorted(), id: \.self) { day in
                             let meals = groupedByDay[day] ?? []
                             Section(header: Text(day)
-                                .font(Fonts.title1)// Setzt die Schriftart
-                                .padding(.vertical, 10)
-                                .padding(.horizontal, 10)
-                                .background(Color.blue)// Hintergrundfarbe des Headers
-                                .foregroundStyle(.white)// Schriftfarbe des Headers
-                                .cornerRadius(8)// Abrundung des Headers
-                                .shadow(color: .mint, radius: 1, x: 0, y: 7)// Schatten des Headers
+                                .customHeaderStyle()
                             ) {
                                 // Gruppierung der Mahlzeiten des Tages nach Zeit
                                 let groupedByTime = viewModel.groupMealsByTime(meals)

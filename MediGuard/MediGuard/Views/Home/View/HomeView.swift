@@ -97,6 +97,7 @@ struct HomeView: View {
             }
             )
         }
+        .background(Color("Background")).ignoresSafeArea()
         
         .environmentObject(homeViewModel)
         .environmentObject(settingsViewModel)

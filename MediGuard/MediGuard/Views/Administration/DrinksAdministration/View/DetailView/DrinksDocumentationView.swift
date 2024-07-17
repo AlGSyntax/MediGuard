@@ -43,36 +43,43 @@ struct DrinksDocumentationView: View {
                 
                 // MARK: - Aktuelle Woche
                 
-                // Zeigt die aktuelle Woche an
+                // Überprüft, ob `currentWeek` im `viewModel` vorhanden ist.
                 if let currentWeek = viewModel.currentWeek {
+                    // Erstellt eine DisclosureGroup, die eine ausklappbare Ansicht darstellt.
                     DisclosureGroup(isExpanded: Binding(
+                        // Ruft den aktuellen Erweiterungszustand ab oder setzt ihn auf `true`, wenn nicht vorhanden.
                         get: { self.expandedSections["currentWeek"] ?? true },
+                        // Aktualisiert den Erweiterungszustand im Dictionary.
                         set: { self.expandedSections["currentWeek"] = $0 }
                     )) {
-                        // Gruppierung der Getränke der aktuellen Woche nach Tag
+                        // Gruppiert die Getränkezunahmen der aktuellen Woche nach Tag.
                         let groupedByDay = viewModel.groupIntakesByDay(currentWeek.intakes)
+                        // Iteriert über die gruppierten Tage.
                         ForEach(groupedByDay.keys.sorted(), id: \.self) { day in
+                            // Ruft die Getränkezunahmen für den Tag ab oder setzt sie auf eine leere Liste.
                             let intakes = groupedByDay[day] ?? []
+                            // Berechnet die gesamte Getränkemenge für den Tag.
                             let totalIntake = intakes.reduce(0) { $0 + $1.amount }
+                            // Erstellt eine Sektion für jeden Tag.
                             Section(header: Text(day)
-                                .font(Fonts.title1)// Setzt die Schriftart
-                                                             .padding(.vertical, 10)
-                                                             .padding(.horizontal, 10)
-                                                             .background(Color.blue)// Hintergrundfarbe des Headers
-                                                             .foregroundStyle(.white)// Schriftfarbe des Headers
-                                                             .cornerRadius(8)// Abrundung des Headers
-                                                             .shadow(color: .mint, radius: 1, x: 0, y: 7)// Schatten des Headers
+                                    // Definiert den Header der Sektion mit dem Tagesnamen und wendet den benutzerdefinierten Stil an.
+                                .customHeaderStyle()
                             ) {
+                                // Zeigt die gesamte Getränkemenge für den Tag an.
                                 Text("Gesamt: \(totalIntake) mL")
                                     .headlineBlue()
+                                
+                                // Zeigt an, ob das Tagesziel erreicht wurde, und wendet den Stil für den Textkörper an.
                                 Text(totalIntake >= viewModel.goal ? "Tagesziel erreicht" : "Tagesziel noch nicht erreicht")
-                                                                    .bodyBlue()
+                                    .foregroundStyle(totalIntake >= viewModel.goal ? .blue : .red)
                             }
                         }
                     } label: {
+                        // Definiert das Label der DisclosureGroup mit dem Wochenbezeichner und wendet den Stil für die Schlagzeile an.
                         Text("Aktuelle Woche \(currentWeek.weekNumber)")
                             .headlineBlue()
                     }
+                    // Setzt den Hintergrund der Listenzeile auf eine benutzerdefinierte Farbe.
                     .listRowBackground(Color("Background"))
                 }
                 
@@ -90,18 +97,12 @@ struct DrinksDocumentationView: View {
                             let intakes = groupedByDay[day] ?? []
                             let totalIntake = intakes.reduce(0) { $0 + $1.amount }
                             Section(header: Text(day)
-                                .font(Fonts.title1)// Setzt die Schriftart
-                                                             .padding(.vertical, 10)
-                                                             .padding(.horizontal, 10)
-                                                             .background(Color.blue)// Hintergrundfarbe des Headers
-                                                             .foregroundStyle(.white)// Schriftfarbe des Headers
-                                                             .cornerRadius(8)// Abrundung des Headers
-                                                             .shadow(color: .mint, radius: 1, x: 0, y: 7)
+                                .customHeaderStyle()
                             ) {
                                 Text("Gesamt: \(totalIntake) mL")
                                     .headlineBlue()
                                 Text(totalIntake >= viewModel.goal ? "Tagesziel erreicht" : "Tagesziel nicht erreicht")
-                                                                    .bodyBlue()
+                                    .foregroundStyle(totalIntake >= viewModel.goal ? .blue : .red)
                             }
                         }
                     } label: {

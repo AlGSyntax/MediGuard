@@ -74,40 +74,51 @@ struct AuthenticationView: View {
                 }
                 
                 
-                
+                // Wenn der Modus des Benutzer-ViewModels "register" ist, zeige das folgende UI-Element an.
                 if userViewModel.mode == .register {
-                    ZStack(alignment:.topLeading) {
+                    // Ein ZStack, der die Elemente übereinander stapelt, mit der oberen linken Ecke als Ausrichtungspunkt.
+                    ZStack(alignment: .topLeading) {
+                        // Ein VStack, das die Elemente vertikal stapelt, links ausgerichtet.
                         VStack(alignment: .leading) {
+                            // Ein weiterer ZStack, der die Elemente übereinander stapelt, links ausgerichtet.
                             ZStack(alignment: .leading) {
+                                // Eine abgerundete Rechteckform, die einen blauen Rahmen hat.
                                 RoundedRectangle(cornerRadius: 16)
                                     .stroke(Color.blue, lineWidth: 2)
                                     .frame(height: 50)
                                 
+                                // Ein Textfeld für die Eingabe des Wohnorts, gebunden an `searchText` im `cityViewModel`.
                                 TextField("Wohnort", text: $cityViewModel.searchText)
-                                    .padding()
-                                    .font(Fonts.headline)
-                                    .onChange(of: cityViewModel.searchText) { newValue in
+                                    .padding()// Fügt Padding um das Textfeld hinzu.
+                                    .font(Fonts.headline)// Setzt die Schriftart auf `headline`.
+                                    .onChange(of: cityViewModel.searchText) { oldValue, newValue in
+                                        // Wenn der neue Text mindestens 2 Zeichen lang ist, sucht es nach Städten.
                                         if newValue.count >= 2 {
                                             cityViewModel.searchCities(byName: newValue)
                                         } else {
+                                            // Wenn der Text weniger als 2 Zeichen lang ist, leere die Liste der Städte.
                                             cityViewModel.cities = []
                                         }
                                     }
                             }
-                            
-                            
                         }
-                        
+                    
+                
+
+                        // Wenn die Liste der Städte im `cityViewModel` nicht leer ist, zeigt es die folgende Ansicht an.
                         if !cityViewModel.cities.isEmpty {
+                            // Ein VStack, das die Städte vertikal stapelt, zentriert mit 0 Abstand zwischen den Elementen.
                             VStack(alignment: .center, spacing: 0) {
+                                // Für jede Stadt in der Liste der Städte zeige einen Text mit dem Stadtnamen an.
                                 ForEach(cityViewModel.cities, id: \.name) { city in
                                     Text(city.name)
-                                        .padding()
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                        .background(Color.white)
+                                        .padding()// Fügt Padding um den Text hinzu.
+                                        .frame(maxWidth: .infinity, alignment: .leading)// Setzt die Breite auf das Maximum und richtet den Text links aus.
+                                        .background(Color.white)// Setzt den Hintergrund auf weiß.
                                         .onTapGesture {
+                                            // Beim Antippen wird der Text des Textfelds auf den Stadtnamen gesetzt und die Liste der Städte geleert.
                                             cityViewModel.searchText = city.name
-                                            userViewModel.city = city.name // Wohnort im UserViewModel speicher
+                                            userViewModel.city = city.name  // Speichert den Wohnort im UserViewModel.
                                             cityViewModel.cities = []
                                         }
                                 }
@@ -118,8 +129,8 @@ struct AuthenticationView: View {
                             .shadow(radius: 5)
                             .frame(maxHeight: 150) // Begrenzt die Höhe des Dropdown-Menüs
                             
-                            .position(x: UIScreen.main.bounds.width / 2.4, y: textFieldPosition + 125)
-                            .zIndex(1)
+                            .position(x: UIScreen.main.bounds.width / 2.4, y: textFieldPosition + 125)// Positioniert den VStack relativ zur Bildschirmmitte.
+                            .zIndex(1)// Setzt die Z-Index-Reihenfolge, um sicherzustellen, dass der VStack über anderen Elementen liegt.
                             
                             
                         }

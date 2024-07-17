@@ -81,7 +81,7 @@ struct AddMealSheetView: View {
             Section(header: Text("Uhrzeit der Mahlteit")
                 .headlineBlue()) {
                     
-                DatePicker("", selection: $selectedTime, displayedComponents: .hourAndMinute)
+                DatePicker("Wähle deine Uhrzeit", selection: $selectedTime, displayedComponents: .hourAndMinute)
             }
                 .customSectionStyle()
         }
