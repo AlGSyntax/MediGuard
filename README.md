@@ -1,4 +1,4 @@
-# MediGuard
+# Welcome to MediGuard !
 
 🌐 **Choose your language / Wähle deine Sprache:**
 
