@@ -1,12 +1,13 @@
 # MediGuard
 
-- [English Version](#english-version)
-- [Deutsche Version](#deutsche-version)
+🌐 **Choose your language / Wähle deine Sprache:**
+
+[🇬🇧 English Version](#english-version) | [🇩🇪 Deutsche Version](#deutsche-version)
 
 
 
 
-## English Version 
+## English Version 🇬🇧
 
 **Your health, simply managed**
 
@@ -78,7 +79,7 @@ Describe here where the journey will take you after your practical project. What
 - [ ] Continuous improvement of data security and data protection measures
 
 
-## Deutsche Version
+## Deutsche Version 🇩🇪  
 
 **Ihre Gesundheit, einfach verwaltet.**
 
