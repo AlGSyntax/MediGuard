@@ -4,9 +4,6 @@
 
 [🇬🇧 English Version](#english-version) | [🇩🇪 Deutsche Version](#deutsche-version)
 
-
-
-
 ## 🇬🇧 English Version 
 
 **Your health, simply managed**
@@ -78,7 +75,6 @@ Describe here where the journey will take you after your practical project. What
 - [ ] Customisation of the app for the chronically ill and people with special needs
 - [ ] Continuous improvement of data security and data protection measures
 
-
 ## 🇩🇪 Deutsche Version
 
 **Ihre Gesundheit, einfach verwaltet.**
@@ -149,4 +145,3 @@ Beschreibe hier, wo die Reise nach deinem Praxisprojekt hingeht. Was möchtest d
 - [ ] Partnerschaften mit Krankenhäusern und Pflegediensten zur Integration in Pflegeprozesse
 - [ ] Anpassung der App für chronisch Kranke und Menschen mit besonderen Bedürfnissen
 - [ ] Ständige Verbesserung der Datensicherheit und Datenschutzmaßnahmen
-
