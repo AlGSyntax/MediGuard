@@ -4,7 +4,7 @@
 
 [🇬🇧 English Version](#english-version) | [🇩🇪 Deutsche Version](#deutsche-version)
 
-## 🇬🇧 English Version 
+##  English Version 
 
 **Your health, simply managed**
 
@@ -75,7 +75,7 @@ Describe here where the journey will take you after your practical project. What
 - [ ] Customisation of the app for the chronically ill and people with special needs
 - [ ] Continuous improvement of data security and data protection measures
 
-## 🇩🇪 Deutsche Version
+##  Deutsche Version
 
 **Ihre Gesundheit, einfach verwaltet.**
 
